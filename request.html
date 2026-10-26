@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex">
+<title>Request a conversation · Dapperowl</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+main{max-width:1180px;margin:0 auto;padding-block:48px 90px;display:flex;flex-direction:column;gap:30px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:36px;align-items:start}
+form.card{display:flex;flex-direction:column;gap:26px}
+fieldset{border:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px;border-top:2px solid var(--navy);padding-top:22px}
+legend{font-family:var(--head);font-size:30px;text-transform:uppercase;padding:0;margin-bottom:6px;float:left;width:100%}
+fieldset>*:not(legend){clear:both}
+.times{display:flex;flex-direction:column;gap:12px}
+.time{display:grid;grid-template-columns:40px minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:center}
+.time span{font-family:var(--ui);font-weight:700;width:40px;height:40px;border-radius:50%;border:3px solid var(--ink);display:grid;place-items:center;background:var(--white)}
+.pledge{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:stretch}
+.money{display:flex;align-items:center;border:3px solid var(--ink);border-radius:12px;background:var(--paper);overflow:hidden}
+.money b{font-family:var(--head);font-size:32px;padding:0 6px 0 16px}
+.money input{border:none;background:transparent;font-family:var(--head);font-size:32px;padding:10px 12px 10px 0}
+.money input:focus-visible{outline:none}
+.money:focus-within{outline:3px solid var(--cobalt);outline-offset:3px}
+.sugg{border:3px dashed var(--ink);border-radius:14px;padding:14px 18px;background:var(--white);font-size:18px}
+.sugg b{font-family:var(--head);font-size:28px;display:block;font-weight:400}
+.side{position:sticky;top:110px;display:flex;flex-direction:column;gap:16px}
+.side .card{padding:26px;display:flex;flex-direction:column;gap:8px}
+.side h3{margin:0;font-family:var(--head);font-weight:400;font-size:26px;line-height:1.1}
+.side .meta{color:var(--muted);font-size:17px}
+.sent{display:flex;flex-direction:column;gap:18px;align-items:flex-start}
+.sent svg{width:80px;height:80px}
+@media (max-width:960px){.layout{grid-template-columns:1fr}.side{position:static;order:-1}.pledge{grid-template-columns:1fr}.time{grid-template-columns:40px minmax(0,1fr)}.time input[type=time]{grid-column:2}}
+</style>
+</head><body>
+<header id="site-head"></header>
+<main class="gut">
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <a class="link" href="find.html" style="font-size:17px">← Back to Find an expert</a>
+    <h1 class="page">Request a conversation</h1>
+    <p class="lead">Signed in as <b>James Okafor, Harbourline Capital</b>. The expert will reply within a few days.</p>
+  </div>
+  <div class="layout">
+    <form class="card" id="form" novalidate>
+      <fieldset>
+        <legend>About you</legend>
+        <div class="row">
+          <div class="f"><label for="nm">Your name</label><input type="text" id="nm" value="James Okafor"></div>
+          <div class="f"><label for="rl">Your role</label><input type="text" id="rl" value="Investment Director"></div>
+        </div>
+        <div class="f"><label for="org">Organisation</label><input type="text" id="org" value="Harbourline Capital"></div>
+      </fieldset>
+      <fieldset>
+        <legend>What you'd like to discuss</legend>
+        <div class="f"><label for="topic">Topic</label><input type="text" id="topic" value="Scaling seaweed farming in the Scottish Highlands"></div>
+        <div class="f"><label for="goal">What you hope to get out of it</label><textarea id="goal" style="min-height:100px">Decide by December whether to invest about £2m in a new longline seaweed farm on the west coast of Scotland, and understand what a realistic plan for the first five years looks like.</textarea><small>The expert sees this first. Be specific about the decision you're making.</small></div>
+        <div class="f"><label for="qs">Questions you'd like to cover</label><textarea id="qs">1. What does it cost to set up a new longline site, and how long does licensing take?
+2. Which buyers (food, cosmetics, fertiliser) are growing fastest?
+3. What are the biggest risks in the first three years?</textarea></div>
+        <div class="f"><span class="lab">Format</span><div class="chips" role="radiogroup" aria-label="Format">
+          <label class="chip"><input type="radio" name="fmt" id="f1" checked>Phone or video call</label>
+          <label class="chip"><input type="radio" name="fmt" id="f2">Written advice</label>
+          <label class="chip"><input type="radio" name="fmt" id="f3">Site visit</label>
+          <label class="chip"><input type="radio" name="fmt" id="f4">Talk or presentation</label>
+          <label class="chip"><input type="radio" name="fmt" id="f5">Mentoring</label>
+        </div></div>
+        <div class="f"><label for="bg">What you already know <span class="opt">(optional)</span></label><textarea id="bg" style="min-height:90px">We have read the Crown Estate Scotland seaweed reports and spoken to two buyers. We have not visited a site yet.</textarea></div>
+        <div class="row"><div class="f"><label for="att">Who will attend</label><input type="text" id="att" value="James Okafor (Investment Director), Mei Chen (Analyst)"></div><div class="f"><label for="doc">Anything for the expert to read <span class="opt">(optional)</span></label><input type="file" id="doc" style="font-size:17px"></div></div>
+        <div class="f"><label for="len">Length</label><select id="len"><option>30 minutes</option><option selected>1 hour</option><option>90 minutes</option><option>Half a day</option></select></div>
+      </fieldset>
+      <fieldset>
+        <legend>Three times that suit you</legend>
+        <p class="hint" style="margin:0">The expert picks one, or suggests another time. You'll both get a calendar invite and a video link.</p>
+        <div class="times">
+          <div class="time"><span>1</span><input type="date" id="d1" value="2026-11-04" aria-label="First date"><input type="time" id="t1" value="10:00" aria-label="First time"></div>
+          <div class="time"><span>2</span><input type="date" id="d2" value="2026-11-05" aria-label="Second date"><input type="time" id="t2" value="14:30" aria-label="Second time"></div>
+          <div class="time"><span>3</span><input type="date" id="d3" value="2026-11-10" aria-label="Third date"><input type="time" id="t3" value="11:00" aria-label="Third time"></div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Your donation</legend>
+        <div class="pledge">
+          <div class="f"><label for="amt">Amount you'll donate</label><div class="money"><b>£</b><input type="number" id="amt" min="0" step="10" placeholder="0" inputmode="numeric"></div><small id="to"></small></div>
+          <div class="sugg"><span class="eyebrow">The expert suggests</span><b id="sug"></b><span id="sugk"></span></div>
+        </div>
+        <div class="note"><p>You pay the charity directly, on its own donation page, after the conversation. Dapperowl never touches the money. The amount can't be negotiated: the expert simply accepts or declines.</p></div>
+      </fieldset>
+      <fieldset>
+        <legend>Optional extras</legend>
+        <label class="tick"><input type="checkbox" id="conf">Mark this request confidential. The expert must agree to keep it private before seeing the details.</label>
+        <label class="tick"><input type="checkbox" id="comp">Add our own compliance questions for the expert to answer.</label>
+        <label class="tick"><input type="checkbox" id="rec">Ask to record the call (only if the expert agrees).</label>
+      </fieldset>
+      <fieldset>
+        <legend>Our agreement</legend>
+        <label class="tick"><input type="checkbox" class="ag">We won't ask for inside information, or for anything the expert isn't free to share.</label>
+        <label class="tick"><input type="checkbox" class="ag">We'll respect the expert's right to decline a question or end the conversation.</label>
+        <label class="tick"><input type="checkbox" class="ag">Within 48 hours of the expert pressing Send, we'll donate the agreed amount directly to the charity or flag a problem.</label>
+        <label class="tick"><input type="checkbox" class="ag">We'll use the expert's contact details only for this engagement.</label>
+        <label class="tick"><input type="checkbox" class="ag">We won't record the conversation unless the expert agrees.</label>
+        <label class="tick"><input type="checkbox" class="ag">The expert is giving a personal view, not professional advice. Our decisions are our own responsibility.</label>
+      </fieldset>
+      <p class="hint" id="err" role="alert" style="margin:0;color:#A3202F;font-weight:700" hidden></p>
+      <button type="submit" class="btn">Send request</button>
+    </form>
+    <aside class="side">
+      <div class="card">
+        <span class="eyebrow">Your request to</span>
+        <h3 id="xn"></h3>
+        <span class="meta" id="xr"></span>
+        <span class="meta" id="xc"></span>
+      </div>
+      <div class="note"><p><b>What happens next</b></p><p>1 The expert accepts or declines. 2 You meet. 3 They press Send. 4 You donate on the charity's page and upload your receipt.</p></div>
+    </aside>
+  </div>
+  <div class="card sent" id="sent" hidden>
+    <svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="36" fill="#1F9D55" stroke="#141414" stroke-width="4"/><path d="M23 41l11 11 23-25" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <h2 class="sec">Request sent</h2>
+    <p class="lead" id="sentmsg"></p>
+    <div class="acts"><a class="btn" href="firm-dashboard.html">Go to My bookings →</a></div>
+  </div>
+</main>
+<footer id="site-foot"></footer>
+<script src="site.js"></script>
+<script>
+const X=[
+ ['The Hon. Inglebert Montgomery-Smythe','Founder, Broom Bay Seaweed','Loch Broom Lifeboat Fund','£250–£400','per hour for calls'],
+ ['Alejandro Ruiz Cárdenas','Senior Strategy Officer, Golfo Infraestructura','Bridges to Literacy','£500','suggested per hour'],
+ ['Aino Väisänen','Independent woodland adviser','Northern Woodland Trust','Open','the firm decides'],
+ ['Isla Morrow','Founder and CEO, Kelpwell','Oban Food Bank','£150–£200','per hour for calls'],
+ ['Priya Raman','Non-executive director, Tidewater Ports','Seafarers Support Network','£500','suggested per hour'],
+ ['Tom Achterberg','Hospital operations consultant','Yorkshire Carers Trust','£250–£400','per hour for calls']];
+let i=0; try{ i=+(sessionStorage.getItem('dapper-expert')||0); }catch(e){}
+const x=X[i]||X[0], $=id=>document.getElementById(id);
+$('xn').textContent=x[0]; $('xr').textContent=x[1]; $('xc').textContent='Supports: '+x[2];
+$('sug').textContent=x[3]; $('sugk').textContent=x[4];
+$('to').textContent='100% goes to '+x[2]+'.';
+$('form').addEventListener('submit',e=>{
+  e.preventDefault();
+  const amt=+$('amt').value, ags=[...document.querySelectorAll('.ag')];
+  let msg='';
+  if(!amt) msg='Please enter the amount you\'ll donate.';
+  else if(!ags.every(a=>a.checked)) msg='Please tick all six points in "Our agreement".';
+  $('err').textContent=msg; $('err').hidden=!msg; if(msg) return;
+  $('sentmsg').textContent='We\'ve sent your request to '+x[0]+', with a pledged donation of £'+amt.toLocaleString('en-GB')+' to '+x[2]+'. We\'ll email you when they reply.';
+  document.querySelector('.layout').hidden=true; $('sent').hidden=false; window.scrollTo({top:0,behavior:'smooth'});
+});
+</script>
+</body></html>

@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex">
+<title>Your dashboard · Dapperowl</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+main{max-width:1180px;margin:0 auto;padding-block:48px 90px;display:flex;flex-direction:column;gap:26px}
+.hello{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.times{display:flex;flex-direction:column;gap:8px}
+.decl{display:flex;flex-direction:column;gap:10px}
+.decl .tick{font-size:17px;padding:10px 14px}
+.total{display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.total .big{font-family:var(--head);font-size:clamp(54px,7vw,88px);line-height:.9;color:var(--green)}
+.private{display:inline-flex;gap:8px;align-items:center;font-family:var(--ui);font-weight:700;font-size:15px;border:2px solid var(--ink);border-radius:999px;padding:4px 12px;background:var(--soft)}
+.certs{display:grid;grid-template-columns:repeat(2,minmax(0,360px));gap:28px}
+.cq{container-type:inline-size}
+.ccert{border:3px solid var(--ink);border-radius:6px;overflow:hidden;box-shadow:5px 5px 0 var(--ink)}
+.c1{aspect-ratio:4/5;background:#fff;position:relative;overflow:hidden;color:var(--navy)}
+.c1 .frame{position:absolute;inset:4.5cqw;border:.5cqw solid var(--navy);outline:.25cqw solid var(--navy);outline-offset:-2.2cqw}
+.c1 .in{position:absolute;inset:4.5cqw;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2.2cqw;padding:9cqw 8cqw 11cqw}
+.c1 .logo{width:30cqw;height:auto}
+.c1 .k{font-family:var(--ui);font-weight:600;font-size:3.2cqw;letter-spacing:.32em;text-transform:uppercase;color:var(--cobalt)}
+.c1 .photo{width:24cqw;height:24cqw;border-radius:50%;border:.6cqw solid var(--navy);background:#E9E4D8;display:grid;place-items:end center;overflow:hidden;margin-block:1cqw}
+.c1 .photo svg{width:78%;height:78%}
+.c1 .nm{font-family:var(--head);font-size:6cqw;line-height:1.08}
+.c1 .rule{width:16cqw;height:.4cqw;background:var(--navy);margin-block:.6cqw}
+.c1 .amt{font-family:var(--head);font-size:12cqw;line-height:.9;color:#18743a}
+.c1 .to{font-size:3.4cqw;line-height:1.35}
+.c1 .to b{font-family:var(--ui);font-weight:700;display:block;font-size:4cqw}
+.c1 .date{position:absolute;right:10cqw;top:9cqw;font-family:var(--ui);font-weight:500;font-size:2.8cqw;color:var(--muted)}
+.ok-msg{background:#D6F1E1;border:3px solid var(--ink);border-radius:14px;padding:14px 18px;font-size:18px}
+.empty{color:var(--muted);font-size:18px;border:3px dashed var(--ink);border-radius:16px;padding:20px}
+@media (max-width:760px){.certs{grid-template-columns:1fr}}
+.rq{display:flex;flex-direction:column;gap:16px}
+.goal{background:#FCEFC7;border:3px solid var(--ink);border-radius:14px;padding:14px 18px;box-shadow:4px 4px 0 var(--ink)}
+.goal p{margin:6px 0 0;font-size:19px;font-weight:600}
+.rsec{display:flex;flex-direction:column;gap:8px}
+.rsec ol{margin:0;padding-left:24px;display:flex;flex-direction:column;gap:6px;font-size:18px}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.two .rsec{background:var(--white);border:2px solid var(--ink);border-radius:14px;padding:14px 16px}
+.two .dl{grid-template-columns:max-content minmax(0,1fr);font-size:17px}
+.panel2{background:var(--white);border:3px solid var(--ink);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:18px}
+.panel2 h3{margin:0;font-family:var(--head);font-weight:400;font-size:28px;text-transform:uppercase}
+.panel2.acc{border-color:var(--green);box-shadow:5px 5px 0 var(--green)}
+.panel2.dec{box-shadow:5px 5px 0 var(--ink)}
+@media (max-width:760px){.two{grid-template-columns:1fr}.two .dl{grid-template-columns:1fr}}
+</style>
+</head><body>
+<header id="site-head"></header>
+<main class="gut">
+  <div class="hello">
+    <div><span class="eyebrow">Expert dashboard</span><h1 class="page">Good afternoon, Inglebert</h1></div>
+    <a class="btn ghost sm" href="index.html">Sign out</a>
+  </div>
+  <div>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="panel" id="panel" role="tabpanel"></div>
+  </div>
+</main>
+<footer id="site-foot"></footer>
+<script src="site.js"></script>
+<script>
+const S={
+  requests:[
+    {id:'r1',firm:'Harbourline Capital',who:'James Okafor, Investment Director',received:'Received today',topic:'Scaling seaweed farming in the Scottish Highlands',fmt:'Video call · 1 hour',amt:350,
+     goal:'Decide by December whether to invest about £2m in a new longline seaweed farm on the west coast of Scotland, and understand what a realistic plan for the first five years looks like.',
+     qs:['What does it cost to set up a new longline site, and how long does licensing usually take?','Which buyers (food, cosmetics, fertiliser) are growing fastest, and what do they pay?','What are the biggest risks in the first three years, and how do farms manage them?','Would you see Ullapool or Oban as the better base, and why?'],
+     firmType:'Investor or fund · about 12 people',site:'harbourline.example.com (verified)',attend:'James Okafor (Investment Director), Mei Chen (Analyst)',
+     background:'We have read the Crown Estate Scotland seaweed reports and spoken to two buyers. We have not visited a site yet.',docs:'Two-page investment summary (PDF)',compliance:'None',conf:false,
+     times:['Wed 4 Nov, 10:00','Thu 5 Nov, 14:30','Tue 10 Nov, 11:00']},
+    {id:'r2',firm:'Northfield Foods',who:'Sarah Lindqvist, Head of Sourcing',received:'Received yesterday',topic:'Seaweed as an ingredient: supply and pricing',fmt:'Written advice',amt:300,
+     goal:'Choose a reliable UK seaweed supplier for a new range of soups launching next spring, and set a fair price per tonne.',
+     qs:['How consistent is UK seaweed supply through the year?','What price range per tonne is fair for dried kelp?','What should we check before signing a supplier?'],
+     firmType:'Company · about 400 people',site:'northfieldfoods.example.com (verified)',attend:'Written answers to Sarah Lindqvist',
+     background:'We currently import from Ireland and want a UK source.',docs:'None',compliance:'Two short questions about conflicts of interest',conf:true,
+     times:['Any day next week']}
+  ],
+  upcoming:[{firm:'Kelp Ventures',who:'Daniel Reyes, Partner',when:'Fri 30 Oct, 15:00 · Video call · 1 hour',amt:400,email:'daniel@kelpventures.example.com',phone:'020 7946 0018'}],
+  donations:[
+    {id:'d1',firm:'Tidewater Ports',what:'Video call, 21 Oct',amt:350,stage:1},
+    {id:'d2',firm:'Coastal Growers Co-op',what:'Site visit, 14 Oct',amt:900,stage:3,note:'Receipt uploaded by the firm on 17 Oct. Waiting for the charity to confirm.'},
+    {id:'d3',firm:'A firm (anonymous)',what:'Video call, 2 Oct',amt:500,stage:4,note:'Loch Broom Lifeboat Fund confirmed on 8 Oct and sent you a thank-you: "£500 keeps our inshore boat fuelled for two months."'}
+  ],
+  msg:''
+};
+const CH='Loch Broom Lifeboat Fund';
+const TABS=[['new','New requests'],['up','Upcoming'],['don','Donations'],['imp','My impact'],['prof','My profile']];
+let tab='new';
+const $=id=>document.getElementById(id), gbp=n=>'£'+n.toLocaleString('en-GB');
+function trk(stage){ return DapperTracker.html(['Pledged','You sent it','Firm paid','Charity received'],stage); }
+function tabs(){
+  const n={new:S.requests.length,up:S.upcoming.length,don:S.donations.filter(d=>d.stage===1).length};
+  $('tabs').innerHTML=TABS.map(([k,l])=>'<button role="tab" id="tab-'+k+'" aria-selected="'+(k===tab)+'" data-k="'+k+'">'+l+(n[k]?' <span class="badge">'+n[k]+'</span>':'')+'</button>').join('');
+  $('tabs').querySelectorAll('button').forEach(b=>b.onclick=()=>{tab=b.dataset.k;S.msg='';draw();});
+}
+function draw(){
+  tabs(); let h=S.msg?'<p class="ok-msg">'+S.msg+'</p>':'';
+  if(tab==='new'){
+    h+='<h2 class="sec" style="font-size:32px">New requests</h2>';
+    if(!S.requests.length) h+='<p class="empty">No new requests. We\'ll email you when a firm asks for your knowledge.</p>';
+    S.requests.forEach(r=>{
+      h+='<div class="item"><div class="item-h"><div><b>'+r.firm+'</b><span class="meta">'+r.who+' · '+r.received+'</span></div><span class="pill go">'+gbp(r.amt)+' to '+CH+'</span></div>'+
+      (r.conf?'<p class="note" style="margin:0">This request is marked <b>confidential</b>. Tick below to agree to keep it private before reading the details.</p><label class="tick"><input type="checkbox" onchange="this.closest(\'.item\').querySelector(\'.hid\').hidden=!this.checked">I agree to keep this request confidential.</label><div class="hid rq" hidden>':'<div class="rq">')+
+      '<dl class="dl"><dt>Topic</dt><dd>'+r.topic+'</dd><dt>Format</dt><dd>'+r.fmt+'</dd></dl>'+
+      '<div class="goal"><span class="eyebrow">What they hope to get out of it</span><p>'+r.goal+'</p></div>'+
+      '<div class="rsec"><span class="lab">Their questions</span><ol>'+r.qs.map(q=>'<li>'+q+'</li>').join('')+'</ol></div>'+
+      '<div class="two"><div class="rsec"><span class="lab">About the firm</span><dl class="dl"><dt>Type</dt><dd>'+r.firmType+'</dd><dt>Website</dt><dd>'+r.site+'</dd><dt>Attending</dt><dd>'+r.attend+'</dd></dl></div>'+
+      '<div class="rsec"><span class="lab">Background and preparation</span><dl class="dl"><dt>What they know</dt><dd>'+r.background+'</dd><dt>To read</dt><dd>'+(r.docs==='None'?'Nothing':'<a class="link" href="#" data-done="Downloaded">'+r.docs+'</a>')+'</dd><dt>Compliance</dt><dd>'+r.compliance+'</dd><dt>Confidential</dt><dd>'+(r.conf?'Yes':'No')+'</dd></dl></div></div>'+
+      '</div>';
+      if(r.mode==='acc'){
+        h+='<div class="panel2 acc"><h3>Accept this request</h3>'+
+        '<div class="f"><span class="lab">1. Pick a time</span><div class="times">'+r.times.map((t,i)=>'<label class="radio"><input type="radio" name="t'+r.id+'" value="'+t+'" '+(i===0?'checked':'')+'>'+t+'</label>').join('')+'<label class="radio"><input type="radio" name="t'+r.id+'" value="other" data-other>Suggest a different time</label></div>'+
+        '<div class="row other" hidden><div class="f"><label for="od'+r.id+'">Date</label><input type="date" id="od'+r.id+'" value="2026-11-12"></div><div class="f"><label for="ot'+r.id+'">Time</label><input type="time" id="ot'+r.id+'" value="10:00"></div></div></div>'+
+        '<div class="f"><span class="lab">2. Tick your declarations</span><div class="decl">'+
+        ['I won\'t share inside information.','I won\'t share confidential information belonging to a current or former employer or client.','I don\'t work for or advise this organisation, or I\'ve told the firm that I do.','Taking part doesn\'t break any agreement I\'m bound by.','If I work in the public sector, I\'m allowed to take part.','I can decline any question, and I\'ll stop if the conversation moves into these areas.'].map(t=>'<label class="tick"><input type="checkbox" class="dc">'+t+'</label>').join('')+
+        '</div></div>'+
+        '<div class="f"><label for="an'+r.id+'">3. A note to '+r.firm+' <span class="opt">(optional)</span></label><textarea id="an'+r.id+'" style="min-height:90px">Happy to help. I\'ll bring some rough set-up costs from our own site.</textarea></div>'+
+        '<div class="note"><p><b>What happens next</b></p><p>We send you both a calendar invite and a video link, and share your contact details with '+r.firm+'. After the call, you press Send and they donate '+gbp(r.amt)+' to '+CH+'.</p></div>'+
+        '<div class="acts"><button class="btn" data-conf="'+r.id+'" disabled>Confirm and accept</button><button class="btn ghost sm" data-cancel="'+r.id+'">Cancel</button></div><p class="hint" style="margin:0">Tick all six declarations to confirm.</p></div>';
+      } else if(r.mode==='dec'){
+        h+='<div class="panel2 dec"><h3>Decline this request</h3>'+
+        '<div class="f"><span class="lab">Reason</span><div class="times">'+['Not my area of expertise','I don\'t have time right now','Conflict of interest','Other'].map((t,i)=>'<label class="radio"><input type="radio" name="dr'+r.id+'" value="'+t+'" '+(i===1?'checked':'')+'>'+t+'</label>').join('')+'</div></div>'+
+        '<div class="f"><label for="dm'+r.id+'">A message to '+r.firm+' <span class="opt">(optional)</span></label><textarea id="dm'+r.id+'" style="min-height:90px">Thank you for asking. I\'m fully committed this month, but I\'d be glad to help in the new year.</textarea></div>'+
+        '<label class="tick"><input type="checkbox" checked>Suggest other experts in this field to them</label>'+
+        '<label class="tick"><input type="checkbox" checked>I\'m happy to be asked again later</label>'+
+        '<div class="note"><p><b>What they\'ll receive</b></p><p>A polite note that you can\'t help this time, your message if you add one, and a link to similar experts. Your reason stays private unless you put it in your message.</p></div>'+
+        '<div class="acts"><button class="btn" data-dsend="'+r.id+'">Send decline</button><button class="btn ghost sm" data-cancel="'+r.id+'">Cancel</button></div></div>';
+      } else {
+        h+='<div class="acts"><button class="btn sm" data-acc="'+r.id+'">Accept…</button><button class="btn ghost sm" data-dec="'+r.id+'">Decline…</button></div>';
+      }
+      h+='</div>';
+    });
+  }
+  if(tab==='up'){
+    h+='<h2 class="sec" style="font-size:32px">Upcoming</h2>';
+    S.upcoming.forEach(u=>{h+='<div class="item"><div class="item-h"><div><b>'+u.firm+'</b><span class="meta">'+u.who+'</span></div><span class="pill ok">Booked</span></div><dl class="dl"><dt>When</dt><dd>'+u.when+'</dd><dt>Donation</dt><dd>'+gbp(u.amt)+' to '+CH+'</dd><dt>Contact</dt><dd>'+u.email+' · '+u.phone+'</dd></dl><p class="hint" style="margin:0">Contact details are shared now you\'ve accepted. A calendar invite and video link are in your email.</p><div class="acts"><button class="btn sm" type="button" data-done="Opening the call">Join video call</button><button class="btn ghost sm" data-done="'+u.firm+'">Mark as done</button></div></div>';});
+    if(!S.upcoming.length) h+='<p class="empty">Nothing booked yet.</p>';
+  }
+  if(tab==='don'){
+    h+='<h2 class="sec" style="font-size:32px">Donations</h2><p class="lead" style="margin:0">After each conversation, press Send. We then ask the firm to donate directly to your charity.</p>';
+    S.donations.forEach(d=>{
+      h+='<div class="item"><div class="item-h"><div><b>'+d.firm+'</b><span class="meta">'+d.what+'</span></div><span class="pill '+(d.stage===4?'ok':'wait')+'">'+gbp(d.amt)+'</span></div>'+trk(d.stage)+
+      (d.note?'<p style="margin:0;font-size:18px">'+d.note+'</p>':'')+
+      (d.stage===1?'<div class="acts"><button class="btn green" data-send="'+d.id+'">Send to '+CH+'</button></div>':'')+'</div>';
+    });
+  }
+  if(tab==='imp'){
+    const done=S.donations.filter(d=>d.stage===4);
+    h+='<h2 class="sec" style="font-size:32px">My impact</h2><div class="total"><span class="big">£4,500</span><div><b style="font-family:var(--ui);font-size:20px">raised for '+CH+'</b><br><span class="hint">from 9 conversations since July</span><br><span class="private">Only you can see this</span></div></div>'+
+      '<h3 class="lab" style="margin:10px 0 0">Your LinkedIn certificates</h3><div class="certs">'+
+      [['£500','October 2026'],['£350','September 2026']].map(c=>'<div><div class="ccert"><div class="cq"><div class="c1"><div class="frame"></div><div class="in">'+DAPPER_LOGO('#fff','#14254F')+'<span class="k">Certificate of impact</span><div class="photo"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="22" r="13" fill="#141414"/><path d="M6 60c0-15 11-23 24-23s24 8 24 23z" fill="#141414"/></svg></div><span class="nm">The Hon. Inglebert Montgomery-Smythe</span><span class="rule"></span><span class="amt">'+c[0]+'</span><span class="to">donated to<b>'+CH+'</b></span></div><span class="date">'+c[1]+'</span></div></div></div><div class="acts" style="margin-top:14px"><button class="btn sm" type="button" data-done="Opening LinkedIn">Post to LinkedIn</button><button class="btn ghost sm" type="button" data-done="Saved">Save image</button></div></div>').join('')+'</div>';
+  }
+  if(tab==='prof'){
+    h+='<h2 class="sec" style="font-size:32px">My profile</h2><div class="item"><div class="item-h"><div><b>The Hon. Inglebert Montgomery-Smythe</b><span class="meta">Founder, Broom Bay Seaweed · Based in Ullapool, Scotland</span></div><span class="pill ok">Live</span></div><dl class="dl"><dt>Charity</dt><dd>'+CH+' · <a class="link" href="create-profile.html">Change charity</a></dd><dt>Suggested donation</dt><dd>£250–£400 per hour</dd><dt>Availability</dt><dd>Up to 5 hours a month</dd></dl><div class="acts"><a class="btn sm" href="create-profile.html">Edit my profile</a><a class="btn ghost sm" href="find.html">See it as firms do</a><button class="btn ghost sm" type="button" data-done="Profile paused">Pause my profile</button></div></div>';
+  }
+  $('panel').innerHTML=h;
+  const R=id=>S.requests.find(x=>x.id===id);
+  $('panel').querySelectorAll('[data-acc]').forEach(b=>b.onclick=()=>{S.requests.forEach(x=>x.mode=null);R(b.dataset.acc).mode='acc';S.msg='';draw();});
+  $('panel').querySelectorAll('[data-dec]').forEach(b=>b.onclick=()=>{S.requests.forEach(x=>x.mode=null);R(b.dataset.dec).mode='dec';S.msg='';draw();});
+  $('panel').querySelectorAll('[data-cancel]').forEach(b=>b.onclick=()=>{R(b.dataset.cancel).mode=null;draw();});
+  $('panel').querySelectorAll('.panel2.acc').forEach(pn=>{
+    const btn=pn.querySelector('[data-conf]'), dcs=[...pn.querySelectorAll('.dc')];
+    const upd=()=>{btn.disabled=!dcs.every(c=>c.checked);};
+    dcs.forEach(c=>c.onchange=upd);
+    pn.querySelectorAll('input[type=radio]').forEach(rd=>rd.onchange=()=>{pn.querySelector('.other').hidden=!pn.querySelector('[data-other]').checked;});
+    btn.onclick=()=>{const r=R(btn.dataset.conf);const t=pn.querySelector('input[type=radio]:checked');const other=t&&t.value==='other';
+      S.requests=S.requests.filter(x=>x!==r);
+      S.upcoming.unshift({firm:r.firm,who:r.who,when:(other?'New time suggested, waiting for '+r.firm+' to confirm':t.value)+' · '+r.fmt,amt:r.amt,email:'james.okafor@harbourline.example.com',phone:'020 7946 0102'});
+      S.msg=other?'Accepted, with a new time suggested. We\'ll confirm the booking as soon as '+r.firm+' agrees.':'Accepted. We\'ve sent you and '+r.firm+' a calendar invite and video link, and shared your contact details.';tab='up';draw();};
+  });
+  $('panel').querySelectorAll('[data-dsend]').forEach(b=>b.onclick=()=>{const r=R(b.dataset.dsend);S.requests=S.requests.filter(x=>x!==r);S.msg='Declined. We\'ve sent '+r.firm+' a polite note with your message and some similar experts.';draw();});
+  $('panel').querySelectorAll('[data-done]').forEach(b=>b.onclick=()=>{const u=S.upcoming.find(x=>x.firm===b.dataset.done);S.upcoming=S.upcoming.filter(x=>x!==u);S.donations.unshift({id:'d'+Date.now(),firm:u.firm,what:'Just finished',amt:u.amt,stage:1});S.msg='Marked as done. Press Send when you\'re ready.';tab='don';draw();});
+  $('panel').querySelectorAll('[data-send]').forEach(b=>b.onclick=()=>{const d=S.donations.find(x=>x.id===b.dataset.send);d.stage=2;d.note='Sent. We\'ve asked '+d.firm+' to donate '+gbp(d.amt)+' on the charity\'s page within 48 hours. You\'ll see their receipt here.';S.msg='';draw();});
+}
+draw();
+</script>
+</body></html>

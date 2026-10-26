@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex">
+<title>Create your profile · Dapperowl</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* Layout: cream top bar with centred logo; green step bar across the top; left = 8 steps list, right = one thick-outlined form card with a hard black shadow; big Back / Continue buttons. Bold black-figure style carried by chunky outlines. */
+:root{
+  --paper:#F5F0E6; --ink:#141414; --navy:#14254F; --cobalt:#2251FF; --green:#1F9D55; --white:#ffffff; --muted:#4A5675; --soft:#E9E2D3;
+  --head:'DM Serif Display', Georgia, serif; --body:'Source Sans 3', Arial, sans-serif; --ui:'Outfit', Arial, sans-serif;
+  color-scheme: light;
+}
+body{background:var(--paper);color:var(--navy);font-family:var(--body);font-size:20px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.gut{padding-left:max(40px,env(safe-area-inset-left,0px));padding-right:max(40px,env(safe-area-inset-right,0px))}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:2px solid var(--navy);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;padding-block:14px}
+.top nav{display:flex;gap:28px;flex-wrap:wrap}
+.top nav.r{justify-content:flex-end}
+.top a{color:var(--navy);text-decoration:none;font-family:var(--ui);font-weight:600;font-size:16px;letter-spacing:.04em;text-transform:uppercase}
+.logo{display:block;height:56px;width:auto}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,label.chip:focus-within{outline:3px solid var(--cobalt);outline-offset:3px}
+
+main{max-width:1180px;margin:0 auto;padding-block:48px 80px;display:flex;flex-direction:column;gap:36px}
+.intro{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+h1{margin:0;font-family:var(--head);font-weight:400;font-size:clamp(38px,4.4vw,62px);line-height:1;text-transform:uppercase}
+.saved{font-family:var(--ui);font-weight:600;font-size:16px;display:flex;gap:8px;align-items:center;color:var(--green)}
+.saved svg{width:22px;height:22px}
+.bar{position:relative;height:22px;border:3px solid var(--ink);border-radius:20px;background:var(--white);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--green);transition:width .6s ease}
+.barlabel{margin:-24px 0 0;font-family:var(--ui);font-weight:600;font-size:16px;color:var(--muted)}
+
+.layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:40px;align-items:start}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;position:sticky;top:120px}
+.steps button{all:unset;cursor:pointer;box-sizing:border-box;width:100%;display:flex;gap:14px;align-items:center;padding:8px 10px;border-radius:12px;font-family:var(--ui);font-weight:600;font-size:18px;color:var(--muted)}
+.steps button:hover{background:var(--soft)}
+.steps .n{flex:none;width:40px;height:40px;border-radius:50%;border:3px solid var(--ink);background:var(--white);display:grid;place-items:center;font-size:17px;color:var(--ink)}
+.steps .done .n{background:var(--green);color:var(--white)}
+.steps .cur{color:var(--navy);background:var(--white);box-shadow:inset 0 0 0 3px var(--ink)}
+.steps .cur .n{background:var(--cobalt);color:var(--white)}
+
+.card{background:var(--white);border:3px solid var(--ink);border-radius:24px;box-shadow:7px 7px 0 var(--ink);padding:44px;display:flex;flex-direction:column;gap:28px;min-width:0}
+.card h2{margin:0;font-family:var(--head);font-weight:400;font-size:clamp(30px,3vw,42px);line-height:1.05;text-transform:uppercase}
+.lead{margin:-14px 0 0;color:var(--muted);max-width:60ch}
+.f{display:flex;flex-direction:column;gap:8px;min-width:0}
+.f label,.lab{font-family:var(--ui);font-weight:700;font-size:18px}
+.opt{font-family:var(--body);font-weight:400;color:var(--muted);font-size:16px}
+.f small{color:var(--muted);font-size:16px}
+input[type=text],input[type=email],input[type=url],input[type=tel],input[type=number],input[type=search],textarea,select{font:inherit;font-size:20px;color:var(--navy);background:var(--paper);border:3px solid var(--ink);border-radius:12px;padding:14px 16px;width:100%;box-sizing:border-box}
+textarea{min-height:170px;resize:vertical;line-height:1.5}
+.row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.btn{font-family:var(--ui);font-weight:700;font-size:19px;letter-spacing:.03em;text-transform:uppercase;padding:18px 34px;border-radius:12px;border:3px solid var(--ink);cursor:pointer;box-shadow:4px 4px 0 var(--ink);background:var(--cobalt);color:var(--white)}
+.btn.ghost{background:var(--white);color:var(--navy)}
+.btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn[disabled]{opacity:.4;cursor:default}
+.nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:2px solid var(--navy);padding-top:26px}
+.social{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.social .btn{background:var(--white);color:var(--navy);text-transform:none;letter-spacing:0;font-size:19px}
+.or{display:flex;align-items:center;gap:14px;color:var(--muted);font-family:var(--ui);font-weight:600}
+.or::before,.or::after{content:"";flex:1;height:2px;background:var(--navy);opacity:.25}
+
+.drop{border:3px dashed var(--ink);border-radius:16px;background:var(--paper);padding:26px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.drop .big{width:54px;height:54px;flex:none}
+.drop b{font-family:var(--ui)}
+.photo{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.avatar{width:110px;height:110px;border-radius:50%;border:3px solid var(--ink);background:var(--soft);display:grid;place-items:center;flex:none}
+.ai{display:flex;gap:10px;align-items:center;font-family:var(--ui);font-weight:600;font-size:16px;background:#E6F4EC;border:2px solid var(--green);border-radius:10px;padding:10px 14px;color:#145C34}
+.job{border:3px solid var(--ink);border-radius:16px;padding:20px 22px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px}
+.job b{font-family:var(--ui);font-size:19px}
+.job .when{color:var(--muted);font-size:17px}
+.job p{grid-column:1/-1;margin:4px 0 0;font-size:18px}
+.job button{grid-row:1/3;grid-column:2;align-self:start}
+.small{font-family:var(--ui);font-weight:700;font-size:15px;background:var(--white);border:2px solid var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer;color:var(--navy)}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+label.chip{cursor:pointer;display:inline-flex;align-items:center;gap:8px;border:3px solid var(--ink);border-radius:999px;padding:9px 18px;font-family:var(--ui);font-weight:600;font-size:17px;background:var(--white)}
+label.chip input{position:absolute;opacity:0;width:1px;height:1px}
+label.chip:has(input:checked){background:var(--ink);color:var(--white)}
+label.chip.off{opacity:.4;cursor:not-allowed}
+.charity{border:3px solid var(--ink);border-radius:16px;padding:20px 22px;display:flex;gap:16px;align-items:flex-start;background:var(--paper)}
+.charity .ok{flex:none;width:34px;height:34px}
+.charity b{font-family:var(--ui);font-size:20px;display:block}
+.levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.level{border:3px solid var(--ink);border-radius:16px;padding:16px 18px;background:var(--white);display:flex;flex-direction:column;gap:4px;cursor:pointer}
+.level:has(input:checked){background:var(--paper);box-shadow:inset 0 0 0 3px var(--cobalt)}
+.level input{position:absolute;opacity:0}
+.level b{font-family:var(--ui);font-size:19px}
+.level .amt{font-family:var(--head);font-size:30px;line-height:1.1}
+.level small{color:var(--muted);font-size:15px;line-height:1.35}
+.radios{display:flex;flex-direction:column;gap:12px}
+.radio{display:flex;gap:12px;align-items:center;font-size:19px;cursor:pointer}
+.radio input,.tick input{width:26px;height:26px;accent-color:var(--cobalt);flex:none}
+.tick{display:flex;gap:14px;align-items:flex-start;font-size:19px;cursor:pointer;border:3px solid var(--ink);border-radius:14px;padding:16px 18px}
+.tick input{margin-top:3px}
+.note{background:var(--paper);border-left:6px solid var(--navy);border-radius:0 12px 12px 0;padding:16px 20px;font-size:18px}
+.note p{margin:0 0 8px}.note p:last-child{margin:0}
+.preview{border:3px solid var(--ink);border-radius:20px;padding:28px;display:flex;gap:28px;flex-wrap:wrap;background:var(--paper)}
+.preview .who{flex:1 1 220px;display:flex;flex-direction:column;gap:4px}
+.preview h3{margin:0;font-family:var(--head);font-weight:400;font-size:30px;line-height:1.1}
+.preview .meta{color:var(--muted);font-size:17px}
+.tag{align-self:flex-start;margin-top:10px;background:var(--green);color:var(--white);border:2px solid var(--ink);border-radius:999px;font-family:var(--ui);font-weight:700;padding:5px 14px;font-size:16px}
+.preview .who{flex:0 1 240px;gap:14px}
+.preview .pic{width:170px;height:170px;border-radius:20px;border:3px solid var(--ink);background:var(--soft);display:grid;place-items:end center;overflow:hidden}
+.preview .pic svg{width:130px;height:130px}
+.info{flex:999 1 360px;min-width:0;margin:0;background:var(--white);border:3px solid var(--ink);border-radius:16px;padding:22px 24px;display:flex;flex-direction:column;gap:16px}
+.info dt{font-family:var(--ui);font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.info dd{margin:2px 0 0;font-size:18px;line-height:1.45}
+.info .ch{border-top:2px solid var(--navy);padding-top:14px}
+.info .ch dd{font-family:var(--ui);font-weight:700;font-size:20px}
+.done-msg{display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;padding-block:20px}
+.done-msg svg{width:90px;height:90px}
+.example{font-family:var(--ui);font-size:14px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+[data-step]{display:flex;flex-direction:column;gap:28px}
+[hidden]{display:none!important}
+
+@media (max-width:900px){
+  .top{grid-template-columns:1fr;justify-items:center}
+  .top nav,.top nav.r{justify-content:center}
+  .top .logo{order:-1}
+  .gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .layout{grid-template-columns:1fr}
+  .steps{position:static;flex-direction:row;flex-wrap:wrap}
+  .steps li{flex:0 0 auto}
+  .steps .t{display:none}
+  .steps .cur .t{display:inline}
+  .card{padding:24px}
+  .row,.social,.levels{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+</head><body>
+
+<header id="site-head"></header>
+
+<main class="gut">
+  <div class="intro">
+    <h1>Create your profile</h1>
+    <span class="saved"><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="10" fill="#1F9D55"/><path d="M6.5 11.5l3 3 6-6.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Saved as you go · about 10 minutes</span>
+  </div>
+  <div class="bar" role="progressbar" aria-label="Profile progress" aria-valuemin="1" aria-valuemax="8" id="bar"><i id="barfill"></i></div>
+
+  <div class="layout">
+    <ol class="steps" id="steps"></ol>
+
+    <form class="card" id="form" novalidate>
+
+      <div data-step="1">
+        <h2>Create your account</h2>
+        <p class="lead">No password to remember. We'll email you a link to sign in.</p>
+        <div class="social">
+          <button type="button" class="btn" data-adv>Continue with Google</button>
+          <button type="button" class="btn" data-adv>Continue with LinkedIn</button>
+        </div>
+        <div class="or">or</div>
+        <div class="f"><label for="email">Your email address</label><input type="email" id="email" value="inglebert@example.co.uk" autocomplete="email"><small>We'll send a sign-in link to this address.</small></div>
+      </div>
+
+      <div data-step="2" hidden>
+        <h2>About you</h2>
+        <p class="lead">This is what firms see first.</p>
+        <div class="photo">
+          <div class="avatar" aria-hidden="true"><svg width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="22" r="13" fill="#141414"/><path d="M8 58c0-14 10-22 22-22s22 8 22 22z" fill="#141414"/></svg></div>
+          <div class="f"><span class="lab">Your photo</span><button type="button" class="small" data-pick>Upload a photo</button><small>A clear, friendly head-and-shoulders photo works best.</small></div>
+        </div>
+        <div class="f"><label for="name">Full name</label><input type="text" id="name" value="The Hon. Inglebert Montgomery-Smythe" autocomplete="name"></div>
+        <div class="f"><label for="headline">Headline</label><input type="text" id="headline" value="Founder, Broom Bay Seaweed"><small>Your current or most notable role, in a few words.</small></div>
+        <div class="row">
+          <div class="f"><label for="town">Based in</label><input type="text" id="town" value="Ullapool, Scotland"><small>Town and country where you live.</small></div>
+          <div class="f"><label for="years">Years of experience</label><input type="number" id="years" value="27" min="0"></div>
+        </div>
+        <div class="f"><label for="linkedin">LinkedIn link <span class="opt">(optional)</span></label><input type="url" id="linkedin" value="linkedin.com/in/inglebert-ms"></div>
+      </div>
+
+      <div data-step="3" hidden>
+        <h2>Your career</h2>
+        <p class="lead">Upload your CV and we'll draft your career timeline. You check and edit it.</p>
+        <div class="drop">
+          <svg class="big" viewBox="0 0 54 54" aria-hidden="true"><path d="M10 4h24l12 12v34H10z" fill="#141414"/><path d="M34 4v12h12" fill="#F5F0E6"/><path d="M27 42V24M19 31l8-8 8 8" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><b>Inglebert-Montgomery-Smythe-CV.pdf</b><br><small>Uploaded · PDF or Word, up to 10 MB</small></div>
+          <button type="button" class="small" data-pick>Replace</button>
+        </div>
+        <div class="ai"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="10" fill="#1F9D55"/><path d="M6.5 11.5l3 3 6-6.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>We drafted 3 roles from your CV. Please check each one.</div>
+        <div class="job"><b>Founder, Broom Bay Seaweed</b><span class="when">2012 – now · 14 years</span><button type="button" class="small" data-edit>Edit</button><p>Grows sugar kelp and dulse on longlines in Loch Broom; supplies food, cosmetics and fertiliser makers across the UK.</p></div>
+        <div class="job"><b>Site manager, Summer Isles Salmon</b><span class="when">2002 – 2012 · 10 years</span><button type="button" class="small" data-edit>Edit</button><p>Ran daily operations; marine licensing, water quality and work with coastal communities.</p></div>
+        <div class="job"><b>Deckhand, then mate, fisheries survey vessels</b><span class="when">1997 – 2002 · 5 years</span><button type="button" class="small" data-edit>Edit</button><p>Survey work at sea; reading the sea and the weather.</p></div>
+        <button type="button" class="small" style="align-self:flex-start" data-addrole>+ Add a role</button>
+        <div class="row">
+          <div class="f"><label for="edu">Education</label><input type="text" id="edu" value="BSc Marine Biology, University of Aberdeen"></div>
+          <div class="f"><label for="lang">Languages</label><input type="text" id="lang" value="English, Scottish Gaelic"></div>
+        </div>
+      </div>
+
+      <div data-step="4" hidden>
+        <h2>Your expertise</h2>
+        <p class="lead">Pick up to 2 broad industries. You can add specialities now or later.</p>
+        <div class="f"><span class="lab">Industries <span class="opt">(up to 2)</span></span><div class="chips" id="inds"></div></div>
+        <div class="f"><label for="spec">Specialities <span class="opt">(optional)</span></label><input type="text" id="spec" value="Seaweed farming, marine licensing, aquaculture, coastal communities"><small>Separate with commas.</small></div>
+        <div class="f"><label for="about">About you</label><textarea id="about">I spent ten years as a site manager at Summer Isles Salmon, where I learned how marine licensing, water quality and coastal communities really work. Before that, five years as a deckhand and then mate on fisheries survey vessels taught me to read the sea and the weather. In 2012 I founded Broom Bay Seaweed, growing sugar kelp and dulse on longlines in Loch Broom; it now supplies food, cosmetics and fertiliser makers across the UK. Together, that gives me a rare view of seaweed from the water, the regulator's desk and the buyer's side.</textarea><small>Cover each main job, what you learned there, and how it adds up to your speciality.</small></div>
+      </div>
+
+      <div data-step="5" hidden>
+        <h2>Your charity</h2>
+        <p class="lead">Every donation goes straight to this charity. You can change it at any time.</p>
+        <div class="f"><label for="csearch">Search for a registered UK charity</label><input type="search" id="csearch" value="Loch Broom Lifeboat"></div>
+        <div class="charity">
+          <svg class="ok" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#1F9D55" stroke="#141414" stroke-width="2.5"/><path d="M10 17.5l4.5 4.5L24 12.5" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><b>Loch Broom Lifeboat Fund</b><span class="example">Example charity</span><br>Checked against the Scottish Charity Regulator (OSCR) register. Funds the volunteer lifeboat crew serving Loch Broom and the Summer Isles.</div>
+        </div>
+        <div class="f"><label for="why">Why it's personal to you <span class="opt">(optional)</span></label><textarea id="why" style="min-height:110px">The crew came out for our boat in a winter gale in 2004. I've supported them ever since.</textarea></div>
+        <div class="f">
+          <span class="lab">Suggested donation <span class="opt">(optional)</span></span>
+          <small>Firms see this at the bottom of your profile. Don't undersell your charity: pick the level closest to you as a guide.</small>
+          <div class="levels" role="radiogroup" aria-label="Your level">
+            <label class="level"><input type="radio" name="lvl" id="lvl1"><b>Specialist</b><span class="amt">£100–£200</span><small>per hour · manager, practitioner, small business owner</small></label>
+            <label class="level"><input type="radio" name="lvl" id="lvl2" checked><b>Senior</b><span class="amt">£250–£400</span><small>per hour · director, head of department, founder of an established business</small></label>
+            <label class="level"><input type="radio" name="lvl" id="lvl3"><b>Executive</b><span class="amt">£500+</span><small>per hour · CEO, board member, former senior official</small></label>
+          </div>
+          <small>Talks, visits and mentoring: about 2–4 times the hourly figure per engagement.</small>
+        </div>
+        <div class="radios" role="radiogroup" aria-label="How to show it">
+          <label class="radio"><input type="radio" name="sug" id="sug1">A suggested amount, e.g. £300 per hour</label>
+          <label class="radio"><input type="radio" name="sug" id="sug2" checked>A suggested range: £250–£400 per hour</label>
+          <label class="radio"><input type="radio" name="sug" id="sug3">Open: the firm decides</label>
+        </div>
+      </div>
+
+      <div data-step="6" hidden>
+        <h2>Contact and availability</h2>
+        <p class="lead">Your contact details stay private. Firms send requests through Dapperowl, and details are only swapped once you accept.</p>
+        <div class="row">
+          <div class="f"><label for="cemail">Email for requests</label><input type="email" id="cemail" value="inglebert@example.co.uk"></div>
+          <div class="f"><label for="phone">Phone <span class="opt">(optional, never shown)</span></label><input type="tel" id="phone" value="07700 900123"></div>
+        </div>
+        <div class="f"><span class="lab">How you're happy to help</span><div class="chips" id="fmts"></div></div>
+        <div class="f"><label for="avail">How much time could you give?</label>
+          <select id="avail"><option>Up to 2 hours a month</option><option selected>Up to 5 hours a month</option><option>Up to 10 hours a month</option><option>More than 10 hours a month</option></select>
+        </div>
+      </div>
+
+      <div data-step="7" hidden>
+        <h2>Declarations and tax note</h2>
+        <p class="lead">Please read and tick each one.</p>
+        <div class="note">
+          <p><b>A note on tax.</b> HMRC could treat a donation as your own income, because you choose the charity. Casual income under £1,000 a year is covered by the trading allowance and is tax-free.</p>
+          <p>If you're unsure, free help is available from Tax Help for Older People and TaxAid.</p>
+        </div>
+        <label class="tick"><input type="checkbox" id="d1" checked>I have read the tax note.</label>
+        <label class="tick"><input type="checkbox" id="d2" checked>I'm giving a personal view, not professional advice.</label>
+        <label class="tick"><input type="checkbox" id="d3" checked>I won't share confidential information from current or past employers.</label>
+        <label class="tick"><input type="checkbox" id="d4">The details on my profile are true.</label>
+      </div>
+
+      <div data-step="8" hidden>
+        <h2>Preview and publish</h2>
+        <p class="lead">This is how firms will see you. You can change anything later.</p>
+        <div class="preview">
+          <div class="who">
+            <h3>The Hon. Inglebert Montgomery-Smythe</h3>
+            <div class="pic" aria-label="Profile photo"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="22" r="13" fill="#141414"/><path d="M8 58c0-14 10-22 22-22s22 8 22 22z" fill="#141414"/></svg></div>
+            <span class="meta">Based in Ullapool, Scotland</span>
+          </div>
+          <dl class="info">
+            <div><dt>Current position</dt><dd>Founder, Broom Bay Seaweed · 27 years' experience</dd></div>
+            <div><dt>Sectors</dt><dd>Food, Agriculture &amp; Fisheries · Environment &amp; Sustainability</dd></div>
+            <div><dt>About</dt><dd>Ten years running Summer Isles Salmon's site taught me marine licensing, water quality and coastal communities. Since 2012 I've grown sugar kelp and dulse at Broom Bay Seaweed, supplying food, cosmetics and fertiliser makers across the UK.</dd></div>
+            <div class="ch"><dt>Charity</dt><dd>Loch Broom Lifeboat Fund</dd></div>
+          </dl>
+        </div>
+        <p class="note" style="margin:0">After you publish, we check your identity and LinkedIn. Your profile goes live within 48 hours, and we'll email you when it does.</p>
+      </div>
+
+      <div data-step="9" hidden>
+        <div class="done-msg">
+          <svg viewBox="0 0 90 90" aria-hidden="true"><circle cx="45" cy="45" r="41" fill="#1F9D55" stroke="#141414" stroke-width="4"/><path d="M26 46l13 13 26-28" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h2>Thank you, Inglebert</h2>
+          <p class="lead" style="margin:0">Your profile is with us for a quick check. It goes live within 48 hours, and we'll email you when it does.</p>
+          <a class="btn" href="expert-dashboard.html">Go to your dashboard →</a>
+        </div>
+      </div>
+
+      <div class="nav" id="navrow">
+        <button type="button" class="btn ghost" id="back">← Back</button>
+        <button type="submit" class="btn" id="next">Continue →</button>
+      </div>
+    </form>
+  </div>
+</main>
+
+<footer id="site-foot"></footer>
+<script src="site.js"></script>
+<script>
+const titles=['Create account','About you','Career','Expertise','Charity','Contact & availability','Declarations','Preview & publish'];
+const inds=['Finance & Investment','Energy & Natural Resources','Shipping, Transport & Logistics','Food, Agriculture & Fisheries','Health & Life Sciences','Technology & Telecoms','Manufacturing & Construction','Property & Infrastructure','Consumer, Retail & Hospitality','Media, Entertainment & Games','Environment & Sustainability','Government, Policy & Defence','Law & Professional Services','Education, Charities & Social Impact'];
+const fmts=['Phone or video call','Written advice','Site visit','Talk or presentation','Mentoring'];
+let cur=1;
+const steps=document.getElementById('steps'), form=document.getElementById('form');
+titles.forEach((t,i)=>{const li=document.createElement('li');li.innerHTML='<button type="button" id="go'+(i+1)+'"><span class="n">'+(i+1)+'</span><span class="t"></span></button>';li.querySelector('.t').textContent=t;li.querySelector('button').onclick=()=>show(i+1);steps.appendChild(li);});
+function chips(el,list,checked,name,max){
+  list.forEach((t,i)=>{const l=document.createElement('label');l.className='chip';l.innerHTML='<input type="checkbox" id="'+name+i+'"><span></span>';l.querySelector('span').textContent=t;const c=l.querySelector('input');c.checked=checked.includes(t);c.onchange=()=>limit();el.appendChild(l);});
+  function limit(){ if(!max) return; const boxes=[...el.querySelectorAll('input')]; const n=boxes.filter(b=>b.checked).length; boxes.forEach(b=>{b.disabled=!b.checked&&n>=max;b.parentElement.classList.toggle('off',b.disabled);}); }
+  limit();
+}
+chips(document.getElementById('inds'),inds,['Food, Agriculture & Fisheries','Environment & Sustainability'],'ind',2);
+chips(document.getElementById('fmts'),fmts,['Phone or video call','Written advice','Site visit'],'fmt',0);
+function show(n){
+  cur=n;
+  form.querySelectorAll('[data-step]').forEach(s=>s.hidden=+s.dataset.step!==n);
+  steps.querySelectorAll('button').forEach((b,i)=>{b.classList.toggle('cur',i+1===n);b.classList.toggle('done',i+1<n||n===9);b.querySelector('.n').textContent=(i+1<n||n===9)?'✓':(i+1);});
+  document.getElementById('barfill').style.width=(n===9?100:((n-1)/8*100+4))+'%';
+  document.getElementById('bar').setAttribute('aria-valuenow',Math.min(n,8));
+  document.getElementById('back').style.visibility=(n===1||n===9)?'hidden':'visible';
+  document.getElementById('navrow').hidden=n===9;
+  document.getElementById('next').textContent=n===8?'Publish my profile':'Continue →';
+}
+document.getElementById('back').onclick=()=>show(Math.max(1,cur-1));
+form.addEventListener('submit',e=>{e.preventDefault(); show(Math.min(9,cur+1)); window.scrollTo({top:0,behavior:'smooth'});});
+show(1);
+
+document.querySelectorAll('[data-adv]').forEach(b=>b.onclick=()=>document.getElementById('next').click());
+const picker=document.createElement('input');picker.type='file';picker.hidden=true;document.body.appendChild(picker);let pickFor=null;
+picker.onchange=()=>{ if(!pickFor||!picker.files[0]) return; const f=picker.files[0];
+  if(pickFor.closest('.photo')&&f.type.startsWith('image/')){const av=pickFor.closest('.photo').querySelector('.avatar');av.innerHTML='<img alt="Your photo" style="width:100%;height:100%;object-fit:cover;border-radius:50%" src="'+URL.createObjectURL(f)+'">';pickFor.textContent='Change photo';}
+  else { const d=pickFor.closest('.drop'); if(d){ d.querySelector('b').textContent=f.name; } }
+  picker.value=''; };
+document.querySelectorAll('[data-pick]').forEach(b=>b.onclick=()=>{pickFor=b;picker.accept=b.closest('.photo')?'image/*':'.pdf,.doc,.docx';picker.click();});
+function wireEdit(b){ b.onclick=()=>{ const j=b.closest('.job'), on=b.textContent==='Edit';
+  j.querySelectorAll('b,.when,p').forEach(x=>{x.contentEditable=on?'true':'false';x.style.outline=on?'2px dashed var(--cobalt)':'';x.style.outlineOffset='3px';});
+  b.textContent=on?'Done':'Edit'; if(on) j.querySelector('b').focus(); }; }
+document.querySelectorAll('[data-edit]').forEach(wireEdit);
+document.querySelectorAll('[data-addrole]').forEach(b=>b.onclick=()=>{ const j=document.createElement('div'); j.className='job';
+  j.innerHTML='<b>Job title, organisation</b><span class="when">Start year – end year</span><button type="button" class="small" data-edit>Edit</button><p>What you did there, in a sentence or two.</p>';
+  b.before(j); const e=j.querySelector('[data-edit]'); wireEdit(e); e.click(); });
+</script>
+</body></html>

@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>Dapperowl</title>
+<title>Dapperowl Prototype</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* Layout: a sequence of full-width colour bands taken from the drawing's clothes (cream, burgundy, olive, cream, cobalt, navy), joined by soft wavy edges. Big DM Serif headings sit on chunky outlined colour blobs; three small black-figure drawings; tilted cards with hard shadows. */
+:root{ --trk:#F6C344; --trktext:#14254F; --olive:#5E6B33; --burg:#7A1F2B; --cream:#F5F0E6; --sun:#F6C344; }
+body{font-size:20px}
+.band{position:relative;padding-block:96px}
+.band .inner{position:relative;z-index:1}
+.wave{display:block;width:100%;height:72px;margin:-1px 0}
+
+/* headings with a blob behind */
+.hd{text-align:center;margin:0 auto;font-family:var(--head);font-weight:400;font-size:clamp(40px,5.4vw,80px);line-height:1.28;text-transform:uppercase;max-width:20ch;color:var(--navy)}
+.hd span{background:#fff;border:3px solid var(--ink);border-radius:16px;padding:.02em .28em;-webkit-box-decoration-break:clone;box-decoration-break:clone;box-shadow:5px 5px 0 var(--ink)}
+
+/* hero (kept) */
+.hero{position:relative;min-height:600px;display:grid;grid-template-columns:40% 60%;overflow:hidden;background:var(--cream)}
+.hero .wavepanel{position:absolute;inset:0;width:100%;height:100%}
+.hero .wavepanel path{fill:var(--cobalt)}
+.hero .text{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;gap:26px;padding-block:48px 64px;padding-left:max(56px,env(safe-area-inset-left,0px));padding-right:28px;min-width:0}
+.hero h1{margin:0;font-family:var(--head);font-weight:400;font-size:clamp(50px,6.6vw,104px);line-height:1.3;text-transform:uppercase;color:var(--navy)}
+.hero h1 span{background:#fff;border:3px solid var(--ink);border-radius:16px;padding:.02em .26em;-webkit-box-decoration-break:clone;box-decoration-break:clone;box-shadow:6px 6px 0 var(--ink)}
+.pts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.pts li{display:flex;gap:14px;align-items:center;font-weight:700;font-size:clamp(17px,1.45vw,20px);line-height:1.3}
+.ico{flex:none;width:34px;height:34px}
+.art{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;padding:24px 24px 24px 14%}
+.art svg{width:min(100%,560px);height:auto}
+.steam path{animation:steam 3.2s ease-in-out infinite}
+.steam path:nth-child(2){animation-delay:.5s}.steam path:nth-child(3){animation-delay:1s}
+.steam path:nth-child(5){animation-delay:.5s}.steam path:nth-child(6){animation-delay:1s}
+@keyframes steam{0%,100%{transform:translateY(0);opacity:1}50%{transform:translateY(-7px);opacity:.45}}
+
+/* 100% strip: one thin line with wavy top and bottom */
+.strip{position:relative;z-index:3;margin-top:-19px}
+.strip .sw{display:block;width:100%;height:20px;margin:-1px 0}
+.strip p{margin:0;background:var(--burg);color:var(--cream);padding-block:10px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px 20px;font-family:var(--ui);font-weight:600;font-size:clamp(15px,1.35vw,19px);letter-spacing:.02em;text-align:center}
+.strip p b{font-weight:600;color:var(--sun)}
+.strip p i{width:7px;height:7px;border-radius:50%;background:var(--sun);display:inline-block}
+
+/* what is Dapperowl */
+.what{background:var(--cream);padding-block:80px 72px}
+.what .inner{display:flex;flex-direction:column;align-items:center;gap:34px;text-align:center}
+.stmt{margin:0;font-family:var(--head);font-size:clamp(22px,2.1vw,30px);line-height:1.4;max-width:46ch;color:var(--navy)}
+.wsteps{list-style:none;margin:0;padding:0;display:flex;align-items:stretch;justify-content:center;gap:16px;flex-wrap:wrap}
+.wsteps li:not(.arr){background:#fff;border:3px solid var(--ink);border-radius:20px;box-shadow:6px 6px 0 var(--ink);padding:24px 22px;display:flex;flex-direction:column;align-items:center;gap:10px;width:250px}
+.wsteps .wi{width:76px;height:76px;border-radius:50%;background:var(--sun);border:3px solid var(--ink);display:grid;place-items:center}
+.wsteps .wi svg{width:44px;height:44px}
+.wsteps b{font-family:var(--ui);font-size:22px}
+.wsteps span:not(.wi){font-size:17px;line-height:1.4}
+.wsteps .arr{align-self:center;font-family:var(--ui);font-weight:700;font-size:36px;color:var(--navy)}
+@media (max-width:900px){.wsteps .arr{transform:rotate(90deg);width:100%;text-align:center}.wsteps li:not(.arr){width:min(100%,340px)}}
+
+/* tracker */
+.olive{background:var(--trk);color:var(--trktext)}
+.olive .hd{color:var(--navy);--blob:var(--cream)}
+.olive{overflow:hidden}
+.trk-head{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:330px}
+.trk-head .hd{position:relative;z-index:1}
+.rows{position:absolute;top:50%;left:50%;width:100vw;transform:translate(-50%,-50%);display:flex;flex-direction:column;gap:18px;z-index:0;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent)}
+.row{overflow:hidden}
+.row .track{display:flex;gap:64px;width:max-content}
+.row span{font-family:var(--head);font-size:clamp(26px,2.6vw,38px);line-height:1.2;color:var(--navy);opacity:.26;white-space:nowrap;position:relative}
+.row span::after{content:'';position:absolute;right:-37px;top:50%;width:10px;height:10px;margin-top:-5px;border-radius:50%;background:var(--navy)}
+.row.rtl .track{animation:rtl 60s linear infinite}
+.row.ltr .track{animation:ltr 70s linear infinite}
+.row:nth-child(3).ltr .track{animation-duration:54s}
+@keyframes rtl{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes ltr{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.marq-note{margin:0;border:3px dashed var(--navy);color:var(--navy);border-radius:18px;padding:22px 24px;font-size:19px;line-height:1.45;opacity:.9}
+.marq-note span{display:block;font-family:var(--ui);font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;opacity:.75}
+.marq{display:flex;flex-direction:column;gap:14px;min-width:0}
+.marq-lab{font-family:var(--ui);font-weight:600;font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,240,230,.7)}
+.marq-win{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
+.marq-track{display:flex;gap:56px;width:max-content;animation:marq 38s linear infinite}
+.marq:hover .marq-track{animation-play-state:paused}
+.marq-track span{font-family:var(--head);font-size:28px;line-height:1.1;color:var(--cream);opacity:.78;white-space:nowrap;mix-blend-mode:screen}
+@keyframes marq{to{transform:translateX(calc(-50% - 28px))}}
+.trk-wrap{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:36px;align-items:center;margin-top:48px}
+.trk-wrap .ot{box-shadow:7px 7px 0 var(--ink)}
+.spot{width:100%;height:auto;max-width:240px}
+
+/* extras */
+.extras{background:var(--cream)}
+.extras .hd{--blob:#B9C68A}
+.xgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center;margin-top:52px}
+.tilt{transition:transform .35s ease, box-shadow .35s ease;will-change:transform}
+.cert-card{transform:rotate(-2.5deg)}
+.cert-in{aspect-ratio:1.91/1;max-width:100%;background:var(--navy);color:var(--paper);border:3px solid var(--ink);border-radius:14px;padding:5% 6%;display:flex;flex-direction:column;justify-content:space-between;box-shadow:8px 8px 0 var(--ink);container-type:inline-size}
+.cert-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.cert-logo{height:9cqw;width:auto}
+.cert-kicker{font-family:var(--ui);font-weight:600;font-size:2.4cqw;letter-spacing:.14em;text-transform:uppercase;color:#C9D3F2;border:2px solid #C9D3F2;border-radius:999px;padding:.6cqw 1.8cqw}
+.cert-body{display:flex;justify-content:space-between;align-items:flex-end;gap:4cqw;border-top:2px solid rgba(245,240,230,.35);border-bottom:2px solid rgba(245,240,230,.35);padding-block:3cqw}
+.cert-left{display:flex;flex-direction:column;gap:1.2cqw;min-width:0}
+.cert-name{font-family:var(--head);font-size:5cqw;line-height:1.05}
+.cert-line{font-size:2.6cqw;color:#DCE3F5}
+.cert-right{display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:.6cqw;flex:none}
+.cert-amt{font-family:var(--head);font-size:11cqw;line-height:.9;color:#7FE0A6}
+.cert-to{font-size:2.3cqw;line-height:1.3}
+.cert-to b{font-family:var(--ui);font-size:2.7cqw}
+.cert-foot{display:flex;justify-content:space-between;gap:2cqw;flex-wrap:wrap;font-family:var(--ui);font-weight:600;font-size:2cqw;color:#C9D3F2}
+.cap{margin:18px 0 0;font-size:17px;color:var(--muted);max-width:48ch}
+.side{display:flex;flex-direction:column;gap:26px;align-items:flex-start}
+.explain{display:flex;flex-direction:column;gap:14px;max-width:46ch}
+.explain h3{margin:0;font-family:var(--head);font-weight:400;font-size:clamp(30px,3vw,42px);line-height:1.1;color:var(--navy)}
+.explain p{margin:0;font-size:20px;line-height:1.55}
+.side .lead2{margin:0;font-weight:700;font-size:23px;line-height:1.3}
+.total{background:var(--white);border:3px solid var(--ink);border-radius:20px;box-shadow:6px 6px 0 var(--ink);padding:24px 26px;transform:rotate(1.5deg);display:flex;flex-direction:column;gap:10px;position:relative;z-index:2;max-width:420px}
+.total b{font-family:var(--ui);font-size:20px}
+.raised{align-self:flex-start;background:var(--green);color:var(--white);border:3px solid var(--ink);border-radius:999px;font-family:var(--ui);font-weight:700;font-size:26px;padding:8px 22px}
+.total span{font-size:16px;color:var(--muted)}
+
+/* LinkedIn post with classic portrait certificate */
+.post{margin:0;max-width:460px;background:#fff;border:3px solid var(--ink);border-radius:16px;overflow:hidden;box-shadow:8px 8px 0 var(--ink);transform:rotate(-2deg)}
+.post .ph{display:flex;gap:10px;align-items:center;padding:14px 16px 6px}
+.post .av{width:44px;height:44px;border-radius:50%;background:#E9E4D8;display:grid;place-items:end center;overflow:hidden;flex:none}
+.post .av svg{width:36px;height:36px}
+.post .ph b{font-size:15px;display:block;color:#191919;line-height:1.2}
+.post .ph span{font-size:13px;color:#6b6b6b}
+.post .pc{margin:0;padding:4px 16px 12px;font-size:15px;color:#191919;line-height:1.45}
+.post .pa{display:flex;justify-content:space-around;border-top:1px solid #E8E8E8;padding:8px 6px;font-weight:600;font-size:14px;color:#666}
+.cq{container-type:inline-size}
+.cert{aspect-ratio:4/5;background:#fff;position:relative;overflow:hidden;color:var(--navy);border-top:1px solid #EEE;border-bottom:1px solid #EEE}
+.c1 .frame{position:absolute;inset:4.5cqw;border:.5cqw solid var(--navy);outline:.25cqw solid var(--navy);outline-offset:-2.2cqw}
+.c1 .in{position:absolute;inset:4.5cqw;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2.4cqw;padding:9cqw 8cqw 11cqw}
+.c1 .logo{width:30cqw;height:auto}
+.c1 .k{font-family:var(--ui);font-weight:600;font-size:3.2cqw;letter-spacing:.32em;text-transform:uppercase;color:var(--cobalt)}
+.c1 .photo{width:24cqw;height:24cqw;border-radius:50%;border:.6cqw solid var(--navy);background:#E9E4D8;display:grid;place-items:end center;overflow:hidden;margin-block:1cqw}
+.c1 .photo svg{width:78%;height:78%}
+.c1 .nm{font-family:var(--head);font-size:6cqw;line-height:1.08}
+.c1 .rule{width:16cqw;height:.4cqw;background:var(--navy);margin-block:.6cqw}
+.c1 .amt{font-family:var(--head);font-size:12cqw;line-height:.9;color:#18743a}
+.c1 .to{font-size:3.4cqw;line-height:1.35}
+.c1 .to b{font-family:var(--ui);font-weight:700;display:block;font-size:4cqw}
+.c1 .date{position:absolute;right:10cqw;top:9cqw;font-family:var(--ui);font-weight:500;font-size:2.8cqw;color:var(--muted)}
+
+/* profile */
+.cob{background:var(--cobalt);color:var(--white)}
+.cob .hd{color:var(--navy);--blob:var(--cream)}
+.pcard{margin-top:52px;background:var(--white);color:var(--navy);border:3px solid var(--ink);border-radius:24px;padding:40px;display:flex;gap:40px;flex-wrap:wrap;box-shadow:10px 10px 0 var(--ink);transform:rotate(-1deg);cursor:pointer;text-decoration:none}
+.who{flex:1 1 260px;display:flex;flex-direction:column;gap:6px}
+.who h3{margin:0;font-family:var(--head);font-weight:400;font-size:36px;line-height:1.1}
+.who .role{font-weight:700}
+.who .meta{color:var(--muted);font-size:18px}
+.about{flex:999 1 480px;min-width:0}
+.about h4{margin:0 0 8px;font-family:var(--ui);font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.about p{margin:0;max-width:68ch}
+.pcard .go{font-family:var(--ui);font-weight:700;color:var(--cobalt);margin-top:14px;display:inline-block}
+
+.pgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center;margin-top:52px}
+.scard{background:#fff;color:var(--navy);border:3px solid var(--ink);border-radius:20px;box-shadow:8px 8px 0 var(--ink);padding:28px 30px;display:flex;flex-direction:column;gap:8px;transform:rotate(-1.5deg);max-width:500px}
+.stag{align-self:flex-start;font-family:var(--ui);font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;background:var(--sun);border:2px solid var(--ink);border-radius:999px;padding:3px 12px;margin-bottom:6px}
+.srow{display:flex;gap:16px;align-items:center}
+.sav{width:64px;height:64px;border-radius:50%;background:#E9E4D8;border:3px solid var(--ink);display:grid;place-items:end center;overflow:hidden;flex:none}
+.sav svg{width:52px;height:52px}
+.snm{display:block;font-family:var(--head);font-size:26px;line-height:1.1}
+.srl{display:block;font-weight:700;font-size:18px}
+.smt{color:var(--muted);font-size:17px}
+.sch{font-family:var(--ui);font-weight:600;font-size:16px;border-top:2px solid var(--soft);padding-top:10px;margin-top:6px}
+.pexplain{display:flex;flex-direction:column;gap:16px;align-items:flex-start;color:var(--white)}
+.pexplain h3{margin:0;font-family:var(--head);font-weight:400;font-size:clamp(30px,3vw,42px);line-height:1.1}
+.pexplain p{margin:0;font-size:20px;max-width:42ch}
+.pexplain .btn{background:var(--white);color:var(--navy)}
+/* full profile pop-up (the expert's own view) */
+dialog.prof{width:min(920px,calc(100vw - 32px));max-height:88vh;padding:0;border:3px solid var(--ink);border-radius:22px;box-shadow:10px 10px 0 var(--ink);background:var(--paper);color:var(--navy)}
+dialog.prof::backdrop{background:rgba(20,37,79,.62)}
+.pd-top{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--navy);color:var(--cream);padding:14px 22px;font-family:var(--ui);font-weight:600;font-size:15px}
+.pd-x{font-family:var(--ui);font-weight:700;font-size:16px;background:var(--white);color:var(--navy);border:2px solid var(--ink);border-radius:10px;padding:8px 14px;cursor:pointer}
+.pd{padding:30px;display:flex;flex-direction:column;gap:24px}
+.pd-h{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}
+.pd-pic{width:130px;height:130px;border-radius:18px;border:3px solid var(--ink);background:#E9E4D8;display:grid;place-items:end center;overflow:hidden;flex:none}
+.pd-pic svg{width:100px;height:100px}
+.pd-t{flex:1 1 280px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.pd-t h3{margin:0;font-family:var(--head);font-weight:400;font-size:34px;line-height:1.08}
+.pd-t .r{font-weight:700;font-size:20px}
+.pd-t .m{color:var(--muted);font-size:17px}
+.pd-tot{background:#fff;border:3px solid var(--ink);border-radius:16px;box-shadow:4px 4px 0 var(--ink);padding:14px 18px;display:flex;flex-direction:column;gap:6px;align-self:flex-start}
+.pd-tot b{font-family:var(--head);font-weight:400;font-size:36px;line-height:1;color:var(--green)}
+.pd-tot span{font-size:14px;color:var(--muted);font-family:var(--ui);font-weight:600}
+.pd section{border-top:2px solid var(--navy);padding-top:18px}
+.pd h4{margin:0 0 10px;font-family:var(--ui);font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.pd p{margin:0;max-width:70ch}
+.pd .tags{display:flex;flex-wrap:wrap;gap:8px}
+.pd .tags span{font-family:var(--ui);font-weight:600;font-size:15px;border:2px solid var(--ink);border-radius:999px;padding:4px 12px;background:#fff}
+.pd .tags span.i{background:var(--ink);color:#fff}
+.pd ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.pd ol b{font-family:var(--ui);display:block;font-size:18px}
+.pd ol .w{color:var(--muted);font-size:16px}
+.pd .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.pd .ch{background:#fff;border:3px solid var(--ink);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:8px}
+.pd .ch b{font-family:var(--ui);font-size:20px}
+.pd .don{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.pd .don .a{font-family:var(--head);font-size:30px}
+.pd .acts{display:flex;gap:12px;flex-wrap:wrap}
+@media (max-width:900px){.pgrid{grid-template-columns:1fr}.scard{transform:none}.pd .two{grid-template-columns:1fr}.pd{padding:20px}}
+
+/* join */
+.join{background:var(--navy);color:var(--cream);text-align:center;overflow:hidden}
+.join .ghost-owl{position:absolute;right:-6%;bottom:-12%;width:min(780px,90%);opacity:.09;z-index:0;pointer-events:none}
+.join .inner{display:flex;flex-direction:column;align-items:center;gap:34px}
+.join .hd{color:var(--navy);--blob:var(--sun)}
+.join p{margin:0;font-size:20px}
+.join .link2{color:var(--cream);font-weight:700}
+.btn.lg{font-size:24px;padding:24px 44px;box-shadow:6px 6px 0 var(--ink)}
+.btn .arr{display:inline-block;transition:transform .25s ease}
+.btn:hover .arr{transform:translateX(6px)}
+
+/* gentle reveal: content is always visible; it only slides and brightens slightly */
+.rv{transition:transform .8s ease, opacity .8s ease}
+.js .rv:not(.in){transform:translateY(26px);opacity:.35}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .hero .wavepanel{display:none}
+  .art{background:var(--cobalt);order:-1;padding:24px 16px;border-radius:0 0 40px 40px}
+  .hero .text{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .trk-wrap,.xgrid{grid-template-columns:1fr}
+  .spot{max-width:170px;justify-self:center}
+  .total{margin-left:0}
+  .band{padding-block:64px}
+  .pcard{padding:24px;transform:none}
+  .hd::before{left:-10px;right:-10px}
+}
+@media (prefers-reduced-motion:reduce){
+  .steam path{animation:none}
+  .row .track{animation:none!important}
+  .marq-track{animation:none;flex-wrap:wrap;width:auto;gap:12px 32px}
+  .marq-track span[aria-hidden]{display:none}
+  .marq-win{-webkit-mask-image:none;mask-image:none}
+  .rv,.tilt,.btn .arr{transition:none}
+  .js .rv:not(.in){transform:none;opacity:1}
+}
+</style>
+</head><body>
+
+
+<header id="site-head"></header>
+
+<section class="hero" aria-label="Opening screen">
+  <svg class="wavepanel" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M50 0 C47 18, 53 30, 49 46 C45 60, 42 68, 44 82 C45 92, 46 97, 46 100 L100 100 L100 0 Z"/></svg>
+  <div class="text">
+    <h1><span>Specialise for<br>charity</span></h1>
+    <ul class="pts">
+      <li><svg class="ico" viewBox="0 0 34 34" aria-hidden="true"><path d="M17 3c-4 0-7 3-7 7 0 3 2 6 4 9l-6 11 5 1 4-8 4 8 5-1-6-11c2-3 4-6 4-9 0-4-3-7-7-7z" fill="#141414"/><path d="M17 8c-1.6 0-2.6 1.1-2.6 2.4 0 1.4 1 3 2.6 5.2 1.6-2.2 2.6-3.8 2.6-5.2C19.6 9.1 18.6 8 17 8z" fill="#F5F0E6"/></svg>Support a cause you care about</li>
+      <li><svg class="ico" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#141414"/><path d="M10 17.5l4.5 4.5L24 12.5" fill="none" stroke="#F5F0E6" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>100% of every donation reaches your charity</li>
+      <li><svg class="ico" viewBox="0 0 34 34" aria-hidden="true"><path d="M4 30l2-8L22 6l6 6-16 16z" fill="#141414"/><path d="M19 9l6 6" stroke="#F5F0E6" stroke-width="2.4"/></svg>Share what you know, on your own terms</li>
+    </ul>
+  </div>
+  <div class="art">
+    <svg viewBox="0 0 600 580" role="img" aria-label="Three people chatting over coffee at a round table">
+      <g stroke="#141414" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M232 70 L370 60 L378 210 L226 214 Z" fill="#fff"/>
+        <path d="M236 236 C230 176 258 150 302 150 C346 150 372 176 366 236 Z" fill="#2F6B45"/>
+        <path d="M284 152 L302 182 L320 152" fill="#9AA0A6"/>
+        <ellipse cx="302" cy="112" rx="32" ry="38" fill="#141414"/>
+        <path d="M296 108 q6 6 12 0" stroke="#fff" stroke-width="3" fill="none"/>
+        <ellipse cx="300" cy="300" rx="168" ry="118" fill="#fff"/>
+        <path d="M300 418 L300 470"/>
+        <path d="M252 176 C226 210 236 238 262 246" fill="none" stroke-width="30"/>
+        <path d="M352 176 C372 205 362 230 340 238" fill="none" stroke-width="30"/>
+        <g fill="#fff">
+          <path d="M268 222 h40 l-4 42 h-32 Z"/><path d="M308 232 q16 2 12 16 q-4 10 -14 8" fill="none"/>
+          <path d="M392 300 h36 l-4 38 h-28 Z"/><path d="M428 310 q14 2 10 14 q-4 9 -12 7" fill="none"/>
+        </g>
+        <g class="steam" fill="none" stroke-width="3.5">
+          <path d="M276 212 q-6 -8 0 -16 q6 -8 0 -16"/><path d="M288 210 q-6 -8 0 -16 q6 -8 0 -16"/><path d="M300 212 q-6 -8 0 -16 q6 -8 0 -16"/>
+          <path d="M400 290 q-6 -8 0 -16 q6 -8 0 -16"/><path d="M410 288 q-6 -8 0 -16 q6 -8 0 -16"/><path d="M420 290 q-6 -8 0 -16 q6 -8 0 -16"/>
+        </g>
+        <path d="M196 276 L250 266 L262 318 L208 328 Z" fill="#fff"/>
+        <path d="M210 288 L248 281 M213 300 L251 293 M216 312 L246 306" stroke-width="3"/>
+        <path d="M318 330 L384 346 L370 380 L304 364 Z" fill="#D9DCE1"/>
+        <path d="M384 346 L404 286 L398 280 L378 340" fill="#141414"/>
+        <path d="M54 250 L104 238 L150 500 L104 510 Z" fill="#fff"/>
+        <path d="M104 510 L118 560 M150 500 L210 470 L222 540" fill="none"/>
+        <path d="M150 412 L262 432 L268 528" fill="none" stroke-width="58"/>
+        <path d="M150 412 L262 432 L268 528" fill="none" stroke="#6B7A3A" stroke-width="46"/>
+        <ellipse cx="282" cy="540" rx="26" ry="13" fill="#fff"/>
+        <path d="M108 400 C92 330 112 280 160 272 C204 266 232 300 232 352 C232 402 210 430 160 432 C130 432 114 422 108 400 Z" fill="#EFE3CC"/>
+        <ellipse cx="176" cy="234" rx="30" ry="36" fill="#141414"/>
+        <circle cx="146" cy="226" r="14" fill="#141414"/>
+        <path d="M180 230 q6 6 12 0" stroke="#fff" stroke-width="3" fill="none"/>
+        <circle cx="186" cy="228" r="13" fill="none" stroke="#fff" stroke-width="2.5"/>
+        <path d="M196 300 C210 340 232 352 250 344" fill="none" stroke-width="28"/>
+        <path d="M236 316 h34 l-4 38 h-26 Z" fill="#fff"/><path d="M270 326 q13 2 9 13 q-4 8 -11 6" fill="none"/>
+        <g class="steam" fill="none" stroke-width="3.5"><path d="M244 306 q-6 -8 0 -16 q6 -8 0 -16"/><path d="M254 304 q-6 -8 0 -16 q6 -8 0 -16"/><path d="M264 306 q-6 -8 0 -16 q6 -8 0 -16"/></g>
+        <path d="M500 236 L552 248 L520 498 L470 488 Z" fill="#fff"/>
+        <path d="M470 488 L456 556 M520 498 L530 560" fill="none"/>
+        <path d="M478 404 L374 422 L362 522" fill="none" stroke-width="58"/>
+        <path d="M478 404 L374 422 L362 522" fill="none" stroke="#D6C7A6" stroke-width="46"/>
+        <ellipse cx="350" cy="534" rx="26" ry="13" fill="#fff"/>
+        <path d="M410 404 C404 340 410 282 452 272 C494 264 516 300 512 360 C508 410 490 428 452 430 C430 430 414 422 410 404 Z" fill="#7A1F2B"/>
+        <path d="M440 276 L456 304 L470 274" fill="#fff"/>
+        <ellipse cx="452" cy="234" rx="30" ry="36" fill="#141414"/>
+        <path d="M434 228 q6 6 12 0" stroke="#fff" stroke-width="3" fill="none"/>
+        <circle cx="438" cy="226" r="13" fill="none" stroke="#fff" stroke-width="2.5"/>
+        <path d="M428 300 C404 330 384 350 360 354" fill="none" stroke-width="28"/>
+      </g>
+    </svg>
+    
+  </div>
+</section>
+
+<div class="strip" role="note">
+  <svg class="sw" viewBox="0 0 1440 24" preserveAspectRatio="none" aria-hidden="true"><path d="M0 24 L0 12 C240 26 480 0 720 10 S1200 22 1440 6 L1440 24 Z" fill="#7A1F2B"/></svg>
+  <p class="gut"><b>100% of every donation reaches the charity</b><i aria-hidden="true"></i>Dapperowl never touches the money<i aria-hidden="true"></i>Firms donate straight to your chosen charity</p>
+  <svg class="sw" viewBox="0 0 1440 24" preserveAspectRatio="none" aria-hidden="true" style="background:var(--cream)"><path d="M0 0 L0 12 C300 0 560 24 820 10 S1260 0 1440 16 L1440 0 Z" fill="#7A1F2B"/></svg>
+</div>
+
+<section class="band what gut" aria-label="What Dapperowl does">
+  <div class="inner rv">
+    <p class="stmt">Dapperowl connects people who know their field inside out with organisations that need that knowledge. A firm asks for your time, and if you believe you have the expertise, you can accept. Once you have helped the firm, they donate straight to the charity you choose. No contracts, no selling yourself: just your expertise, put to work for a cause you care about.</p>
+    <ol class="wsteps">
+      <li><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 10h36v22H20l-9 8v-8H6z" fill="#141414"/><path d="M14 18h20M14 24h14" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg></span><b>They ask</b></li>
+      <li class="arr" aria-hidden="true">→</li>
+      <li><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="16" cy="16" r="7" fill="#141414"/><circle cx="33" cy="16" r="7" fill="#141414"/><path d="M4 40c0-8 5-13 12-13s12 5 12 13zM21 40c0-8 5-13 12-13s12 5 12 13z" fill="#141414"/></svg></span><b>You share</b></li>
+      <li class="arr" aria-hidden="true">→</li>
+      <li><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4L6 14v4h36v-4z" fill="#141414"/><path d="M10 21h5v14h-5zM21.5 21h5v14h-5zM33 21h5v14h-5z" fill="#141414"/><path d="M6 38h36v5H6z" fill="#141414"/></svg></span><b>Your charity receives</b></li>
+    </ol>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true" style="background:var(--cream)"><path d="M0 40 C300 0 560 70 820 34 S1260 6 1440 44 L1440 72 L0 72 Z" style="fill:var(--trk)"/></svg>
+
+<section class="band olive gut" id="tracker">
+  <div class="inner rv">
+    <div class="trk-head">
+      <div class="rows" aria-hidden="true"><div class="row ltr"><div class="track"><span>Harbour Lights Hospice</span><span>Glen Affric Wildlife Trust</span><span>The Reading Tree</span><span>Brightwater Children's Fund</span><span>Moorland Mountain Rescue</span><span>Kindred Kitchens</span><span>Harbour Lights Hospice</span><span>Glen Affric Wildlife Trust</span><span>The Reading Tree</span><span>Brightwater Children's Fund</span><span>Moorland Mountain Rescue</span><span>Kindred Kitchens</span></div></div><div class="row rtl"><div class="track"><span>Loch Broom Lifeboat Fund</span><span>Second Spring Dementia Care</span><span>Open Door Shelters</span><span>Little Lungs Foundation</span><span>Bridges to Literacy</span><span>Riverside Youth Music</span><span>Loch Broom Lifeboat Fund</span><span>Second Spring Dementia Care</span><span>Open Door Shelters</span><span>Little Lungs Foundation</span><span>Bridges to Literacy</span><span>Riverside Youth Music</span></div></div><div class="row ltr"><div class="track"><span>Northern Woodland Trust</span><span>Oban Food Bank</span><span>Seafarers Support Network</span><span>Veterans' Workshop</span><span>Yorkshire Carers Trust</span><span>Green Corridor Trust</span><span>Northern Woodland Trust</span><span>Oban Food Bank</span><span>Seafarers Support Network</span><span>Veterans' Workshop</span><span>Yorkshire Carers Trust</span><span>Green Corridor Trust</span></div></div></div>
+      <h2 class="hd"><span>Watch your donation reach your charity</span></h2>
+    </div>
+    <div class="trk-wrap">
+      <div id="tracker-demo"></div>
+      <svg class="spot" viewBox="0 0 260 250" role="img" aria-label="Drawing: a finger pressing a big Send button">
+        <g stroke="#141414" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+    <!-- shadow -->
+    <ellipse cx="124" cy="234" rx="96" ry="12" fill="#141414" opacity=".22" stroke="none"/>
+    <!-- base box -->
+    <path d="M36 178 h176 a10 10 0 0 1 10 10 v30 a10 10 0 0 1 -10 10 h-176 a10 10 0 0 1 -10 -10 v-30 a10 10 0 0 1 10 -10 z" fill="#fff"/>
+    <text x="124" y="214" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="800" font-size="22" letter-spacing="3" fill="#141414" stroke="none">SEND</text>
+    <!-- button: cylinder pressed in -->
+    <path d="M74 166 v12 h100 v-12" fill="#1A3FCC"/>
+    <ellipse cx="124" cy="166" rx="50" ry="13" fill="#2251FF"/>
+    <ellipse cx="110" cy="162" rx="14" ry="3.5" fill="#fff" stroke="none" opacity=".55"/>
+    <!-- sleeve (burgundy) coming from top right -->
+    <path d="M196 18 L250 -6 L262 40 L214 70 Z" fill="#7A1F2B"/>
+    <path d="M206 64 L254 36" stroke-width="4"/>
+    <!-- hand: back of hand, knuckles, curled fingers -->
+    <path d="M206 66 C196 74 186 80 172 82 C158 84 150 92 146 104 C142 116 150 126 162 126 L176 124 C190 122 202 112 210 98 C216 86 216 74 206 66 Z" fill="#141414"/>
+    <!-- curled fingers (knuckle bumps) -->
+    <path d="M176 124 C178 132 172 138 164 136 M190 118 C194 126 188 132 180 131 M202 106 C208 112 204 120 196 120" fill="none" stroke="#fff" stroke-width="3"/>
+    <!-- index finger pointing down onto the button -->
+    <path d="M150 100 C142 112 136 128 130 146 C128 152 132 157 137 156 C141 155 143 151 144 148 L156 112" fill="#141414"/>
+    <path d="M131 147 q4 3 10 0" fill="none" stroke="#fff" stroke-width="2.5"/>
+    <!-- thumb -->
+    <path d="M150 98 C140 96 132 100 128 108 C126 113 131 116 136 113 C141 110 146 108 152 108" fill="#141414"/>
+    <!-- press lines -->
+    <path d="M60 150 l-16 -8 M54 168 l-20 0 M188 150 l16 -8 M194 168 l20 0" stroke-width="4"/>
+  </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true" style="background:var(--trk)"><path d="M0 26 C260 66 520 6 780 30 S1240 62 1440 18 L1440 72 L0 72 Z" fill="#F5F0E6"/></svg>
+
+<section class="band extras gut">
+  <div class="inner rv">
+    <h2 class="hd"><span>What else you get</span></h2>
+    <div class="xgrid">
+      <div>
+        <figure class="post tilt" aria-label="Example LinkedIn post with an impact certificate">
+          <div class="ph"><span class="av"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="22" r="13" fill="#141414"/><path d="M6 60c0-15 11-23 24-23s24 8 24 23z" fill="#141414"/></svg></span><div><b>The Hon. Inglebert Montgomery-Smythe</b><span>Founder, Broom Bay Seaweed · 1h</span></div></div>
+          <p class="pc">Proud to have shared what I know about Scottish seaweed farming, and that £500 went straight to Loch Broom Lifeboat Fund.</p>
+          <div class="cq"><div class="cert c1"><div class="frame"></div><div class="in"><svg class="logo" viewBox="18 14 274 108" aria-label="Dapperowl"><path d="M50 18 A28 28 0 0 1 78 46 L78 88 Q78 94 72 94 L36 94 Q22 94 22 80 L22 46 A28 28 0 0 1 50 18 Z" fill="#2251FF"/><path d="M-10 -5 L0 5 L10 -5" transform="translate(50 44)" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M44 98 L57 98 L43 118 L30 118 Z M62 98 L75 98 L61 118 L48 118 Z" fill="#2251FF"/><path d="M82 58 L286 58 Q206 106 108 100 L82 96 Z" fill="#2251FF"/><path d="M156 56 L128 108 M202 56 L178 102 M246 56 L228 90" stroke="#fff" stroke-width="4"/><text x="92" y="46.4" font-family="Outfit, sans-serif" font-weight="700" font-size="24" letter-spacing="2" fill="#14254F">DAPPEROWL</text></svg><span class="k">Certificate of impact</span><div class="photo"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="22" r="13" fill="#141414"/><path d="M6 60c0-15 11-23 24-23s24 8 24 23z" fill="#141414"/></svg></div><span class="nm">The Hon. Inglebert Montgomery-Smythe</span><span class="rule"></span><span class="amt">£500</span><span class="to">donated to<b>Loch Broom Lifeboat Fund</b></span></div><span class="date">October 2026</span></div></div>
+          <div class="pa"><span>Like</span><span>Comment</span><span>Share</span></div>
+        </figure>
+      </div>
+      <div class="side">
+        <div class="explain">
+          <h3>An official certificate of impact for every donation</h3>
+          <p>Once your charity confirms it has received the donation, we make you an official certificate of impact, ready to post on LinkedIn in one click.</p>
+          <p>It shows your photo, your name, the amount and your charity, so your network can see the good your knowledge has done. The firm stays anonymous unless it chooses to be named.</p>
+        </div>
+        <div class="total tilt">
+          <b>Your total raised, tracked privately on your own profile</b>
+          <span class="raised">£4,500 raised</span>
+          <span>Only you can see this.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true" style="background:#F5F0E6"><path d="M0 44 C280 4 600 66 900 30 S1300 10 1440 40 L1440 72 L0 72 Z" fill="#2251FF"/></svg>
+
+<section class="band cob gut">
+  <div class="inner rv">
+    <h2 class="hd"><span>What your profile could look like</span></h2>
+    <div class="pgrid">
+      <article class="scard tilt" aria-label="Your card in search results">
+        <span class="stag">In search results</span>
+        <div class="srow"><span class="sav"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="22" r="13" fill="#141414"/><path d="M6 60c0-15 11-23 24-23s24 8 24 23z" fill="#141414"/></svg></span><div><span class="snm">The Hon. Inglebert Montgomery-Smythe</span><span class="srl">Founder, Broom Bay Seaweed</span></div></div>
+        <span class="smt">Based in Ullapool, Scotland</span>
+        <span class="smt">Food, Agriculture &amp; Fisheries · Environment &amp; Sustainability</span>
+        <span class="sch">Supports: Loch Broom Lifeboat Fund</span>
+      </article>
+      <div class="pexplain">
+        <h3>This is how firms find you</h3>
+        <p>Your card appears when firms search by industry, job or keyword. They open it to see your full profile and send you a request if they believe your expertise matches their needs.</p>
+        <button type="button" class="btn lg" id="openProf">See your full profile <span class="arr">→</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true" style="background:#2251FF"><path d="M0 30 C320 68 640 4 940 34 S1320 60 1440 26 L1440 72 L0 72 Z" fill="#14254F"/></svg>
+
+<section class="band join gut" id="join">
+  <svg class="ghost-owl" viewBox="18 14 274 108" aria-hidden="true"><path d="M50 18 A28 28 0 0 1 78 46 L78 88 Q78 94 72 94 L36 94 Q22 94 22 80 L22 46 A28 28 0 0 1 50 18 Z" fill="#F5F0E6"/><path d="M44 98 L57 98 L43 118 L30 118 Z M62 98 L75 98 L61 118 L48 118 Z" fill="#F5F0E6"/><path d="M82 58 L286 58 Q206 106 108 100 L82 96 Z" fill="#F5F0E6"/></svg>
+  <div class="inner rv">
+    <svg class="spot" viewBox="0 0 260 200" role="img" aria-label="Drawing: two people shaking hands" style="max-width:260px">
+      <g stroke="#141414" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M30 132 C26 96 44 78 70 78 C96 78 112 96 108 132 Z" fill="#EFE3CC"/>
+        <ellipse cx="70" cy="50" rx="24" ry="28" fill="#141414"/><circle cx="48" cy="44" r="10" fill="#141414"/>
+        <path d="M70 46 q6 6 12 0" stroke="#fff" stroke-width="3" fill="none"/>
+        <path d="M150 132 C146 96 162 78 190 78 C216 78 234 96 230 132 Z" fill="#7A1F2B"/>
+        <ellipse cx="190" cy="50" rx="24" ry="28" fill="#141414"/>
+        <path d="M178 46 q6 6 12 0" stroke="#fff" stroke-width="3" fill="none"/>
+        <path d="M98 100 C112 110 122 112 130 108 M162 100 C148 110 138 112 130 108" fill="none" stroke-width="20"/>
+        <circle cx="130" cy="108" r="12" fill="#141414"/>
+        <path d="M48 132 L44 192 M90 132 L94 192" stroke-width="20"/><path d="M48 132 L44 192 M90 132 L94 192" stroke="#6B7A3A" stroke-width="10"/>
+        <path d="M170 132 L166 192 M212 132 L216 192" stroke-width="20"/><path d="M170 132 L166 192 M212 132 L216 192" stroke="#D6C7A6" stroke-width="10"/>
+        <path d="M122 70 l-6 -14 M130 66 v-16 M138 70 l6 -14" stroke="#F5F0E6" stroke-width="4"/>
+      </g>
+    </svg>
+    <h2 class="hd"><span>Ready to put your knowledge to good use?</span></h2>
+    <a class="btn lg" href="join.html">Join as an expert <span class="arr">→</span></a>
+    <p>Looking to find an expert instead? <a class="link2" href="find.html">Search our experts →</a></p>
+  </div>
+</section>
+
+
+<dialog class="prof" id="pdlg" aria-labelledby="pdName">
+  <div class="pd-top"><span>Your profile · this is your own view</span><button type="button" class="pd-x" id="closeProf">Close ✕</button></div>
+  <div class="pd">
+    <div class="pd-h">
+      <div class="pd-pic"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="22" r="13" fill="#141414"/><path d="M6 60c0-15 11-23 24-23s24 8 24 23z" fill="#141414"/></svg></div>
+      <div class="pd-t"><h3 id="pdName">The Hon. Inglebert Montgomery-Smythe</h3><span class="r">Founder, Broom Bay Seaweed</span><span class="m">Based in Ullapool, Scotland · 27 years' experience</span><span class="m">linkedin.com/in/inglebert-ms</span></div>
+      <div class="pd-tot"><b>£4,500</b><span>Raised so far · Only you can see this</span></div>
+    </div>
+    <section><h4>Industries and specialities</h4><div class="tags"><span class="i">Food, Agriculture &amp; Fisheries</span><span class="i">Environment &amp; Sustainability</span><span>Seaweed farming</span><span>Marine licensing</span><span>Aquaculture</span><span>Coastal communities</span></div></section>
+    <section><h4>About</h4><p>I spent ten years as a site manager at Summer Isles Salmon, where I learned how marine licensing, water quality and coastal communities really work. Before that, five years as a deckhand and then mate on fisheries survey vessels taught me to read the sea and the weather. In 2012 I founded Broom Bay Seaweed, growing sugar kelp and dulse on longlines in Loch Broom; it now supplies food, cosmetics and fertiliser makers across the UK. Together, that gives me a rare view of seaweed from the water, the regulator's desk and the buyer's side.</p></section>
+    <section><h4>Career</h4><ol><li><b>Founder, Broom Bay Seaweed</b><span class="w">2012 – now · 14 years</span></li><li><b>Site manager, Summer Isles Salmon</b><span class="w">2002 – 2012 · 10 years</span></li><li><b>Deckhand, then mate, fisheries survey vessels</b><span class="w">1997 – 2002 · 5 years</span></li></ol></section>
+    <section class="two"><div><h4>Education</h4><p>BSc Marine Biology, University of Aberdeen</p></div><div><h4>Languages</h4><p>English, Scottish Gaelic</p></div></section>
+    <section><h4>Chosen charity</h4><div class="ch"><b>Loch Broom Lifeboat Fund</b><p>Funds the volunteer lifeboat crew serving Loch Broom and the Summer Isles.</p><p><i>"The crew came out for our boat in a winter gale in 2004. I've supported them ever since."</i></p></div></section>
+    <section class="don"><div><h4>Suggested donation</h4><span class="a">£250–£400</span> <span class="m">per hour for calls</span></div><div class="acts"><a class="btn" href="create-profile.html">Edit my profile</a><a class="btn ghost" href="expert-dashboard.html">Go to my dashboard</a></div></section>
+  </div>
+</dialog>
+<footer id="site-foot"></footer>
+<script src="site.js"></script>
+<script>
+DapperTracker.mount(document.getElementById('tracker-demo'), DapperTracker.EXPERT);
+(function(){
+  const d=document.getElementById('pdlg');
+  document.getElementById('openProf').onclick=()=>{ if(d.showModal) d.showModal(); else d.setAttribute('open',''); };
+  document.getElementById('closeProf').onclick=()=>d.close();
+  d.addEventListener('click',e=>{ if(e.target===d) d.close(); });
+})();
+(function(){
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce && 'IntersectionObserver' in window){
+    document.documentElement.classList.add('js');
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.15});
+    document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+    setTimeout(()=>document.querySelectorAll('.rv').forEach(el=>el.classList.add('in')),6000);
+  }
+  if(!reduce && matchMedia('(hover: hover)').matches){
+    document.querySelectorAll('.tilt').forEach(el=>{
+      const base=getComputedStyle(el).transform; const b=base==='none'?'':base;
+      el.addEventListener('mousemove',e=>{const r=el.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;el.style.transform=b+' perspective(900px) rotateY('+(x*7)+'deg) rotateX('+(-y*7)+'deg)';});
+      el.addEventListener('mouseleave',()=>{el.style.transform='';});
+    });
+  }
+})();
+</script>
+
+</body></html>

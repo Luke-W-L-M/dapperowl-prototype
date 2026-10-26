@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex">
+<title>Join as an expert · Dapperowl</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+.hero{background:var(--cobalt);color:var(--white);overflow:hidden}
+.hero .inner{padding-block:72px 40px;display:flex;flex-direction:column;gap:22px;align-items:flex-start}
+.hero h1{color:var(--white)}
+.hero p{margin:0;font-size:23px;max-width:46ch}
+.hero .btn{background:var(--white);color:var(--navy)}
+/* every industry: A to Z fields drifting in two rows */
+.az{width:100%;margin-top:18px;display:flex;flex-direction:column;gap:12px;align-items:center}
+.az-lab{font-family:var(--ui);font-weight:700;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--white)}
+.az-lab b{background:var(--sun);color:var(--navy);border:2px solid var(--ink);border-radius:8px;padding:2px 10px;margin-left:6px;box-shadow:3px 3px 0 var(--ink)}
+.az-win{width:100vw;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.az-row{display:flex;gap:12px;width:max-content;padding-block:4px}
+.az-row span{font-family:var(--ui);font-weight:600;font-size:17px;background:var(--white);color:var(--navy);border:2px solid var(--ink);border-radius:999px;padding:7px 16px;white-space:nowrap}
+.az-row span i{font-style:normal;font-family:var(--head);color:var(--cobalt);margin-right:6px}
+.az-row.a{animation:azl 80s linear infinite}
+.az-row.b{animation:azr 90s linear infinite}
+@keyframes azl{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes azr{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@media (prefers-reduced-motion:reduce){.az-row{animation:none!important;flex-wrap:wrap;width:auto;justify-content:center}.az-row span[aria-hidden]{display:none}.az-win{width:auto;-webkit-mask-image:none;mask-image:none}}
+
+main{max-width:1180px;margin:0 auto;padding-block:56px 90px;display:flex;flex-direction:column;gap:56px}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;list-style:none;margin:0;padding:0}
+.steps li{background:var(--white);border:3px solid var(--ink);border-radius:20px;box-shadow:5px 5px 0 var(--ink);padding:24px;display:flex;flex-direction:column;gap:10px}
+.steps .n{width:52px;height:52px;border-radius:50%;background:var(--ink);color:var(--white);display:grid;place-items:center;font-family:var(--head);font-size:26px}
+.steps b{font-family:var(--ui);font-size:20px;line-height:1.25}
+.steps p{margin:0;font-size:17px}
+@media (max-width:960px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.steps{grid-template-columns:1fr}}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.three .card{display:flex;flex-direction:column;gap:10px;padding:28px}
+.three .card.c1{background:var(--sun);color:var(--navy)}
+.three .card.c2{background:var(--cobalt);color:var(--white)}
+.three .card.c3{background:var(--burgundy);color:var(--paper)}
+.three b{font-family:var(--ui);font-size:22px}
+.three p{margin:0;font-size:18px}
+
+/* thin burgundy strip: what you'll need */
+.need-strip{position:relative;margin-inline:calc(50% - 50vw);background:var(--burgundy);color:var(--paper);padding:14px max(24px,calc(50vw - 50% + 24px));margin-bottom:0}
+.need-strip::before,.need-strip::after{content:"";position:absolute;left:0;right:0;height:22px;background:var(--burgundy);-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.need-strip::before{top:-21px;-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 22' preserveAspectRatio='none'%3E%3Cpath d='M0 22 L0 11 C240 24 480 0 720 9 S1200 20 1440 4 L1440 22 Z'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 22' preserveAspectRatio='none'%3E%3Cpath d='M0 22 L0 11 C240 24 480 0 720 9 S1200 20 1440 4 L1440 22 Z'/%3E%3C/svg%3E")}
+.need-strip::after{bottom:-21px;z-index:2;-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 22' preserveAspectRatio='none'%3E%3Cpath d='M0 0 L0 12 C300 0 560 22 820 9 S1260 0 1440 15 L1440 0 Z'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 22' preserveAspectRatio='none'%3E%3Cpath d='M0 0 L0 12 C300 0 560 22 820 9 S1260 0 1440 15 L1440 0 Z'/%3E%3C/svg%3E")}
+.need-strip ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 22px;font-family:var(--ui);font-weight:600;font-size:clamp(15px,1.25vw,18px);text-align:center}
+@media (min-width:1100px){.need-strip ul{flex-wrap:nowrap;white-space:nowrap}}
+.need-strip li{display:flex;align-items:center;gap:22px}
+.need-strip li:first-child{color:var(--sun)}
+.need-strip li+li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--sun);display:inline-block;margin-right:0}
+.need-strip{margin-bottom:-56px}
+.need-strip + .bleed{margin-top:0}
+.need-strip + .bleed::before{display:none}
+.need-strip + .bleed{padding-top:84px}
+
+/* example: two equal boxes */
+.exgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px;align-items:stretch}
+.exbox{display:flex;flex-direction:column;gap:12px;min-width:0}
+.extag{align-self:flex-start;font-family:var(--ui);font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;background:var(--white);color:var(--navy);border:2px solid var(--ink);border-radius:999px;padding:4px 14px;box-shadow:3px 3px 0 var(--ink)}
+.exframe{height:560px;background:var(--white);border:3px solid var(--ink);border-radius:20px;box-shadow:8px 8px 0 var(--ink);color:var(--navy)}
+.scard{padding:30px 30px;display:flex;flex-direction:column;gap:10px;justify-content:center}
+.srow{display:flex;gap:18px;align-items:center}
+.sav{width:96px;height:96px;border-radius:50%;background:#E9E4D8;border:3px solid var(--ink);display:grid;place-items:end center;overflow:hidden;flex:none}
+.sav svg{width:78px;height:78px}
+.snm{display:block;font-family:var(--head);font-size:32px;line-height:1.08}
+.srl{display:block;font-weight:700;font-size:20px;margin-top:4px}
+.smt{color:var(--muted);font-size:18px}
+.sch{font-family:var(--ui);font-weight:600;font-size:17px;border-top:2px solid var(--soft);padding-top:12px;margin-top:6px}
+.sbtn{align-self:flex-start;margin-top:10px}
+/* scrollable full profile; the scrollbar shows when the mouse is over it */
+.fullp{overflow-y:auto;padding:26px 28px;scrollbar-width:none;overscroll-behavior:contain}
+.fullp::-webkit-scrollbar{width:0}
+.fullp:hover,.fullp:focus{scrollbar-width:auto;scrollbar-color:var(--navy) var(--soft)}
+.fullp:hover::-webkit-scrollbar,.fullp:focus::-webkit-scrollbar{width:12px}
+.fullp::-webkit-scrollbar-thumb{background:var(--navy);border-radius:8px;border:3px solid var(--soft)}
+.fullp::-webkit-scrollbar-track{background:var(--soft);border-radius:8px}
+.fullp:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px}
+.fullp .ph{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.fullp .pic{width:84px;height:84px;border-radius:16px;border:3px solid var(--ink);background:#E9E4D8;display:grid;place-items:end center;overflow:hidden;flex:none}
+.fullp .pic svg{width:66px;height:66px}
+.fullp h3{margin:0;font-family:var(--head);font-weight:400;font-size:28px;line-height:1.1}
+.fullp .r{font-weight:700;font-size:18px;display:block}
+.fullp .m{color:var(--muted);font-size:16px;display:block}
+.fullp section{border-top:2px solid var(--navy);padding-top:14px;margin-top:18px}
+.fullp h4{margin:0 0 8px;font-family:var(--ui);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.fullp p{margin:0;font-size:17px}
+.fullp .tags{display:flex;flex-wrap:wrap;gap:6px}
+.fullp .tags span{font-family:var(--ui);font-weight:600;font-size:14px;border:2px solid var(--ink);border-radius:999px;padding:3px 10px}
+.fullp .tags span.i{background:var(--ink);color:#fff}
+.fullp ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.fullp ol b{font-family:var(--ui);display:block;font-size:17px}
+.fullp ol span{color:var(--muted);font-size:15px}
+.fullp .ch{background:var(--paper);border:3px solid var(--ink);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.fullp .ch b{font-family:var(--ui);font-size:18px}
+.fullp .amt{font-family:var(--head);font-size:26px}
+.scrollhint{font-family:var(--ui);font-weight:600;font-size:15px;color:var(--navy);display:flex;align-items:center;gap:8px}
+
+.end{text-align:center;display:flex;flex-direction:column;align-items:center;gap:20px}
+.faq{display:flex;flex-direction:column;gap:12px}
+details{background:var(--white);border:3px solid var(--ink);border-radius:16px;padding:18px 22px}
+summary{font-family:var(--ui);font-weight:700;font-size:20px;cursor:pointer}
+details p{margin:12px 0 0;max-width:70ch}
+@media (max-width:860px){.three,.exgrid{grid-template-columns:1fr}.exframe{height:auto}.fullp{height:520px}}
+</style>
+</head><body>
+<header id="site-head"></header>
+<section class="hero gut"><div class="inner">
+  <h1 class="page">Your experience,<br>their cause</h1>
+  <p>Share what you know with organisations that need it. They donate to the charity you choose.</p>
+  <a class="btn" href="create-profile.html">Start your profile →</a>
+  <div class="az" aria-label="Experts in every industry, from A to Z">
+    <div class="az-win"><div class="az-row a" id="azA"></div></div>
+    <div class="az-win"><div class="az-row b" id="azB"></div></div>
+  </div>
+</div></section>
+<main class="gut">
+  <div class="tstrip" role="note" style="margin-top:-20px;margin-bottom:0"><ul><li>100% of every donation reaches the charity</li><li>Dapperowl never touches the money</li><li>Firms donate straight to your chosen charity</li></ul></div>
+  <section style="display:flex;flex-direction:column;gap:24px">
+    <h2 class="sec">Who it's for</h2>
+    <div class="three">
+      <div class="card c1"><b>Still working</b><p>Senior people with deep knowledge who want their spare hours to do some good.</p></div>
+      <div class="card c2"><b>Retired</b><p>Decades of experience that firms still need, and a cause you care about.</p></div>
+      <div class="card c3"><b>Specialists</b><p>Farmers, engineers, clinicians, founders: anyone who knows a field inside out.</p></div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:24px">
+    <h2 class="sec">How it works</h2>
+    <ol class="steps">
+      <li><span class="n">1</span><b>Create your profile</b><p>About 10 minutes. Upload your CV and we draft your career for you to check.</p></li>
+      <li><span class="n">2</span><b>Firms ask for your knowledge</b><p>You get an email for each request. Accept or decline; your contact details stay private until you accept.</p></li>
+      <li><span class="n">3</span><b>Share what you know</b><p>A call, written advice, a site visit, a talk or mentoring. On your terms.</p></li>
+      <li><span class="n">4</span><b>Press Send</b><p>The firm donates directly to your charity, and you watch it arrive.</p></li>
+    </ol>
+    <div id="jointrk" style="box-shadow:6px 6px 0 var(--ink)"></div>
+  </section>
+
+  <div class="need-strip" role="note">
+    <ul>
+      <li>What you'll need · 10 minutes</li>
+      <li>Your CV or career details</li>
+      <li>A clear photo of you</li>
+      <li>The charity you'd like to support</li>
+      <li>LinkedIn (optional)</li>
+    </ul>
+  </div>
+  <section class="bleed" style="--bb:#F6C344;display:flex;flex-direction:column;gap:28px;color:var(--navy)">
+    <h2 class="sec" style="text-align:center">See an example</h2>
+    <div class="exgrid">
+      <div class="exbox">
+        <span class="extag">How firms see you in search</span>
+        <article class="exframe scard">
+          <div class="srow"><span class="sav"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="22" r="13" fill="#141414"/><path d="M6 60c0-15 11-23 24-23s24 8 24 23z" fill="#141414"/></svg></span><div><span class="snm">The Hon. Inglebert Montgomery-Smythe</span><span class="srl">Founder, Broom Bay Seaweed</span></div></div>
+          <span class="smt">Based in Ullapool, Scotland · 27 years' experience</span>
+          <span class="smt">Food, Agriculture &amp; Fisheries · Environment &amp; Sustainability</span>
+          <span class="smt">Seaweed farming, marine licensing, aquaculture, coastal communities</span>
+          <span class="sch">Supports: Loch Broom Lifeboat Fund</span>
+          <span class="sbtn btn sm" aria-hidden="true">Request a conversation</span>
+        </article>
+      </div>
+      <div class="exbox">
+        <span class="extag">The full profile</span>
+        <article class="exframe fullp" tabindex="0" aria-label="Full example profile, scrollable">
+          <div class="ph"><span class="pic"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="22" r="13" fill="#141414"/><path d="M6 60c0-15 11-23 24-23s24 8 24 23z" fill="#141414"/></svg></span><div><h3>The Hon. Inglebert Montgomery-Smythe</h3><span class="r">Founder, Broom Bay Seaweed</span><span class="m">Based in Ullapool, Scotland · 27 years' experience</span></div></div>
+          <section><h4>Industries and specialities</h4><div class="tags"><span class="i">Food, Agriculture &amp; Fisheries</span><span class="i">Environment &amp; Sustainability</span><span>Seaweed farming</span><span>Marine licensing</span><span>Aquaculture</span><span>Coastal communities</span></div></section>
+          <section><h4>About</h4><p>I spent ten years as a site manager at Summer Isles Salmon, where I learned how marine licensing, water quality and coastal communities really work. Before that, five years as a deckhand and then mate on fisheries survey vessels taught me to read the sea and the weather. In 2012 I founded Broom Bay Seaweed, growing sugar kelp and dulse on longlines in Loch Broom; it now supplies food, cosmetics and fertiliser makers across the UK. Together, that gives me a rare view of seaweed from the water, the regulator's desk and the buyer's side.</p></section>
+          <section><h4>Career</h4><ol><li><b>Founder, Broom Bay Seaweed</b><span>2012 – now · 14 years</span><p>Sugar kelp and dulse on longlines in Loch Broom; supplies food, cosmetics and fertiliser makers.</p></li><li><b>Site manager, Summer Isles Salmon</b><span>2002 – 2012 · 10 years</span><p>Daily operations, marine licensing, water quality, community relations.</p></li><li><b>Deckhand, then mate, fisheries survey vessels</b><span>1997 – 2002 · 5 years</span><p>Survey work at sea.</p></li></ol></section>
+          <section><h4>Education</h4><p>BSc Marine Biology, University of Aberdeen</p></section>
+          <section><h4>Languages</h4><p>English, Scottish Gaelic</p></section>
+          <section><h4>Chosen charity</h4><div class="ch"><b>Loch Broom Lifeboat Fund</b><p>Funds the volunteer lifeboat crew serving Loch Broom and the Summer Isles.</p><p><i>"The crew came out for our boat in a winter gale in 2004. I've supported them ever since."</i></p></div></section>
+          <section><h4>Suggested donation</h4><span class="amt">£250–£400</span><p>Per hour for calls · 100% goes to Loch Broom Lifeboat Fund</p></section>
+        </article>
+        <span class="scrollhint">↕ Scroll inside the box to see the whole profile</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="end bleed" style="--bb:#14254F;color:var(--paper)">
+    <h2 class="sec">Ready to put your knowledge to good use?</h2>
+    <a class="btn" href="create-profile.html">Start your profile →</a>
+    <p style="margin:0">Already have a profile? <a class="link" href="signin.html" style="color:var(--paper)">Sign in</a></p>
+  </section>
+
+  <section class="note" style="font-size:19px">
+    <p><b>A short note on tax.</b> Because you choose the charity, HMRC could treat a donation as your income. Casual income under £1,000 a year is tax-free. We explain this during sign-up, and you tick to say you've read it.</p>
+  </section>
+  <section class="faq">
+    <h2 class="sec">Questions</h2>
+    <details><summary>Does it cost anything to join?</summary><p>No. Joining is free, and firms pay nothing to Dapperowl. The only money that moves is the firm's donation to your charity.</p></details>
+    <details><summary>How much time does it take?</summary><p>As much or as little as you like. Set your hours per month, decline any request, or pause your profile.</p></details>
+    <details><summary>Who can contact me?</summary><p>Only signed-in firms, through the "Request a conversation" button. Your email and phone stay private until you accept.</p></details>
+    <details><summary>What kind of expertise counts?</summary><p>Any. If you know a field inside out, from accountancy to zoology, firms may want to hear from you.</p></details>
+    <details><summary>Will I pay tax on the donation?</summary><p>Possibly, because you choose the charity. Casual income under £1,000 a year is tax-free under the trading allowance. We explain this during sign-up and point you to free help.</p></details>
+    <details><summary>What about compliance?</summary><p>You tick six declarations before each conversation, and every firm agrees six rules with each request. Firms can add their own compliance questions.</p></details>
+    <details><summary>What if someone doesn't show up?</summary><p>If you can't attend, nothing is owed. If a session is cut short, the firm can donate part of the amount with a reason. Firms that never pay are banned.</p></details>
+    <details><summary>Can I change my charity?</summary><p>Yes, any time. Past donations stay credited to your old charity.</p></details>
+    <details><summary>Who runs Dapperowl?</summary><p>A community interest company. We never take a cut of any donation.</p></details>
+  </section>
+</main>
+<footer id="site-foot"></footer>
+<script src="site.js"></script>
+<script>DapperTracker.mount(document.getElementById('jointrk'),DapperTracker.EXPERT);</script>
+<script>
+(function(){
+  const A=['Accountancy','Aquaculture','Beekeeping','Broadcasting','Construction','Cybersecurity','Dentistry','Distilling','Energy','Engineering','Fashion','Fisheries','Forestry','Gaming','Haulage','Hospitals','Insurance','Journalism','Kitchens','Law','Logistics','Manufacturing','Mining','Nursing','Oil and gas','Publishing'];
+  const B=['Quarrying','Railways','Retail','Seaweed farming','Shipping','Sport','Teaching','Textiles','Tourism','Underwriting','Utilities','Veterinary','Viticulture','Water','Wealth management','Wind power','X-ray imaging','Yachting','Youth work','Zoology','Agriculture','Banking','Charities','Defence','Ecology','Film'];
+  const chip=(w,h)=>'<span'+(h?' aria-hidden="true"':'')+'><i>'+w[0]+'</i>'+w+'</span>';
+  document.getElementById('azA').innerHTML=A.map(w=>chip(w)).join('')+A.map(w=>chip(w,1)).join('');
+  document.getElementById('azB').innerHTML=B.map(w=>chip(w)).join('')+B.map(w=>chip(w,1)).join('');
+})();
+</script>
+</body></html>

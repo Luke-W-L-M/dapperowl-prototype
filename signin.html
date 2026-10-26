@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex">
+<title>Sign in · Dapperowl</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+main{max-width:640px;margin:0 auto;padding-block:56px 90px;display:flex;flex-direction:column;gap:26px}
+.who{display:grid;grid-template-columns:1fr 1fr;border:3px solid var(--ink);border-radius:14px;overflow:hidden;box-shadow:4px 4px 0 var(--ink)}
+.who button{font-family:var(--ui);font-weight:700;font-size:18px;padding:14px;border:none;background:var(--white);color:var(--navy);cursor:pointer}
+.who button[aria-pressed="true"]{background:var(--ink);color:var(--white)}
+.card{display:flex;flex-direction:column;gap:20px}
+.social{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.social .btn{background:var(--white);color:var(--navy);text-transform:none;letter-spacing:0;font-size:18px}
+.or{display:flex;align-items:center;gap:14px;color:var(--muted);font-family:var(--ui);font-weight:600}
+.or::before,.or::after{content:"";flex:1;height:2px;background:var(--navy);opacity:.25}
+.sent{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.ctx{background:#DCE5FF;border:3px solid var(--ink);border-radius:14px;padding:14px 18px;font-size:18px}
+@media (max-width:600px){.social{grid-template-columns:1fr}}
+</style>
+</head><body>
+<header id="site-head"></header>
+<main class="gut">
+  <h1 class="page">Sign in</h1>
+  <p class="ctx" id="ctx" hidden>To request a conversation, please sign in or create a firm account first. It takes a minute.</p>
+  <div class="who" role="group" aria-label="I am">
+    <button type="button" id="asExpert" aria-pressed="true">I'm an expert</button>
+    <button type="button" id="asFirm" aria-pressed="false">I'm a firm</button>
+  </div>
+
+  <form class="card" id="form" novalidate>
+    <div id="step1" style="display:flex;flex-direction:column;gap:20px">
+      <p class="lead" style="margin:0">No password to remember. We'll email you a link to sign in.</p>
+      <div class="social">
+        <button type="button" class="btn" data-go>Continue with Google</button>
+        <button type="button" class="btn" data-go>Continue with LinkedIn</button>
+      </div>
+      <div class="or">or</div>
+      <div class="f"><label for="em" id="emlab">Your email address</label><input type="email" id="em" value="inglebert@example.co.uk" autocomplete="email"><small id="emhint">Use the email on your expert profile.</small></div>
+      <div id="newfirm" hidden style="display:flex;flex-direction:column;gap:18px">
+        <div class="note"><p><b>New to Dapperowl?</b> We'll create your firm account in one step. Use your work email; no manual approval needed.</p></div>
+        <div class="f"><label for="org">Organisation name</label><input type="text" id="org" value="Harbourline Capital"></div>
+        <div class="row">
+          <div class="f"><label for="otype">Type of organisation</label><select id="otype"><option>Investor or fund</option><option>Company</option><option>Event organiser</option><option>NGO or charity</option><option>Public body</option><option>Other</option></select></div>
+          <div class="f"><label for="site">Website</label><input type="url" id="site" value="harbourline.example.com"></div>
+        </div>
+      </div>
+      <button type="submit" class="btn">Email me a sign-in link</button>
+      <p style="margin:0;font-size:18px" id="joinline">New expert? <a class="link" href="join.html">Join as an expert →</a></p>
+    </div>
+    <div class="sent" id="step2" hidden>
+      <h2 class="sec" style="font-size:34px">Check your email</h2>
+      <p style="margin:0">We've sent a sign-in link to <b id="sentto"></b>. It works for 15 minutes.</p>
+      <a class="btn" id="open" href="expert-dashboard.html">Open the sign-in link →</a>
+      <button type="button" class="btn ghost sm" id="again">Use a different email</button>
+    </div>
+  </form>
+</main>
+<footer id="site-foot"></footer>
+<script src="site.js"></script>
+<script>
+const req = location.hash==='#request';
+let firm = req || location.hash==='#firm';
+const $=id=>document.getElementById(id);
+function dest(){ return firm ? (req ? 'request.html' : 'firm-dashboard.html') : 'expert-dashboard.html'; }
+function mode(f){
+  firm=f;
+  $('asExpert').setAttribute('aria-pressed',!f); $('asFirm').setAttribute('aria-pressed',f);
+  $('newfirm').hidden=!f; $('joinline').hidden=f;
+  $('em').value = f ? 'james.okafor@harbourline.example.com' : 'inglebert@example.co.uk';
+  $('emlab').textContent = f ? 'Your work email' : 'Your email address';
+  $('emhint').textContent = f ? 'Already have an account? Just enter your email; the details below are only for new firms.' : 'Use the email on your expert profile.';
+  $('open').href=dest();
+}
+$('ctx').hidden=!req;
+$('asExpert').onclick=()=>mode(false); $('asFirm').onclick=()=>mode(true);
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{location.href=dest();});
+$('form').addEventListener('submit',e=>{e.preventDefault();$('sentto').textContent=$('em').value;$('step1').hidden=true;$('step2').hidden=false;$('open').href=dest();});
+$('again').onclick=()=>{$('step2').hidden=true;$('step1').hidden=false;};
+mode(firm);
+</script>
+</body></html>

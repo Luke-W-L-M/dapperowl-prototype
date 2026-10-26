@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex">
+<title>Find an expert · Dapperowl</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* Layout: cream top bar with centred logo; big outlined search bar + industry chips; then a two-pane catalogue: scrolling list of expert cards (left) and the selected expert's full profile (right). Card-shuffle loader while searching. */
+:root{
+  --paper:#F5F0E6; --ink:#141414; --navy:#14254F; --cobalt:#2251FF; --green:#1F9D55; --white:#ffffff; --muted:#4A5675; --soft:#E9E2D3;
+  --head:'DM Serif Display', Georgia, serif; --body:'Source Sans 3', Arial, sans-serif; --ui:'Outfit', Arial, sans-serif;
+  color-scheme: light;
+}
+[hidden]{display:none!important}
+body{background:var(--paper);color:var(--navy);font-family:var(--body);font-size:20px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.gut{padding-left:max(40px,env(safe-area-inset-left,0px));padding-right:max(40px,env(safe-area-inset-right,0px))}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:2px solid var(--navy);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;padding-block:14px}
+.top nav{display:flex;gap:28px;flex-wrap:wrap}
+.top nav.r{justify-content:flex-end}
+.top a{color:var(--navy);text-decoration:none;font-family:var(--ui);font-weight:600;font-size:16px;letter-spacing:.04em;text-transform:uppercase}
+.top a.here{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
+.logo{display:block;height:56px;width:auto}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px}
+
+main{max-width:1280px;margin:0 auto;padding-block:44px 80px;display:flex;flex-direction:column;gap:28px}
+h1{margin:0;font-family:var(--head);font-weight:400;font-size:clamp(38px,4.4vw,62px);line-height:1;text-transform:uppercase}
+.search{display:flex;gap:14px;flex-wrap:wrap}
+.search input{flex:1 1 380px;min-width:0;font:inherit;font-size:21px;color:var(--navy);background:var(--white);border:3px solid var(--ink);border-radius:14px;padding:18px 20px 18px 58px;box-shadow:5px 5px 0 var(--ink);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Ccircle cx='11' cy='11' r='8' fill='none' stroke='%23141414' stroke-width='3.4'/%3E%3Cpath d='M17 17l6 6' stroke='%23141414' stroke-width='3.6' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:20px center}
+.btn{font-family:var(--ui);font-weight:700;font-size:19px;letter-spacing:.03em;text-transform:uppercase;padding:18px 34px;border-radius:14px;border:3px solid var(--ink);cursor:pointer;box-shadow:5px 5px 0 var(--ink);background:var(--cobalt);color:var(--white)}
+.btn:active{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{font-family:var(--ui);font-weight:600;font-size:16px;border:3px solid var(--ink);border-radius:999px;padding:8px 16px;background:var(--white);color:var(--navy);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--white)}
+.count{font-family:var(--ui);font-weight:600;font-size:17px;color:var(--muted);margin:0}
+
+.cat{display:grid;grid-template-columns:400px minmax(0,1fr);gap:32px;align-items:start}
+.list{display:flex;flex-direction:column;gap:16px;max-height:calc(100vh - 150px);overflow-y:auto;padding:4px 12px 12px 4px;position:sticky;top:110px}
+.ec{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:4px;background:var(--white);border:3px solid var(--ink);border-radius:18px;padding:20px 22px;box-shadow:4px 4px 0 var(--ink);transition:transform .3s ease, box-shadow .3s ease}
+.ec:hover{transform:translateY(-4px);box-shadow:6px 9px 0 var(--ink)}
+.ec:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px}
+.ec[aria-current="true"]{background:var(--soft);box-shadow:inset 0 0 0 3px var(--cobalt),4px 4px 0 var(--ink)}
+.ec .nm{font-family:var(--head);font-size:25px;line-height:1.1}
+.ec .rl{font-weight:700;font-size:17px;line-height:1.35}
+.ec .mt{font-size:16px;color:var(--muted);line-height:1.4}
+.ec .chr{margin-top:8px;font-family:var(--ui);font-weight:600;font-size:15px;border-top:2px solid var(--soft);padding-top:8px}
+
+.prof{background:var(--white);border:3px solid var(--ink);border-radius:24px;box-shadow:7px 7px 0 var(--ink);padding:40px;display:flex;flex-direction:column;gap:30px;min-width:0}
+.ph{display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start}
+.pic{width:150px;height:150px;border-radius:20px;border:3px solid var(--ink);background:var(--soft);display:grid;place-items:end center;overflow:hidden;flex:none}
+.pic svg{width:116px;height:116px}
+.pt{flex:1 1 300px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.pt h2{margin:0;font-family:var(--head);font-weight:400;font-size:clamp(32px,3vw,44px);line-height:1.05}
+.pt .hl{font-weight:700;font-size:21px}
+.pt .mt{color:var(--muted);font-size:18px}
+.pt a{color:var(--cobalt);font-weight:700;font-size:17px}
+.prof h3{margin:0 0 10px;font-family:var(--ui);font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.prof section{border-top:2px solid var(--navy);padding-top:22px}
+.prof p{margin:0;max-width:70ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags span{font-family:var(--ui);font-weight:600;font-size:15px;border:2px solid var(--ink);border-radius:999px;padding:5px 12px}
+.tags span.ind{background:var(--ink);color:var(--white)}
+.tl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:18px}
+.tl li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:14px}
+.tl li::before{content:"";width:16px;height:16px;border-radius:50%;background:var(--ink);margin-top:7px}
+.tl b{font-family:var(--ui);font-size:19px;display:block}
+.tl .w{color:var(--muted);font-size:17px}
+.tl p{font-size:18px}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.charity{border:3px solid var(--ink);border-radius:18px;padding:22px 24px;background:var(--paper);display:flex;flex-direction:column;gap:10px}
+.charity b{font-family:var(--ui);font-size:22px}
+.charity q{font-style:italic;quotes:"“" "”"}
+.charity a{color:var(--cobalt);font-weight:700;font-size:17px;align-self:flex-start}
+.don{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.don .amt{font-family:var(--head);font-size:34px;line-height:1}
+.don small{display:block;color:var(--muted);font-size:16px}
+.req{align-self:flex-start}
+
+.empty{background:var(--white);border:3px dashed var(--ink);border-radius:18px;padding:24px;font-size:18px}
+
+/* card-shuffle loader */
+.loader{display:flex;flex-direction:column;align-items:center;gap:18px;padding-block:60px;grid-column:1/-1}
+.shuffle{position:relative;width:320px;height:150px;max-width:100%}
+.hand{position:absolute;bottom:0;width:70px;height:46px;background:var(--ink);border-radius:26px 26px 18px 18px}
+.hand.l{left:10px}.hand.r{right:10px}
+.fly{position:absolute;left:28px;bottom:30px;width:36px;height:52px;background:var(--white);border:3px solid var(--ink);border-radius:6px;animation:flick 1.1s cubic-bezier(.45,.05,.35,1) infinite}
+.fly:nth-child(4){animation-delay:.14s}.fly:nth-child(5){animation-delay:.28s}.fly:nth-child(6){animation-delay:.42s}.fly:nth-child(7){animation-delay:.56s}
+.fly::after{content:"";position:absolute;inset:7px;border-radius:3px;background:var(--cobalt)}
+@keyframes flick{0%{transform:translate(0,0) rotate(-14deg)}50%{transform:translate(120px,-90px) rotate(0deg)}100%{transform:translate(236px,0) rotate(14deg)}}
+.loader p{margin:0;font-family:var(--head);font-size:30px;text-transform:uppercase}
+
+@media (max-width:960px){
+  .top{grid-template-columns:1fr;justify-items:center}
+  .top nav,.top nav.r{justify-content:center}
+  .top .logo{order:-1}
+  .gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .cat{grid-template-columns:1fr}
+  .list{position:static;max-height:none;overflow:visible;padding:0}
+  .prof{padding:24px}
+  .two{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  .fly{animation:none;opacity:0}.fly:nth-child(3){opacity:1;transform:translate(120px,-60px)}
+  .ec,.ec:hover{transition:none;transform:none}
+}
+.firmhow{display:flex;flex-direction:column;gap:24px}
+.fsteps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;list-style:none;margin:0;padding:0}
+.fsteps li{background:var(--white);border:3px solid var(--ink);border-radius:20px;box-shadow:5px 5px 0 var(--ink);padding:24px;display:flex;flex-direction:column;gap:10px}
+.fsteps .n{width:52px;height:52px;border-radius:50%;background:var(--ink);color:var(--white);display:grid;place-items:center;font-family:var(--head);font-size:26px}
+.fsteps b{font-family:var(--ui);font-size:20px;line-height:1.25}
+.fsteps p{margin:0;font-size:17px}
+.ffaq{display:flex;flex-direction:column;gap:12px}
+.ffaq details{background:var(--white);border:3px solid var(--ink);border-radius:16px;padding:16px 20px}
+.ffaq summary{font-family:var(--ui);font-weight:700;font-size:19px;cursor:pointer}
+.ffaq details p{margin:10px 0 0;max-width:70ch}
+.tstrip.mid{margin-block:6px}
+@media (max-width:960px){.fsteps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.fsteps{grid-template-columns:1fr}}
+.phead .firmlead{max-width:60ch;font-size:21px;line-height:1.6;opacity:1;margin-top:40px!important;text-wrap:pretty}
+</style>
+</head><body>
+
+<header id="site-head"></header>
+
+<main class="gut">
+  <h1>Find an expert</h1>
+  <p class="lead firmlead">Dapperowl gives your organisation direct access to people from any industry who know their field inside out. Search for the expertise you need using the filters below, find an expert who suits your needs, and send a request with your goals and questions. Meet in person or online. Instead of paying the expert, you donate to the charity they have chosen, so every conversation builds your knowledge and shows your organisation backing good causes. All of it reaches the charity, and you get the receipt for your reporting.</p>
+  <form class="search" id="sform" role="search">
+    <label for="q" class="sr" style="position:absolute;left:-9999px">Search experts</label>
+    <input type="search" id="q" placeholder="Search by industry, job, speciality or any keyword">
+    <button class="btn" type="submit">Search</button>
+  </form>
+  <div class="chips" id="chips" aria-label="Quick industry filters"></div>
+  <p class="count" id="count" aria-live="polite"></p>
+  <div class="cat" id="cat">
+    <div class="list" id="list" aria-label="Experts"></div>
+    <article class="prof" id="prof" aria-live="polite"></article>
+  </div>
+  <div class="loader" id="loader" hidden>
+    <div class="shuffle" aria-hidden="true"><span class="hand l"></span><span class="hand r"></span><span class="fly"></span><span class="fly"></span><span class="fly"></span><span class="fly"></span><span class="fly"></span></div>
+    <p>Finding your specialist</p>
+  </div>
+  <section class="bleed" style="--bb:#14254F;color:var(--paper);text-align:center;display:flex;flex-direction:column;align-items:center;gap:22px">
+    <h2 class="sec">Have knowledge to share?</h2>
+    <p style="margin:0;font-size:20px;max-width:46ch">Join as an expert and every conversation becomes a donation to the charity you choose.</p>
+    <a class="btn" href="join.html">Join as an expert →</a>
+  </section>
+</main>
+
+<footer id="site-foot"></footer>
+<script src="site.js"></script>
+<script>
+const IND=['Finance & Investment','Energy & Natural Resources','Shipping, Transport & Logistics','Food, Agriculture & Fisheries','Health & Life Sciences','Technology & Telecoms','Manufacturing & Construction','Property & Infrastructure','Consumer, Retail & Hospitality','Media, Entertainment & Games','Environment & Sustainability','Government, Policy & Defence','Law & Professional Services','Education, Charities & Social Impact'];
+const E=[
+ {n:'The Hon. Inglebert Montgomery-Smythe',top:'Founder, Broom Bay Seaweed',cur:'Founder, Broom Bay Seaweed',loc:'Ullapool, Scotland',yrs:27,ind:['Food, Agriculture & Fisheries','Environment & Sustainability'],spec:['Seaweed farming','Marine licensing','Aquaculture','Coastal communities'],
+  about:"I spent ten years as a site manager at Summer Isles Salmon, where I learned how marine licensing, water quality and coastal communities really work. Before that, five years as a deckhand and then mate on fisheries survey vessels taught me to read the sea and the weather. In 2012 I founded Broom Bay Seaweed, growing sugar kelp and dulse on longlines in Loch Broom; it now supplies food, cosmetics and fertiliser makers across the UK.",
+  jobs:[['Founder, Broom Bay Seaweed','2012 – now · 14 years','Sugar kelp and dulse on longlines in Loch Broom; supplies food, cosmetics and fertiliser makers.'],['Site manager, Summer Isles Salmon','2002 – 2012 · 10 years','Daily operations, marine licensing, water quality, community relations.'],['Deckhand, then mate, fisheries survey vessels','1997 – 2002 · 5 years','Survey work at sea.']],
+  edu:'BSc Marine Biology, University of Aberdeen',lang:'English, Scottish Gaelic',ch:'Loch Broom Lifeboat Fund',chd:'Funds the volunteer lifeboat crew serving Loch Broom and the Summer Isles.',why:"The crew came out for our boat in a winter gale in 2004. I've supported them ever since.",don:'£250–£400',donk:'per hour for calls'},
+ {n:'Alejandro Ruiz Cárdenas',top:'Former CMO, Petrosur Energía · 24 years',cur:'Senior Strategy Officer, Golfo Infraestructura',loc:'Villahermosa, Mexico',yrs:31,ind:['Energy & Natural Resources','Property & Infrastructure'],spec:['Oil plant infrastructure','Southern Mexico','Energy marketing','Government relations'],
+  about:"For 24 years I led marketing at Petrosur Energía, selling refinery capacity and building the relationships that keep big plants running in southern Mexico. I now advise Golfo Infraestructura on where to build next, which means knowing the land, the permits and the people in Tabasco and Campeche.",
+  jobs:[['Senior Strategy Officer, Golfo Infraestructura','2019 – now · 7 years','Site selection and strategy for energy infrastructure in the Gulf of Mexico.'],['Chief Marketing Officer, Petrosur Energía','1995 – 2019 · 24 years','Marketing for refinery and storage capacity; partner and government relations.']],
+  edu:'MBA, IPADE Business School',lang:'Spanish, English',ch:'Bridges to Literacy',chd:'Runs reading clubs for children in under-served communities.',why:'',don:'£500',donk:'suggested per hour'},
+ {n:'Aino Väisänen',top:'Head of Forestry, Lappi Woodlands · 18 years',cur:'Independent woodland adviser',loc:'Rovaniemi, Finland',yrs:26,ind:['Environment & Sustainability'],spec:['Northern forestry','Woodland carbon','Sustainable harvesting'],
+  about:"I ran forestry at Lappi Woodlands for 18 years, managing slow-growing northern forests where every harvest decision lasts a century. I now advise landowners and investors on woodland carbon and how to harvest without harming the forest.",
+  jobs:[['Independent woodland adviser','2020 – now · 6 years','Advice on woodland carbon and sustainable harvesting.'],['Head of Forestry, Lappi Woodlands','2002 – 2020 · 18 years','Managed 40,000 hectares of northern forest.']],
+  edu:'MSc Forest Sciences, University of Helsinki',lang:'Finnish, English, Swedish',ch:'Northern Woodland Trust',chd:'Plants and protects native woodland across northern Europe.',why:'',don:'Open',donk:'the firm decides'},
+ {n:'Isla Morrow',top:'Founder, Kelpwell',cur:'Founder and CEO, Kelpwell',loc:'Oban, Scotland',yrs:15,ind:['Food, Agriculture & Fisheries','Consumer, Retail & Hospitality'],spec:['Fermented seaweed drinks','Drinks start-ups','Retail listings'],
+  about:"I founded Kelpwell in 2016 to make fermented seaweed drinks, and took it from a kitchen in Oban to shelves in three national supermarkets. I know what it takes to launch a new drink and win retail buyers.",
+  jobs:[['Founder and CEO, Kelpwell','2016 – now · 10 years','Fermented seaweed drinks sold in UK supermarkets.'],['Brand manager, Highland Springs Co.','2011 – 2016 · 5 years','Launched two soft drink lines.']],
+  edu:'BA Marketing, University of Stirling',lang:'English',ch:'Oban Food Bank',chd:'Provides emergency food parcels across Argyll.',why:'',don:'£150–£200',donk:'per hour for calls'},
+ {n:'Priya Raman',top:'Former COO, Northbridge Shipping · 22 years',cur:'Non-executive director, Tidewater Ports',loc:'London, England',yrs:30,ind:['Shipping, Transport & Logistics','Finance & Investment'],spec:['Ship sale and purchase','Fleet operations','Port investment'],
+  about:"I spent 22 years at Northbridge Shipping, ending as chief operating officer of a 60-vessel fleet. I've bought, sold and run ships through three market cycles, and now sit on the board of Tidewater Ports.",
+  jobs:[['Non-executive director, Tidewater Ports','2021 – now · 5 years','Board oversight of UK port investments.'],['Chief Operating Officer, Northbridge Shipping','1999 – 2021 · 22 years','Fleet operations, vessel sale and purchase.']],
+  edu:'BSc Economics, London School of Economics',lang:'English, Tamil',ch:'Seafarers Support Network',chd:'Helps merchant seafarers and their families in hardship.',why:'',don:'£500',donk:'suggested per hour'},
+ {n:'Tom Achterberg',top:'Former Director of Clinical Operations, Westvale Health · 16 years',cur:'Hospital operations consultant',loc:'Leeds, England',yrs:28,ind:['Health & Life Sciences'],spec:['Hospital operations','Waiting lists','Clinical staffing'],
+  about:"I ran clinical operations at Westvale Health for 16 years, responsible for theatres, wards and waiting lists across four hospitals. I now help hospitals cut waiting times without burning out their staff.",
+  jobs:[['Hospital operations consultant','2021 – now · 5 years','Waiting-list and staffing projects.'],['Director of Clinical Operations, Westvale Health','2005 – 2021 · 16 years','Theatres, wards and waiting lists across four hospitals.']],
+  edu:'MSc Healthcare Management, University of Leeds',lang:'English, Dutch',ch:'Yorkshire Carers Trust',chd:'Supports unpaid carers across Yorkshire.',why:'',don:'£250–£400',donk:'per hour for calls'}
+];
+function keep(){try{sessionStorage.setItem('dapper-expert',String(sel))}catch(e){}}
+let ind=null, sel=0, shown=[];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const person='<svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="22" r="13" fill="#141414"/><path d="M8 58c0-14 10-22 22-22s22 8 22 22z" fill="#141414"/></svg>';
+IND.forEach((t,i)=>{const b=document.createElement('button');b.type='button';b.className='chip';b.id='ind'+i;b.textContent=t;b.setAttribute('aria-pressed','false');b.onclick=()=>{ind=ind===t?null:t;$('chips').querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',c.textContent===ind));run();};$('chips').appendChild(b);});
+function match(e,q){ if(ind&&!e.ind.includes(ind)) return false; if(!q) return true; const hay=[e.n,e.top,e.cur,e.loc,e.about,e.spec.join(' '),e.ind.join(' '),e.jobs.flat().join(' ')].join(' ').toLowerCase(); return q.toLowerCase().split(/\s+/).every(w=>hay.includes(w)); }
+function list(){
+  $('list').innerHTML='';
+  if(!shown.length){ $('list').innerHTML='<div class="empty">No experts match yet. Try a broader word, or clear the industry filter.</div>'; $('prof').hidden=true; return; }
+  $('prof').hidden=false;
+  shown.forEach(i=>{const e=E[i];const b=document.createElement('button');b.className='ec';b.type='button';b.id='e'+i;b.setAttribute('aria-current',i===sel);
+    b.innerHTML='<span class="nm">'+esc(e.n)+'</span><span class="rl">'+esc(e.top)+'</span><span class="mt">Now: '+esc(e.cur)+'</span><span class="mt">Based in '+esc(e.loc)+'</span><span class="mt">'+esc(e.ind.join(' · '))+'</span><span class="chr">Supports: '+esc(e.ch)+'</span>';
+    b.onclick=()=>{sel=i;list();prof();if(innerWidth<960)$('prof').scrollIntoView({behavior:'smooth'});};$('list').appendChild(b);});
+}
+function prof(){
+  const e=E[sel];
+  $('prof').innerHTML='<div class="ph"><div class="pic">'+person+'</div><div class="pt"><h2>'+esc(e.n)+'</h2><span class="hl">'+esc(e.cur)+'</span><span class="mt">Based in '+esc(e.loc)+' · '+e.yrs+' years\' experience</span><a class="link" style="font-size:17px" href="https://www.linkedin.com/" target="_blank" rel="noopener">View LinkedIn profile ↗</a></div><a class="btn req" href="signin.html#request" onclick="keep()">Request a conversation</a></div>'
+  +'<section><h3>Industries and specialities</h3><div class="tags">'+e.ind.map(t=>'<span class="ind">'+esc(t)+'</span>').join('')+e.spec.map(t=>'<span>'+esc(t)+'</span>').join('')+'</div></section>'
+  +'<section><h3>About</h3><p>'+esc(e.about)+'</p></section>'
+  +'<section><h3>Career</h3><ol class="tl">'+e.jobs.map(j=>'<li><div><b>'+esc(j[0])+'</b><span class="w">'+esc(j[1])+'</span><p>'+esc(j[2])+'</p></div></li>').join('')+'</ol></section>'
+  +'<section class="two"><div><h3>Education</h3><p>'+esc(e.edu)+'</p></div><div><h3>Languages</h3><p>'+esc(e.lang)+'</p></div></section>'
+  +'<section><h3>Chosen charity</h3><div class="charity"><b>'+esc(e.ch)+'</b><p>'+esc(e.chd)+'</p>'+(e.why?'<p><q>'+esc(e.why)+'</q></p>':'')+'</div></section>'
+  +'<section class="don"><div><h3>Suggested donation</h3><span class="amt">'+esc(e.don)+'</span><small>'+esc(e.donk)+' · 100% goes to '+esc(e.ch)+'</small></div><a class="btn" href="signin.html#request" onclick="keep()">Request a conversation</a></section>';
+}
+function render(){ $('count').textContent=shown.length+(shown.length===1?' expert':' experts')+(ind?' in '+ind:''); list(); if(shown.length) prof(); }
+let t=null;
+function run(){
+  if(!$('q').value.trim() && !ind){ clearTimeout(t); $('loader').hidden=true; $('cat').hidden=true; $('count').textContent='Type what you need, or pick an industry, to see matching experts.'; return; }
+  const q=$('q').value.trim();
+  shown=E.map((_,i)=>i).filter(i=>match(E[i],q));
+  if(shown.length && !shown.includes(sel)) sel=shown[0];
+  $('cat').hidden=true; $('count').textContent=''; $('loader').hidden=false;
+  clearTimeout(t); t=setTimeout(()=>{ $('loader').hidden=true; $('cat').hidden=false; render(); }, 1800);
+}
+$('sform').addEventListener('submit',e=>{e.preventDefault();run();});
+$('cat').hidden=true;
+</script>
+</body></html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex">
+<title>Email designs · Dapperowl</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+main{max-width:860px;margin:0 auto;padding-block:56px 90px;display:flex;flex-direction:column;gap:40px}
+.mail{display:flex;flex-direction:column;gap:10px}
+.env{font-family:var(--ui);font-size:15px;color:var(--muted);display:flex;flex-direction:column;gap:2px;padding-left:4px}
+.env b{color:var(--navy)}
+.msg{background:var(--white);border:3px solid var(--ink);border-radius:18px;box-shadow:5px 5px 0 var(--ink);overflow:hidden}
+.mh{background:var(--paper);border-bottom:3px solid var(--ink);padding:16px 26px}
+.mh svg{height:40px;width:auto;display:block}
+.mb{padding:28px;display:flex;flex-direction:column;gap:14px}
+.mb h2{margin:0;font-family:var(--head);font-weight:400;font-size:30px;line-height:1.1;text-transform:uppercase}
+.mb p{margin:0;font-size:19px;max-width:60ch}
+.mf{border-top:2px solid var(--soft);padding:14px 26px;font-size:15px;color:var(--muted)}
+.who{font-family:var(--ui);font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;background:var(--ink);color:var(--white);border-radius:999px;padding:4px 12px;align-self:flex-start}
+</style>
+</head><body>
+<header id="site-head"></header>
+<main class="gut">
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <h1 class="page">Email designs</h1>
+    <p class="lead">The emails Dapperowl sends at each step. One clear button each, large text, plain wording.</p>
+  </div>
+  <div id="list"></div>
+</main>
+<footer id="site-foot"></footer>
+<script src="site.js"></script>
+<script>
+const M=[
+ ['To the expert','New request from Harbourline Capital','A firm would like your knowledge','James Okafor of Harbourline Capital would like a 1-hour video call about scaling seaweed farming in the Scottish Highlands. They\'ve pledged <b>£350</b> to Loch Broom Lifeboat Fund.','See the request','expert-dashboard.html'],
+ ['To the firm','Inglebert accepted your request','You\'re booked in','The Hon. Inglebert Montgomery-Smythe accepted. Your video call is on <b>Wed 4 Nov at 10:00</b>. A calendar invite and video link are attached, and you can now see each other\'s contact details.','See your booking','firm-dashboard.html'],
+ ['To the firm','Please donate £350 to Loch Broom Lifeboat Fund','Time to donate','Inglebert has pressed Send. Please donate <b>£350</b> on the charity\'s page within 48 hours, quoting reference <b>DO-0047</b>, then upload your receipt.','Donate and upload receipt','firm-dashboard.html'],
+ ['To the expert','Harbourline Capital has donated','Your donation is on its way','Harbourline Capital has donated <b>£350</b> and uploaded its receipt. We\'ve asked Loch Broom Lifeboat Fund to confirm.','See the receipt','expert-dashboard.html'],
+ ['To the expert, from the charity','Thank you from Loch Broom Lifeboat Fund','Thank you, Inglebert','Your knowledge raised <b>£350</b> for our crew. That keeps our inshore boat fuelled for six weeks. Your LinkedIn certificate is ready to share.','Share your certificate','expert-dashboard.html'],
+ ['To the expert','Your profile is live','You\'re live on Dapperowl','We\'ve checked your identity and LinkedIn. Firms can now find you and send requests. We\'ll email you each time one arrives.','View your profile','find.html']
+];
+const logo=window.DAPPER_LOGO('#F5F0E6','#14254F');
+document.getElementById('list').outerHTML=M.map(m=>'<div class="mail"><span class="who">'+m[0]+'</span><div class="env"><span>From: <b>Dapperowl</b> &lt;hello@dapperowl.co.uk&gt;</span><span>Subject: <b>'+m[1]+'</b></span></div><div class="msg"><div class="mh">'+logo+'</div><div class="mb"><h2>'+m[2]+'</h2><p>'+m[3]+'</p><a class="btn" style="align-self:flex-start" href="'+m[5]+'">'+m[4]+'</a></div><div class="mf">Dapperowl CIC · 100% of every donation goes to charity · <a class="link" href="legal.html#privacy">Privacy</a></div></div></div>').join('');
+</script>
+</body></html>
