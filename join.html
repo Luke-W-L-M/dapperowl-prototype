@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Join as an expert · Dapperowl</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
 <link rel="stylesheet" href="styles.css">
@@ -102,6 +102,19 @@ details{background:var(--white);border:3px solid var(--ink);border-radius:16px;p
 summary{font-family:var(--ui);font-weight:700;font-size:20px;cursor:pointer}
 details p{margin:12px 0 0;max-width:70ch}
 @media (max-width:860px){.three,.exgrid{grid-template-columns:1fr}.exframe{height:auto}.fullp{height:520px}}
+
+/* 26 Oct: burgundy strip joins the blue header directly; How it works in its own navy band */
+main:has(> .topstrip:first-child){padding-top:0}
+section.hero + .pwave path{fill:var(--burgundy)}
+.topstrip{margin-top:-1px!important;margin-bottom:0!important}
+.topstrip::before{display:none}
+.howband .steps li{background:var(--white);color:var(--navy)}
+.howband .steps li{box-shadow:5px 5px 0 #000}
+.howband #jointrk{box-shadow:6px 6px 0 #000!important}
+.howband:has(+ .need-strip){margin-bottom:0}
+.howband:has(+ .need-strip)::after{display:none}
+.howband + .need-strip{margin-top:-56px}
+.howband + .need-strip::before{background:var(--burgundy)}
 </style>
 </head><body>
 <header id="site-head"></header>
@@ -114,7 +127,7 @@ details p{margin:12px 0 0;max-width:70ch}
   </div>
 </div></section>
 <main class="gut">
-  <div class="tstrip" role="note" style="margin-top:-20px;margin-bottom:0"><ul><li>100% of every donation reaches the charity</li><li>Dapperowl never touches the money</li><li>Firms donate straight to your chosen charity</li></ul></div>
+  <div class="tstrip topstrip" role="note"><ul><li>100% of every donation reaches the charity</li><li>Dapperowl never touches the money</li><li>Firms donate straight to your chosen charity</li></ul></div>
   <section style="display:flex;flex-direction:column;gap:24px">
     <h2 class="sec">Who it's for</h2>
     <div class="three">
@@ -124,7 +137,7 @@ details p{margin:12px 0 0;max-width:70ch}
     </div>
   </section>
 
-  <section style="display:flex;flex-direction:column;gap:24px">
+  <section class="bleed howband" style="--bb:#14254F;display:flex;flex-direction:column;gap:28px;color:var(--paper)">
     <h2 class="sec">How it works</h2>
     <ol class="steps">
       <li><span class="n">1</span><b>Create your profile</b><p>About 10 minutes. Upload your CV and we draft your career for you to check.</p></li>
