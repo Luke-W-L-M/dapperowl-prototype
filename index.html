@@ -19,38 +19,47 @@
 <link rel="stylesheet" href="styles.css">
 <style>
 /* Layout: a sequence of full-width colour bands taken from the drawing's clothes (cream, burgundy, olive, cream, cobalt, navy), joined by soft wavy edges. Big DM Serif headings sit on chunky outlined colour blobs; three small black-figure drawings; tilted cards with hard shadows. */
-:root{ --trk:#F6C344; --trktext:#14254F; --olive:#5E6B33; --burg:#7A1F2B; --cream:#F5F0E6; --sun:#F6C344; }
+:root{ --sec:clamp(72px,10vw,128px); --artw:min(80vw,1000px); --spill:calc(var(--artw) * .14); /* image bottom has ~8% empty space, so the drawing itself spills ~6% */ --trk:#F6C344; --trktext:#14254F; --olive:#5E6B33; --burg:#7A1F2B; --cream:#F5F0E6; --sun:#F6C344; }
 body{font-size:20px}
-.band{position:relative;padding-block:96px}
+.band{position:relative;padding-block:var(--sec)}
 .band .inner{position:relative;z-index:1}
 .wave{display:block;width:100%;height:36px;margin:-1px 0} /* half height (30 Oct) */
 
 /* headings with a blob behind */
 .hd{text-align:center;margin:0 auto;font-family:var(--head);font-weight:400;font-size:clamp(40px,5.4vw,80px);line-height:1.28;text-transform:uppercase;max-width:20ch;color:var(--navy)}
 
-/* hero (kept) */
-.hero{position:relative;min-height:600px;display:grid;grid-template-columns:40% 60%;overflow:hidden;background:var(--cream)}
-.hero .wavepanel{position:absolute;inset:0;width:100%;height:100%}
-.hero .wavepanel path{fill:var(--cobalt)}
-.hero .text{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;gap:26px;padding-block:48px 64px;padding-left:max(56px,env(safe-area-inset-left,0px));padding-right:28px;min-width:0}
-.hero h1{margin:0;font-family:var(--head);font-weight:400;font-size:clamp(50px,6.6vw,104px);line-height:1.3;text-transform:uppercase;color:var(--navy)}
-.pts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
-.pts li{display:flex;gap:14px;align-items:center;font-weight:700;font-size:clamp(17px,1.45vw,20px);line-height:1.3}
-.ico{flex:none;width:34px;height:34px}
-.art{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;padding:24px 24px 24px 14%}
-/* hero art (30 Oct): flat picture, square, space reserved so the page doesn't jump while it loads */
-.art picture{display:block;width:min(100%,560px)}
-.art .hero-art{display:block;width:100%;height:auto;aspect-ratio:1/1}
+/* Poster hero (30 Oct): cobalt band, huge two-line headline, one sentence, the table drawing big and spilling over the wavy edge */
+.phero{position:relative;z-index:2;background:var(--cobalt);color:var(--cream);text-align:center;padding-top:clamp(56px,7vw,96px);padding-bottom:0}
+.phero .inner{display:flex;flex-direction:column;align-items:center}
+.ptitle{margin:0;font-family:var(--head);font-weight:400;text-transform:uppercase;line-height:1.02;font-size:clamp(32px,9.2vw,146px);letter-spacing:-.005em}
+.ptitle span{display:block;white-space:nowrap}
+.ptitle .l1{color:var(--cream)}.ptitle .l2{color:#F7C21A}
+.psub{margin:28px auto 0;max-width:40ch;font-family:var(--body);font-weight:600;font-size:clamp(20px,1.7vw,22px);line-height:1.5;color:var(--cream)}
+.part{position:relative;z-index:3;width:var(--artw);margin-top:calc(var(--artw) * -0.085);margin-bottom:calc(var(--spill) * -1)} /* the image has ~10% empty space above the figures */
+.part picture,.part .hero-art{display:block;width:100%;height:auto;aspect-ratio:1/1}
+.psteam{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.stm{transform-box:view-box}
+@media (prefers-reduced-motion:no-preference){
+  .stm{animation:steam 3s ease-in-out infinite}
+  .stm2{animation-delay:-1.2s}
+  .ptitle .l1,.ptitle .l2,.psub{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+  .ptitle .l2{animation-delay:.25s}
+  .psub{animation-delay:.55s}
+  .part{animation:settle 1s cubic-bezier(.2,.7,.2,1) .8s both}
+}
+@keyframes steam{0%{opacity:0;transform:translateY(8px)}30%{opacity:1}70%{opacity:.85}100%{opacity:0;transform:translateY(-16px)}}
+@keyframes rise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+@keyframes settle{from{opacity:0;transform:translateY(40px) scale(.97)}to{opacity:1;transform:none}}
 
 /* 100% strip: one thin line with wavy top and bottom */
-.strip{position:relative;z-index:3;margin-top:-9px}
+.strip{position:relative;z-index:1;margin-top:-9px}
 .strip .sw{display:block;width:100%;height:10px;margin:-1px 0}
 .strip p{margin:0;background:var(--burg);color:var(--cream);padding-block:10px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px 20px;font-family:var(--ui);font-weight:600;font-size:clamp(15px,1.35vw,19px);letter-spacing:.02em;text-align:center}
 .strip p b{font-weight:600;color:var(--sun)}
 .strip p i{width:7px;height:7px;border-radius:50%;background:var(--sun);display:inline-block}
 
 /* what is Dapperowl */
-.what{background:var(--cream);padding-block:80px 72px}
+.what{background:var(--cream);padding-top:calc(var(--sec) + var(--artw) * .06)}
 .what .inner{display:flex;flex-direction:column;align-items:center;gap:34px;text-align:center}
 .stmt{margin:0;font-family:var(--body);font-weight:700;font-size:clamp(22px,1.9vw,26px);line-height:1.6;max-width:52ch;color:var(--navy)}
 .wsteps{list-style:none;margin:0;padding:0;display:flex;align-items:stretch;justify-content:center;gap:16px;flex-wrap:wrap}
@@ -119,7 +128,7 @@ body{font-size:20px}
 /* extras */
 .extras{background:var(--cream)}
 .extras .hd{--blob:#B9C68A}
-.xgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center;margin-top:52px}
+.xgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center;margin-top:48px}
 .tilt{transition:transform .35s ease, box-shadow .35s ease;will-change:transform}
 .cert-card{transform:rotate(-2.5deg)}
 .cert-in{aspect-ratio:1.91/1;max-width:100%;background:var(--navy);color:var(--paper);border:3px solid var(--ink);border-radius:14px;padding:5% 6%;display:flex;flex-direction:column;justify-content:space-between;box-shadow:8px 8px 0 var(--ink);container-type:inline-size}
@@ -141,7 +150,7 @@ body{font-size:20px}
 .explain h3{margin:0;font-family:var(--head);font-weight:400;font-size:clamp(30px,3vw,42px);line-height:1.1;color:var(--navy)}
 .explain p{margin:0;font-size:20px;line-height:1.55}
 .side .lead2{margin:0;font-weight:700;font-size:23px;line-height:1.3}
-.total{background:var(--white);border:3px solid var(--ink);border-radius:20px;box-shadow:6px 6px 0 var(--ink);padding:24px 26px;transform:rotate(1.5deg);display:flex;flex-direction:column;gap:10px;position:relative;z-index:2;max-width:420px}
+.total{background:var(--white);border:3px solid var(--ink);border-radius:20px;box-shadow:6px 6px 0 var(--ink);padding:24px 26px;display:flex;flex-direction:column;gap:10px;position:relative;z-index:2;max-width:420px}
 .total b{font-family:var(--ui);font-size:20px}
 .raised{align-self:flex-start;background:var(--green);color:var(--white);border:3px solid var(--ink);border-radius:999px;font-family:var(--ui);font-weight:700;font-size:26px;padding:8px 22px}
 .total span{font-size:16px;color:var(--muted)}
@@ -203,14 +212,10 @@ body{font-size:20px}
 .js .rv:not(.in){transform:translateY(26px);opacity:.35}
 
 @media (max-width:900px){
-  .hero{grid-template-columns:1fr}
-  .hero .wavepanel{display:none}
-  .art{background:var(--cobalt);order:-1;padding:24px 16px;border-radius:0 0 40px 40px}
-  .hero .text{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  :root{--artw:calc(100vw - 32px)}
   .trk-wrap,.xgrid{grid-template-columns:1fr}
   .send{max-width:260px}
   .total{margin-left:0}
-  .band{padding-block:64px}
 }
 @media (prefers-reduced-motion:reduce){
   .row .track{animation:none!important}
@@ -226,30 +231,23 @@ body{font-size:20px}
 
 <header id="site-head"></header>
 
-<section class="hero" aria-label="Opening screen">
-  <svg class="wavepanel" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M50 0 C47 18, 53 30, 49 46 C45 60, 42 68, 44 82 C45 92, 46 97, 46 100 L100 100 L100 0 Z"/></svg>
-  <div class="text">
-    <h1><span>Specialise for<br>charity</span></h1>
-    <ul class="pts">
-      <li><svg class="ico" viewBox="0 0 34 34" aria-hidden="true"><path d="M17 3c-4 0-7 3-7 7 0 3 2 6 4 9l-6 11 5 1 4-8 4 8 5-1-6-11c2-3 4-6 4-9 0-4-3-7-7-7z" fill="#141414"/><path d="M17 8c-1.6 0-2.6 1.1-2.6 2.4 0 1.4 1 3 2.6 5.2 1.6-2.2 2.6-3.8 2.6-5.2C19.6 9.1 18.6 8 17 8z" fill="#F5F0E6"/></svg>Support a cause you care about</li>
-      <li><svg class="ico" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#141414"/><path d="M10 17.5l4.5 4.5L24 12.5" fill="none" stroke="#F5F0E6" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>100% of every donation reaches your charity</li>
-      <li><svg class="ico" viewBox="0 0 34 34" aria-hidden="true"><path d="M4 30l2-8L22 6l6 6-16 16z" fill="#141414"/><path d="M19 9l6 6" stroke="#F5F0E6" stroke-width="2.4"/></svg>Share what you know, on your own terms</li>
-    </ul>
-  </div>
-  <div class="art">
-    <picture>
-      <source srcset="images/hero-art.webp" type="image/webp">
-      <img class="hero-art" src="images/hero-art.png" width="1024" height="1024" fetchpriority="high" decoding="async" alt="Three people chatting over coffee at a round table: one typing on a laptop, one holding a mug, one thinking with a hand at his chin.">
-    </picture>
-    
+<section class="phero gut" aria-label="Opening screen">
+  <div class="inner">
+    <h1 class="ptitle"><span class="l1">Your knowledge.</span> <span class="l2">Their cause.</span></h1>
+    <p class="psub">Firms ask for your expertise. They donate to the charity you choose: 100% of it, every time.</p>
+    <div class="part">
+      <picture>
+        <source srcset="images/hero-art-plain.webp" type="image/webp">
+        <img class="hero-art" src="images/hero-art-plain.png" width="1024" height="1024" fetchpriority="high" decoding="async" alt="Three people chatting over coffee at a round table: one typing on a laptop, one holding a mug, one thinking with a hand at his chin.">
+      </picture>
+      <svg class="psteam" viewBox="0 0 1024 1024" aria-hidden="true" fill="none" stroke="#141414" stroke-width="3.3" stroke-linecap="round" stroke-linejoin="round"><g class="stm stm1"><path d="M417.5 440.0 C417.2 440.5 416.1 442.0 415.5 443.0 C414.9 444.0 414.1 445.0 414.0 446.0 C413.9 447.0 414.6 448.0 415.0 449.0 C415.4 450.0 415.8 451.0 416.5 452.0 C417.2 453.0 418.4 454.0 419.0 455.0 C419.6 456.0 419.8 457.0 420.0 458.0 C420.2 459.0 420.2 460.0 420.0 461.0 C419.8 462.0 419.0 463.2 418.5 464.0 C418.0 464.8 417.2 465.7 417.0 466.0"/><path d="M432.0 430.0 C431.6 430.5 430.2 432.0 429.5 433.0 C428.8 434.0 428.4 435.0 428.0 436.0 C427.6 437.0 427.0 438.0 427.0 439.0 C427.0 440.0 427.5 441.0 428.0 442.0 C428.5 443.0 429.3 444.0 430.0 445.0 C430.7 446.0 431.3 447.0 432.0 448.0 C432.7 449.0 433.6 450.0 434.0 451.0 C434.4 452.0 434.5 453.0 434.5 454.0 C434.5 455.0 434.4 456.0 434.0 457.0 C433.6 458.0 432.7 459.0 432.0 460.0 C431.3 461.0 430.3 462.3 430.0 463.0 C429.7 463.7 430.0 463.8 430.0 464.0"/><path d="M446.5 438.0 C446.1 438.5 444.6 440.0 444.0 441.0 C443.4 442.0 443.2 443.0 443.0 444.0 C442.8 445.0 442.8 446.0 443.0 447.0 C443.2 448.0 443.9 449.0 444.5 450.0 C445.1 451.0 445.9 452.0 446.5 453.0 C447.1 454.0 447.8 455.0 448.0 456.0 C448.2 457.0 448.3 458.0 448.0 459.0 C447.7 460.0 446.7 461.0 446.0 462.0 C445.3 463.0 444.3 464.5 444.0 465.0"/></g><g class="stm stm2"><path d="M595.0 384.0 C594.8 384.5 594.2 386.0 594.0 387.0 C593.8 388.0 593.7 389.0 594.0 390.0 C594.3 391.0 595.3 392.0 596.0 393.0 C596.7 394.0 597.7 395.0 598.0 396.0 C598.3 397.0 598.2 398.0 598.0 399.0 C597.8 400.0 596.8 401.3 596.5 402.0 C596.2 402.7 596.1 402.8 596.0 403.0"/><path d="M608.5 373.0 C608.1 373.5 606.6 375.0 606.0 376.0 C605.4 377.0 605.2 378.0 605.0 379.0 C604.8 380.0 604.8 381.0 605.0 382.0 C605.2 383.0 605.5 384.0 606.0 385.0 C606.5 386.0 607.3 387.0 608.0 388.0 C608.7 389.0 609.7 390.0 610.0 391.0 C610.3 392.0 610.1 393.0 610.0 394.0 C609.9 395.0 609.9 396.0 609.5 397.0 C609.1 398.0 608.0 399.2 607.5 400.0 C607.0 400.8 606.7 401.7 606.5 402.0"/><path d="M621.0 380.0 C620.6 380.5 619.0 382.0 618.5 383.0 C618.0 384.0 617.9 385.0 618.0 386.0 C618.1 387.0 618.6 388.0 619.0 389.0 C619.4 390.0 620.0 391.0 620.5 392.0 C621.0 393.0 621.8 394.0 622.0 395.0 C622.2 396.0 622.3 397.0 622.0 398.0 C621.7 399.0 620.5 400.2 620.0 401.0 C619.5 401.8 619.2 402.7 619.0 403.0"/></g></svg>
+    </div>
   </div>
 </section>
 
-<div class="strip" role="note">
-  <svg class="sw" viewBox="0 0 1440 24" preserveAspectRatio="none" aria-hidden="true"><path d="M0 24 L0 12 C240 26 480 0 720 10 S1200 22 1440 6 L1440 24 Z" fill="#7A1F2B"/></svg>
-  <p class="gut"><b>100% of every donation reaches the charity</b><i aria-hidden="true"></i>Dapperowl never touches the money<i aria-hidden="true"></i>Firms donate straight to your chosen charity</p>
-  <svg class="sw" viewBox="0 0 1440 24" preserveAspectRatio="none" aria-hidden="true" style="background:var(--cream)"><path d="M0 0 L0 12 C300 0 560 24 820 10 S1260 0 1440 16 L1440 0 Z" fill="#7A1F2B"/></svg>
-</div>
+<svg class="wave" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true" style="background:var(--cobalt)"><path d="M0 40 C300 0 560 70 820 34 S1260 6 1440 44 L1440 72 L0 72 Z" fill="#F5F0E6"/></svg>
+
+
 
 <section class="band what gut" aria-label="What Dapperowl does">
   <div class="inner rv">
@@ -264,7 +262,11 @@ body{font-size:20px}
   </div>
 </section>
 
-<svg class="wave" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true" style="background:var(--cream)"><path d="M0 40 C300 0 560 70 820 34 S1260 6 1440 44 L1440 72 L0 72 Z" style="fill:var(--trk)"/></svg>
+<div class="strip" role="note">
+  <svg class="sw" viewBox="0 0 1440 24" preserveAspectRatio="none" aria-hidden="true"><path d="M0 24 L0 12 C240 26 480 0 720 10 S1200 22 1440 6 L1440 24 Z" fill="#7A1F2B"/></svg>
+  <p class="gut"><b>100% of every donation reaches the charity</b><i aria-hidden="true"></i>Dapperowl never touches the money<i aria-hidden="true"></i>Firms donate straight to your chosen charity</p>
+  <svg class="sw" viewBox="0 0 1440 24" preserveAspectRatio="none" aria-hidden="true" style="background:var(--trk)"><path d="M0 0 L0 12 C300 0 560 24 820 10 S1260 0 1440 16 L1440 0 Z" fill="#7A1F2B"/></svg>
+</div>
 
 <section class="band olive gut" id="tracker">
   <div class="inner rv">
