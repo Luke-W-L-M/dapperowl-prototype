@@ -38,11 +38,9 @@ body{font-size:20px}
 .pts li{display:flex;gap:14px;align-items:center;font-weight:700;font-size:clamp(17px,1.45vw,20px);line-height:1.3}
 .ico{flex:none;width:34px;height:34px}
 .art{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;padding:24px 24px 24px 14%}
-.art svg{width:min(100%,560px);height:auto}
-.steam path{animation:steam 3.2s ease-in-out infinite}
-.steam path:nth-child(2){animation-delay:.5s}.steam path:nth-child(3){animation-delay:1s}
-.steam path:nth-child(5){animation-delay:.5s}.steam path:nth-child(6){animation-delay:1s}
-@keyframes steam{0%,100%{transform:translateY(0);opacity:1}50%{transform:translateY(-7px);opacity:.45}}
+/* hero art (30 Oct): flat picture, square, space reserved so the page doesn't jump while it loads */
+.art picture{display:block;width:min(100%,560px)}
+.art .hero-art{display:block;width:100%;height:auto;aspect-ratio:1/1}
 
 /* 100% strip: one thin line with wavy top and bottom */
 .strip{position:relative;z-index:3;margin-top:-19px}
@@ -236,7 +234,6 @@ dialog.prof::backdrop{background:rgba(20,37,79,.62)}
   .pcard{padding:24px;transform:none}
 }
 @media (prefers-reduced-motion:reduce){
-  .steam path{animation:none}
   .row .track{animation:none!important}
   .marq-track{animation:none;flex-wrap:wrap;width:auto;gap:12px 32px}
   .marq-track span[aria-hidden]{display:none}
@@ -261,55 +258,10 @@ dialog.prof::backdrop{background:rgba(20,37,79,.62)}
     </ul>
   </div>
   <div class="art">
-    <svg viewBox="0 0 600 580" role="img" aria-label="Three people chatting over coffee at a round table">
-      <g stroke="#141414" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
-        <path d="M232 70 L370 60 L378 210 L226 214 Z" fill="#fff"/>
-        <path d="M236 236 C230 176 258 150 302 150 C346 150 372 176 366 236 Z" fill="#2F6B45"/>
-        <path d="M284 152 L302 182 L320 152" fill="#9AA0A6"/>
-        <ellipse cx="302" cy="112" rx="32" ry="38" fill="#141414"/>
-        <path d="M296 108 q6 6 12 0" stroke="#fff" stroke-width="3" fill="none"/>
-        <ellipse cx="300" cy="300" rx="168" ry="118" fill="#fff"/>
-        <path d="M300 418 L300 470"/>
-        <path d="M252 176 C226 210 236 238 262 246" fill="none" stroke-width="30"/>
-        <path d="M352 176 C372 205 362 230 340 238" fill="none" stroke-width="30"/>
-        <g fill="#fff">
-          <path d="M268 222 h40 l-4 42 h-32 Z"/><path d="M308 232 q16 2 12 16 q-4 10 -14 8" fill="none"/>
-          <path d="M392 300 h36 l-4 38 h-28 Z"/><path d="M428 310 q14 2 10 14 q-4 9 -12 7" fill="none"/>
-        </g>
-        <g class="steam" fill="none" stroke-width="3.5">
-          <path d="M276 212 q-6 -8 0 -16 q6 -8 0 -16"/><path d="M288 210 q-6 -8 0 -16 q6 -8 0 -16"/><path d="M300 212 q-6 -8 0 -16 q6 -8 0 -16"/>
-          <path d="M400 290 q-6 -8 0 -16 q6 -8 0 -16"/><path d="M410 288 q-6 -8 0 -16 q6 -8 0 -16"/><path d="M420 290 q-6 -8 0 -16 q6 -8 0 -16"/>
-        </g>
-        <path d="M196 276 L250 266 L262 318 L208 328 Z" fill="#fff"/>
-        <path d="M210 288 L248 281 M213 300 L251 293 M216 312 L246 306" stroke-width="3"/>
-        <path d="M318 330 L384 346 L370 380 L304 364 Z" fill="#D9DCE1"/>
-        <path d="M384 346 L404 286 L398 280 L378 340" fill="#141414"/>
-        <path d="M54 250 L104 238 L150 500 L104 510 Z" fill="#fff"/>
-        <path d="M104 510 L118 560 M150 500 L210 470 L222 540" fill="none"/>
-        <path d="M150 412 L262 432 L268 528" fill="none" stroke-width="58"/>
-        <path d="M150 412 L262 432 L268 528" fill="none" stroke="#6B7A3A" stroke-width="46"/>
-        <ellipse cx="282" cy="540" rx="26" ry="13" fill="#fff"/>
-        <path d="M108 400 C92 330 112 280 160 272 C204 266 232 300 232 352 C232 402 210 430 160 432 C130 432 114 422 108 400 Z" fill="#EFE3CC"/>
-        <ellipse cx="176" cy="234" rx="30" ry="36" fill="#141414"/>
-        <circle cx="146" cy="226" r="14" fill="#141414"/>
-        <path d="M180 230 q6 6 12 0" stroke="#fff" stroke-width="3" fill="none"/>
-        <circle cx="186" cy="228" r="13" fill="none" stroke="#fff" stroke-width="2.5"/>
-        <path d="M196 300 C210 340 232 352 250 344" fill="none" stroke-width="28"/>
-        <path d="M236 316 h34 l-4 38 h-26 Z" fill="#fff"/><path d="M270 326 q13 2 9 13 q-4 8 -11 6" fill="none"/>
-        <g class="steam" fill="none" stroke-width="3.5"><path d="M244 306 q-6 -8 0 -16 q6 -8 0 -16"/><path d="M254 304 q-6 -8 0 -16 q6 -8 0 -16"/><path d="M264 306 q-6 -8 0 -16 q6 -8 0 -16"/></g>
-        <path d="M500 236 L552 248 L520 498 L470 488 Z" fill="#fff"/>
-        <path d="M470 488 L456 556 M520 498 L530 560" fill="none"/>
-        <path d="M478 404 L374 422 L362 522" fill="none" stroke-width="58"/>
-        <path d="M478 404 L374 422 L362 522" fill="none" stroke="#D6C7A6" stroke-width="46"/>
-        <ellipse cx="350" cy="534" rx="26" ry="13" fill="#fff"/>
-        <path d="M410 404 C404 340 410 282 452 272 C494 264 516 300 512 360 C508 410 490 428 452 430 C430 430 414 422 410 404 Z" fill="#7A1F2B"/>
-        <path d="M440 276 L456 304 L470 274" fill="#fff"/>
-        <ellipse cx="452" cy="234" rx="30" ry="36" fill="#141414"/>
-        <path d="M434 228 q6 6 12 0" stroke="#fff" stroke-width="3" fill="none"/>
-        <circle cx="438" cy="226" r="13" fill="none" stroke="#fff" stroke-width="2.5"/>
-        <path d="M428 300 C404 330 384 350 360 354" fill="none" stroke-width="28"/>
-      </g>
-    </svg>
+    <picture>
+      <source srcset="images/hero-art.webp" type="image/webp">
+      <img class="hero-art" src="images/hero-art.png" width="1024" height="1024" fetchpriority="high" decoding="async" alt="Three people chatting over coffee at a round table: one typing on a laptop, one holding a mug, one thinking with a hand at his chin.">
+    </picture>
     
   </div>
 </section>
