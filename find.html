@@ -27,11 +27,6 @@
 body{background:var(--paper);color:var(--navy);font-family:var(--body);font-size:20px;line-height:1.55}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
 .gut{padding-left:max(40px,env(safe-area-inset-left,0px));padding-right:max(40px,env(safe-area-inset-right,0px))}
-.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:2px solid var(--navy);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;padding-block:14px}
-.top nav{display:flex;gap:28px;flex-wrap:wrap}
-.top nav.r{justify-content:flex-end}
-.top a{color:var(--navy);text-decoration:none;font-family:var(--ui);font-weight:600;font-size:16px;letter-spacing:.04em;text-transform:uppercase}
-.top a.here{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
 .logo{display:block;height:56px;width:auto}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px}
 
@@ -102,9 +97,6 @@ h1{margin:0;font-family:var(--head);font-weight:400;font-size:clamp(38px,4.4vw,6
 .loader p{margin:0;font-family:var(--head);font-size:30px;text-transform:uppercase}
 
 @media (max-width:960px){
-  .top{grid-template-columns:1fr;justify-items:center}
-  .top nav,.top nav.r{justify-content:center}
-  .top .logo{order:-1}
   .gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
   .cat{grid-template-columns:1fr}
   .list{position:static;max-height:none;overflow:visible;padding:0}

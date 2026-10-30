@@ -23,7 +23,7 @@
 body{font-size:20px}
 .band{position:relative;padding-block:96px}
 .band .inner{position:relative;z-index:1}
-.wave{display:block;width:100%;height:72px;margin:-1px 0}
+.wave{display:block;width:100%;height:36px;margin:-1px 0} /* half height (30 Oct) */
 
 /* headings with a blob behind */
 .hd{text-align:center;margin:0 auto;font-family:var(--head);font-weight:400;font-size:clamp(40px,5.4vw,80px);line-height:1.28;text-transform:uppercase;max-width:20ch;color:var(--navy)}
@@ -43,8 +43,8 @@ body{font-size:20px}
 .art .hero-art{display:block;width:100%;height:auto;aspect-ratio:1/1}
 
 /* 100% strip: one thin line with wavy top and bottom */
-.strip{position:relative;z-index:3;margin-top:-19px}
-.strip .sw{display:block;width:100%;height:20px;margin:-1px 0}
+.strip{position:relative;z-index:3;margin-top:-9px}
+.strip .sw{display:block;width:100%;height:10px;margin:-1px 0}
 .strip p{margin:0;background:var(--burg);color:var(--cream);padding-block:10px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px 20px;font-family:var(--ui);font-weight:600;font-size:clamp(15px,1.35vw,19px);letter-spacing:.02em;text-align:center}
 .strip p b{font-weight:600;color:var(--sun)}
 .strip p i{width:7px;height:7px;border-radius:50%;background:var(--sun);display:inline-block}
@@ -52,7 +52,7 @@ body{font-size:20px}
 /* what is Dapperowl */
 .what{background:var(--cream);padding-block:80px 72px}
 .what .inner{display:flex;flex-direction:column;align-items:center;gap:34px;text-align:center}
-.stmt{margin:0;font-family:var(--head);font-size:clamp(22px,2.1vw,30px);line-height:1.4;max-width:46ch;color:var(--navy)}
+.stmt{margin:0;font-family:var(--body);font-weight:700;font-size:clamp(22px,1.9vw,26px);line-height:1.6;max-width:52ch;color:var(--navy)}
 .wsteps{list-style:none;margin:0;padding:0;display:flex;align-items:stretch;justify-content:center;gap:16px;flex-wrap:wrap}
 .wsteps li:not(.arr){background:#fff;border:3px solid var(--ink);border-radius:20px;box-shadow:6px 6px 0 var(--ink);padding:24px 22px;display:flex;flex-direction:column;align-items:center;gap:10px;width:250px}
 .wsteps .wi{width:76px;height:76px;border-radius:50%;background:var(--sun);border:3px solid var(--ink);display:grid;place-items:center}
@@ -147,65 +147,6 @@ body{font-size:20px}
 .c1 .to b{font-family:var(--ui);font-weight:700;display:block;font-size:4cqw}
 .c1 .date{position:absolute;right:10cqw;top:9cqw;font-family:var(--ui);font-weight:500;font-size:2.8cqw;color:var(--muted)}
 
-/* profile */
-.cob{background:var(--cobalt);color:var(--white)}
-.cob .hd{color:var(--cream);--blob:var(--cream)}
-.pcard{margin-top:52px;background:var(--white);color:var(--navy);border:3px solid var(--ink);border-radius:24px;padding:40px;display:flex;gap:40px;flex-wrap:wrap;box-shadow:10px 10px 0 var(--ink);transform:rotate(-1deg);cursor:pointer;text-decoration:none}
-.who{flex:1 1 260px;display:flex;flex-direction:column;gap:6px}
-.who h3{margin:0;font-family:var(--head);font-weight:400;font-size:36px;line-height:1.1}
-.who .role{font-weight:700}
-.who .meta{color:var(--muted);font-size:18px}
-.about{flex:999 1 480px;min-width:0}
-.about h4{margin:0 0 8px;font-family:var(--ui);font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.about p{margin:0;max-width:68ch}
-.pcard .go{font-family:var(--ui);font-weight:700;color:var(--cobalt);margin-top:14px;display:inline-block}
-
-.pgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center;margin-top:52px}
-.scard{background:#fff;color:var(--navy);border:3px solid var(--ink);border-radius:20px;box-shadow:8px 8px 0 var(--ink);padding:28px 30px;display:flex;flex-direction:column;gap:8px;transform:rotate(-1.5deg);max-width:500px}
-.stag{align-self:flex-start;font-family:var(--ui);font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;background:var(--sun);border:2px solid var(--ink);border-radius:999px;padding:3px 12px;margin-bottom:6px}
-.srow{display:flex;gap:16px;align-items:center}
-.sav{width:64px;height:64px;border-radius:50%;background:#E9E4D8;border:3px solid var(--ink);display:grid;place-items:end center;overflow:hidden;flex:none}
-.sav svg{width:52px;height:52px}
-.snm{display:block;font-family:var(--head);font-size:26px;line-height:1.1}
-.srl{display:block;font-weight:700;font-size:18px}
-.smt{color:var(--muted);font-size:17px}
-.sch{font-family:var(--ui);font-weight:600;font-size:16px;border-top:2px solid var(--soft);padding-top:10px;margin-top:6px}
-.pexplain{display:flex;flex-direction:column;gap:16px;align-items:flex-start;color:var(--white)}
-.pexplain h3{margin:0;font-family:var(--head);font-weight:400;font-size:clamp(30px,3vw,42px);line-height:1.1}
-.pexplain p{margin:0;font-size:20px;max-width:42ch}
-.pexplain .btn{background:var(--white);color:var(--navy)}
-/* full profile pop-up (the expert's own view) */
-dialog.prof{width:min(920px,calc(100vw - 32px));max-height:88vh;padding:0;border:3px solid var(--ink);border-radius:22px;box-shadow:10px 10px 0 var(--ink);background:var(--paper);color:var(--navy)}
-dialog.prof::backdrop{background:rgba(20,37,79,.62)}
-.pd-top{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--navy);color:var(--cream);padding:14px 22px;font-family:var(--ui);font-weight:600;font-size:15px}
-.pd-x{font-family:var(--ui);font-weight:700;font-size:16px;background:var(--white);color:var(--navy);border:2px solid var(--ink);border-radius:10px;padding:8px 14px;cursor:pointer}
-.pd{padding:30px;display:flex;flex-direction:column;gap:24px}
-.pd-h{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}
-.pd-pic{width:130px;height:130px;border-radius:18px;border:3px solid var(--ink);background:#E9E4D8;display:grid;place-items:end center;overflow:hidden;flex:none}
-.pd-pic svg{width:100px;height:100px}
-.pd-t{flex:1 1 280px;display:flex;flex-direction:column;gap:4px;min-width:0}
-.pd-t h3{margin:0;font-family:var(--head);font-weight:400;font-size:34px;line-height:1.08}
-.pd-t .r{font-weight:700;font-size:20px}
-.pd-t .m{color:var(--muted);font-size:17px}
-.pd-tot{background:#fff;border:3px solid var(--ink);border-radius:16px;box-shadow:4px 4px 0 var(--ink);padding:14px 18px;display:flex;flex-direction:column;gap:6px;align-self:flex-start}
-.pd-tot b{font-family:var(--head);font-weight:400;font-size:36px;line-height:1;color:var(--green)}
-.pd-tot span{font-size:14px;color:var(--muted);font-family:var(--ui);font-weight:600}
-.pd section{border-top:2px solid var(--navy);padding-top:18px}
-.pd h4{margin:0 0 10px;font-family:var(--ui);font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.pd p{margin:0;max-width:70ch}
-.pd .tags{display:flex;flex-wrap:wrap;gap:8px}
-.pd .tags span{font-family:var(--ui);font-weight:600;font-size:15px;border:2px solid var(--ink);border-radius:999px;padding:4px 12px;background:#fff}
-.pd .tags span.i{background:var(--ink);color:#fff}
-.pd ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
-.pd ol b{font-family:var(--ui);display:block;font-size:18px}
-.pd ol .w{color:var(--muted);font-size:16px}
-.pd .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.pd .ch{background:#fff;border:3px solid var(--ink);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:8px}
-.pd .ch b{font-family:var(--ui);font-size:20px}
-.pd .don{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-.pd .don .a{font-family:var(--head);font-size:30px}
-.pd .acts{display:flex;gap:12px;flex-wrap:wrap}
-@media (max-width:900px){.pgrid{grid-template-columns:1fr}.scard{transform:none}.pd .two{grid-template-columns:1fr}.pd{padding:20px}}
 
 /* join */
 .join{background:var(--navy);color:var(--cream);text-align:center;overflow:hidden}
@@ -231,7 +172,6 @@ dialog.prof::backdrop{background:rgba(20,37,79,.62)}
   .spot{max-width:170px;justify-self:center}
   .total{margin-left:0}
   .band{padding-block:64px}
-  .pcard{padding:24px;transform:none}
 }
 @media (prefers-reduced-motion:reduce){
   .row .track{animation:none!important}
@@ -356,29 +296,7 @@ dialog.prof::backdrop{background:rgba(20,37,79,.62)}
   </div>
 </section>
 
-<svg class="wave" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true" style="background:#F5F0E6"><path d="M0 44 C280 4 600 66 900 30 S1300 10 1440 40 L1440 72 L0 72 Z" fill="#2251FF"/></svg>
-
-<section class="band cob gut">
-  <div class="inner rv">
-    <h2 class="hd"><span>What your profile could look like</span></h2>
-    <div class="pgrid">
-      <article class="scard tilt" aria-label="Your card in search results">
-        <span class="stag">In search results</span>
-        <div class="srow"><span class="sav"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="22" r="13" fill="#141414"/><path d="M6 60c0-15 11-23 24-23s24 8 24 23z" fill="#141414"/></svg></span><div><span class="snm">The Hon. Inglebert Montgomery-Smythe</span><span class="srl">Founder, Broom Bay Seaweed</span></div></div>
-        <span class="smt">Based in Ullapool, Scotland</span>
-        <span class="smt">Food, Agriculture &amp; Fisheries · Environment &amp; Sustainability</span>
-        <span class="sch">Supports: Loch Broom Lifeboat Fund</span>
-      </article>
-      <div class="pexplain">
-        <h3>This is how firms find you</h3>
-        <p>Your card appears when firms search by industry, job or keyword. They open it to see your full profile and send you a request if they believe your expertise matches their needs.</p>
-        <button type="button" class="btn lg" id="openProf">See your full profile <span class="arr">→</span></button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<svg class="wave" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true" style="background:#2251FF"><path d="M0 30 C320 68 640 4 940 34 S1320 60 1440 26 L1440 72 L0 72 Z" fill="#14254F"/></svg>
+<svg class="wave" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true" style="background:#F5F0E6"><path d="M0 44 C280 4 600 66 900 30 S1300 10 1440 40 L1440 72 L0 72 Z" fill="#14254F"/></svg>
 
 <section class="band join gut" id="join">
   <svg class="ghost-owl" viewBox="18 14 274 108" aria-hidden="true"><path d="M50 18 A28 28 0 0 1 78 46 L78 88 Q78 94 72 94 L36 94 Q22 94 22 80 L22 46 A28 28 0 0 1 50 18 Z" fill="#F5F0E6"/><path d="M44 98 L57 98 L43 118 L30 118 Z M62 98 L75 98 L61 118 L48 118 Z" fill="#F5F0E6"/><path d="M82 58 L286 58 Q206 106 108 100 L82 96 Z" fill="#F5F0E6"/></svg>
@@ -405,32 +323,10 @@ dialog.prof::backdrop{background:rgba(20,37,79,.62)}
 </section>
 
 
-<dialog class="prof" id="pdlg" aria-labelledby="pdName">
-  <div class="pd-top"><span>Your profile · this is your own view</span><button type="button" class="pd-x" id="closeProf">Close ✕</button></div>
-  <div class="pd">
-    <div class="pd-h">
-      <div class="pd-pic"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="22" r="13" fill="#141414"/><path d="M6 60c0-15 11-23 24-23s24 8 24 23z" fill="#141414"/></svg></div>
-      <div class="pd-t"><h3 id="pdName">The Hon. Inglebert Montgomery-Smythe</h3><span class="r">Founder, Broom Bay Seaweed</span><span class="m">Based in Ullapool, Scotland · 27 years' experience</span><span class="m">linkedin.com/in/inglebert-ms</span></div>
-      <div class="pd-tot"><b>£4,500</b><span>Raised so far · Only you can see this</span></div>
-    </div>
-    <section><h4>Industries and specialities</h4><div class="tags"><span class="i">Food, Agriculture &amp; Fisheries</span><span class="i">Environment &amp; Sustainability</span><span>Seaweed farming</span><span>Marine licensing</span><span>Aquaculture</span><span>Coastal communities</span></div></section>
-    <section><h4>About</h4><p>I spent ten years as a site manager at Summer Isles Salmon, where I learned how marine licensing, water quality and coastal communities really work. Before that, five years as a deckhand and then mate on fisheries survey vessels taught me to read the sea and the weather. In 2012 I founded Broom Bay Seaweed, growing sugar kelp and dulse on longlines in Loch Broom; it now supplies food, cosmetics and fertiliser makers across the UK. Together, that gives me a rare view of seaweed from the water, the regulator's desk and the buyer's side.</p></section>
-    <section><h4>Career</h4><ol><li><b>Founder, Broom Bay Seaweed</b><span class="w">2012 – now · 14 years</span></li><li><b>Site manager, Summer Isles Salmon</b><span class="w">2002 – 2012 · 10 years</span></li><li><b>Deckhand, then mate, fisheries survey vessels</b><span class="w">1997 – 2002 · 5 years</span></li></ol></section>
-    <section class="two"><div><h4>Education</h4><p>BSc Marine Biology, University of Aberdeen</p></div><div><h4>Languages</h4><p>English, Scottish Gaelic</p></div></section>
-    <section><h4>Chosen charity</h4><div class="ch"><b>Loch Broom Lifeboat Fund</b><p>Funds the volunteer lifeboat crew serving Loch Broom and the Summer Isles.</p><p><i>"The crew came out for our boat in a winter gale in 2004. I've supported them ever since."</i></p></div></section>
-    <section class="don"><div><h4>Suggested donation</h4><span class="a">£250–£400</span> <span class="m">per hour for calls</span></div><div class="acts"><a class="btn" href="create-profile.html">Edit my profile</a><a class="btn ghost" href="expert-dashboard.html">Go to my dashboard</a></div></section>
-  </div>
-</dialog>
 <footer id="site-foot"></footer>
 <script src="site.js"></script>
 <script>
 DapperTracker.mount(document.getElementById('tracker-demo'), DapperTracker.EXPERT);
-(function(){
-  const d=document.getElementById('pdlg');
-  document.getElementById('openProf').onclick=()=>{ if(d.showModal) d.showModal(); else d.setAttribute('open',''); };
-  document.getElementById('closeProf').onclick=()=>d.close();
-  d.addEventListener('click',e=>{ if(e.target===d) d.close(); });
-})();
 (function(){
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!reduce && 'IntersectionObserver' in window){
