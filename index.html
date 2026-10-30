@@ -23,7 +23,6 @@
 body{font-size:20px}
 .band{position:relative;padding-block:var(--sec)}
 .band .inner{position:relative;z-index:1}
-.wave{display:block;width:100%;height:36px;margin:-1px 0} /* half height (30 Oct) */
 
 /* headings with a blob behind */
 .hd{text-align:center;margin:0 auto;font-family:var(--head);font-weight:400;font-size:clamp(40px,5.4vw,80px);line-height:1.28;text-transform:uppercase;max-width:20ch;color:var(--navy)}
@@ -34,7 +33,6 @@ body{font-size:20px}
 .ptitle{margin:0;font-family:var(--head);font-weight:400;text-transform:uppercase;line-height:1.02;font-size:clamp(32px,9.2vw,146px);letter-spacing:-.005em}
 .ptitle span{display:block;white-space:nowrap}
 .ptitle .l1{color:var(--cream)}.ptitle .l2{color:#F7C21A}
-.psub{margin:28px auto 0;max-width:40ch;font-family:var(--body);font-weight:600;font-size:clamp(20px,1.7vw,22px);line-height:1.5;color:var(--cream)}
 .part{position:relative;z-index:3;width:var(--artw);margin-top:calc(var(--artw) * -0.085);margin-bottom:calc(var(--spill) * -1)} /* the image has ~10% empty space above the figures */
 .part picture,.part .hero-art{display:block;width:100%;height:auto;aspect-ratio:1/1}
 .psteam{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
@@ -52,16 +50,7 @@ body{font-size:20px}
 @keyframes rise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
 @keyframes settle{from{opacity:0;transform:translateY(40px) scale(.97)}to{opacity:1;transform:none}}
 
-/* 100% strip: one thin line with wavy top and bottom */
-.strip{position:relative;z-index:1;margin-top:-9px}
-.strip .sw{display:block;width:100%;height:10px;margin:-1px 0}
-.strip p{margin:0;background:var(--burg);color:var(--cream);padding-block:10px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px 20px;font-family:var(--ui);font-weight:600;font-size:clamp(15px,1.35vw,19px);letter-spacing:.02em;text-align:center}
-.strip p b{font-weight:600;color:var(--sun)}
-.strip p i{width:7px;height:7px;border-radius:50%;background:var(--sun);display:inline-block}
 
-/* what is Dapperowl */
-.what{background:var(--cream);padding-top:calc(var(--sec) + var(--artw) * .06)}
-.what .inner{display:flex;flex-direction:column;align-items:center;gap:34px;text-align:center}
 .stmt{margin:0;font-family:var(--body);font-weight:700;font-size:clamp(22px,1.9vw,26px);line-height:1.6;max-width:52ch;color:var(--navy)}
 .wsteps{list-style:none;margin:0;padding:0;display:flex;align-items:stretch;justify-content:center;gap:16px;flex-wrap:wrap}
 .wsteps li:not(.arr){background:#fff;border:3px solid var(--ink);border-radius:20px;box-shadow:6px 6px 0 var(--ink);padding:24px 22px;display:flex;flex-direction:column;align-items:center;gap:10px;width:250px}
@@ -72,10 +61,6 @@ body{font-size:20px}
 .wsteps .arr{align-self:center;font-family:var(--ui);font-weight:700;font-size:36px;color:var(--navy)}
 @media (max-width:900px){.wsteps .arr{transform:rotate(90deg);width:100%;text-align:center}.wsteps li:not(.arr){width:min(100%,340px)}}
 
-/* tracker */
-.olive{background:var(--trk);color:var(--trktext)}
-.olive .hd{color:var(--navy);--blob:var(--cream)}
-.olive{overflow:hidden}
 .trk-head{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:330px}
 .trk-head .hd{position:relative;z-index:1}
 /* keep the headline readable over the drifting charity names: a soft fade in the band's own yellow, no visible shape */
@@ -126,10 +111,6 @@ body{font-size:20px}
 @keyframes sf2{0%{opacity:0}73.3%{opacity:1}90%{opacity:0}}
 @keyframes sword{0%,73.3%,90%,100%{transform:scale(1)}80%{transform:scale(1.06)}}
 
-/* extras */
-.extras{background:var(--cream)}
-.extras .hd{--blob:#B9C68A}
-.xgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center;margin-top:48px}
 .tilt{transition:transform .35s ease, box-shadow .35s ease;will-change:transform}
 .cert-card{transform:rotate(-2.5deg)}
 .cert-in{aspect-ratio:1.91/1;max-width:100%;background:var(--navy);color:var(--paper);border:3px solid var(--ink);border-radius:14px;padding:5% 6%;display:flex;flex-direction:column;justify-content:space-between;box-shadow:8px 8px 0 var(--ink);container-type:inline-size}
@@ -145,16 +126,6 @@ body{font-size:20px}
 .cert-to{font-size:2.3cqw;line-height:1.3}
 .cert-to b{font-family:var(--ui);font-size:2.7cqw}
 .cert-foot{display:flex;justify-content:space-between;gap:2cqw;flex-wrap:wrap;font-family:var(--ui);font-weight:600;font-size:2cqw;color:#C9D3F2}
-.cap{margin:18px 0 0;font-size:17px;color:var(--muted);max-width:48ch}
-.side{display:flex;flex-direction:column;gap:26px;align-items:flex-start}
-.explain{display:flex;flex-direction:column;gap:14px;max-width:46ch}
-.explain h3{margin:0;font-family:var(--head);font-weight:400;font-size:clamp(30px,3vw,42px);line-height:1.1;color:var(--navy)}
-.explain p{margin:0;font-size:20px;line-height:1.55}
-.side .lead2{margin:0;font-weight:700;font-size:23px;line-height:1.3}
-.total{background:var(--white);border:3px solid var(--ink);border-radius:20px;box-shadow:6px 6px 0 var(--ink);padding:24px 26px;display:flex;flex-direction:column;gap:10px;position:relative;z-index:2;max-width:420px}
-.total b{font-family:var(--ui);font-size:20px}
-.raised{align-self:flex-start;background:var(--green);color:var(--white);border:3px solid var(--ink);border-radius:999px;font-family:var(--ui);font-weight:700;font-size:26px;padding:8px 22px}
-.total span{font-size:16px;color:var(--muted)}
 
 /* LinkedIn post with classic portrait certificate */
 .post{margin:0;max-width:460px;background:#fff;border:3px solid var(--ink);border-radius:16px;overflow:hidden;box-shadow:8px 8px 0 var(--ink);transform:rotate(-2deg)}
@@ -226,16 +197,70 @@ body{font-size:20px}
   .rv,.tilt,.btn .arr{transition:none}
   .js .rv:not(.in){transform:none;opacity:1}
 }
+
+/* ===== Homepage layout (30 Oct): 5 full-screen sections, firm snap scrolling, straight edges, calmer sizing ===== */
+:root{--topbar:86px;--tfs:min(8.4vw,10svh,112px)}
+html{scroll-snap-type:y mandatory}
+@media (max-width:900px),(max-height:700px){html{scroll-snap-type:y proximity}}
+.snap{box-sizing:border-box;min-height:calc(100svh - var(--topbar));scroll-snap-align:start;scroll-margin-top:var(--topbar);display:flex;flex-direction:column;justify-content:center}
+#site-foot{scroll-snap-align:end}
+.snap > .inner{width:100%;max-width:1120px;margin-inline:auto}
+.sec{background:var(--cream);padding-block:56px}
+.sgrid{display:grid;grid-template-columns:minmax(0,45fr) minmax(0,55fr);gap:64px;align-items:center}
+.stext{display:flex;flex-direction:column;gap:22px;align-items:flex-start}
+.svis{display:flex;flex-direction:column;align-items:center;gap:28px}
+.svis > *{width:100%;max-width:440px}
+.sec .hd{font-size:clamp(30px,3.2vw,46px);line-height:1.15;text-align:left;margin:0;max-width:none;color:var(--navy)}
+.body{margin:0;font-family:var(--body);font-size:19px;line-height:1.6;max-width:55ch;color:var(--navy)}
+/* 1 hero: everything on one screen */
+.phero{background:var(--cobalt);padding:28px 0 0;overflow:hidden}
+.phero .inner{display:flex;flex-direction:column;align-items:center;text-align:center}
+.ptitle{font-size:var(--tfs);line-height:1.02}
+.part{--artw:min(760px,88vw,calc((100svh - var(--topbar) - 2.1 * var(--tfs) - 80px) / .84));width:var(--artw);margin:calc(var(--artw) * -0.06) 0 calc(var(--artw) * -0.075)}
+/* 2 what Dapperowl does: the 3 stages stacked */
+.svis .wsteps{flex-direction:column;align-items:center;gap:10px;max-width:360px}
+.svis .wsteps li:not(.arr){width:100%;flex-direction:row;gap:18px;padding:16px 20px;text-align:left}
+.svis .wsteps .wi{width:58px;height:58px;flex:none}.svis .wsteps .wi svg{width:34px;height:34px}
+.svis .wsteps .arr{transform:rotate(90deg);font-size:28px;line-height:1}
+.svis .wsteps li > div,.svis .wsteps li > span:not(.wi){text-align:left}
+/* 3 watch your donation */
+.trk-head{position:relative;min-height:0;align-items:flex-start;text-align:left;padding-block:26px;width:100%}
+.trk-head .hd::after{display:none} /* on cream the faint names don't need the fade */
+.rows{position:absolute;inset:0;width:100%;transform:none;top:0;left:0;justify-content:center;gap:10px}
+.row span{font-size:clamp(18px,1.7vw,24px);opacity:.11}
+.checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.checks li{display:flex;align-items:center;gap:12px;font-family:var(--body);font-weight:700;font-size:19px;line-height:1.3;color:var(--navy)}
+.ck{flex:none;width:26px;height:26px}
+.svis .send{max-width:240px}
+#tracker-demo .ot{padding:22px}
+#tracker-demo .ot-status{font-size:17px}
+#tracker-demo .ot-dot{width:46px;height:46px}
+#tracker-demo .ot-stop,#tracker-demo .ot-btn{font-size:14px}
+/* 4 certificate */
+.tile{display:flex;flex-direction:column;gap:4px;background:var(--white);border:3px solid var(--ink);border-radius:16px;box-shadow:5px 5px 0 var(--ink);padding:16px 22px}
+.tile b{font-family:var(--ui);font-size:22px;color:#18743a}
+.tile span{font-size:16px;color:var(--muted)}
+#certificate .svis > .post{max-width:min(440px,calc((100svh - var(--topbar) - 130px) * .6))}
+/* 5 join band: unchanged, but a full screen with a straight top edge */
+.join.snap{padding-block:56px}
+.join .hd{font-size:clamp(30px,3.2vw,46px);line-height:1.15}
+@media (max-width:900px){
+  .sgrid{grid-template-columns:1fr;gap:36px}
+  .svis > *{max-width:420px}
+  :root{--tfs:min(9.2vw,11svh,112px)}
+  .part{--artw:calc(100vw - 32px)}
+  .row span{opacity:.07}
+  #tracker-demo .ot-stop,#tracker-demo .ot-btn{font-size:17px}
+}
 </style>
 </head><body>
 
 
 <header id="site-head"></header>
 
-<section class="phero gut" aria-label="Opening screen">
+<section class="snap phero gut" id="top" aria-label="Opening screen">
   <div class="inner">
     <h1 class="ptitle"><span class="l1">Your knowledge.</span> <span class="l2">Their cause.</span></h1>
-    <p class="psub">Firms ask for your expertise. They donate to the charity you choose: 100% of it, every time.</p>
     <div class="part">
       <picture>
         <source srcset="images/hero-art-outline.webp" type="image/webp">
@@ -246,37 +271,39 @@ body{font-size:20px}
   </div>
 </section>
 
-<svg class="wave" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true" style="background:var(--cobalt)"><path d="M0 40 C300 0 560 70 820 34 S1260 6 1440 44 L1440 72 L0 72 Z" fill="#F5F0E6"/></svg>
-
-
-
-<section class="band what gut" aria-label="What Dapperowl does">
-  <div class="inner rv">
-    <p class="stmt">Dapperowl connects people who know their field inside out with organisations that need that knowledge. A firm asks for your time, and if you believe you have the expertise, you can accept. Once you have helped the firm, they donate straight to the charity you choose. No contracts, no selling yourself: just your expertise, put to work for a cause you care about.</p>
-    <ol class="wsteps">
+<section class="snap sec gut" id="what" aria-labelledby="what-h">
+  <div class="inner sgrid rv">
+    <div class="stext">
+      <h2 class="hd" id="what-h">What Dapperowl does</h2>
+      <p class="body">Dapperowl connects people who know their field inside out with organisations that need that knowledge. A firm asks for your time, and if you believe you have the expertise, you can accept. Once you have helped the firm, they donate straight to the charity you choose. No contracts, no selling yourself: just your expertise, put to work for a cause you care about.</p>
+    </div>
+    <div class="svis">
+      <ol class="wsteps">
       <li><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 10h36v22H20l-9 8v-8H6z" fill="#141414"/><path d="M14 18h20M14 24h14" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg></span><b>They ask</b></li>
       <li class="arr" aria-hidden="true">→</li>
       <li><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="16" cy="16" r="7" fill="#141414"/><circle cx="33" cy="16" r="7" fill="#141414"/><path d="M4 40c0-8 5-13 12-13s12 5 12 13zM21 40c0-8 5-13 12-13s12 5 12 13z" fill="#141414"/></svg></span><b>You share</b></li>
       <li class="arr" aria-hidden="true">→</li>
       <li><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4L6 14v4h36v-4z" fill="#141414"/><path d="M10 21h5v14h-5zM21.5 21h5v14h-5zM33 21h5v14h-5z" fill="#141414"/><path d="M6 38h36v5H6z" fill="#141414"/></svg></span><b>Your charity receives</b></li>
     </ol>
+    </div>
   </div>
 </section>
 
-<div class="strip" role="note">
-  <svg class="sw" viewBox="0 0 1440 24" preserveAspectRatio="none" aria-hidden="true"><path d="M0 24 L0 12 C240 26 480 0 720 10 S1200 22 1440 6 L1440 24 Z" fill="#7A1F2B"/></svg>
-  <p class="gut"><b>100% of every donation reaches the charity</b><i aria-hidden="true"></i>Dapperowl never touches the money<i aria-hidden="true"></i>Firms donate straight to your chosen charity</p>
-  <svg class="sw" viewBox="0 0 1440 24" preserveAspectRatio="none" aria-hidden="true" style="background:var(--trk)"><path d="M0 0 L0 12 C300 0 560 24 820 10 S1260 0 1440 16 L1440 0 Z" fill="#7A1F2B"/></svg>
-</div>
-
-<section class="band olive gut" id="tracker">
-  <div class="inner rv">
-    <div class="trk-head">
-      <div class="rows" aria-hidden="true"><div class="row ltr"><div class="track"><span>Harbour Lights Hospice</span><span>Glen Affric Wildlife Trust</span><span>The Reading Tree</span><span>Brightwater Children's Fund</span><span>Moorland Mountain Rescue</span><span>Kindred Kitchens</span><span>Harbour Lights Hospice</span><span>Glen Affric Wildlife Trust</span><span>The Reading Tree</span><span>Brightwater Children's Fund</span><span>Moorland Mountain Rescue</span><span>Kindred Kitchens</span></div></div><div class="row rtl"><div class="track"><span>Loch Broom Lifeboat Fund</span><span>Second Spring Dementia Care</span><span>Open Door Shelters</span><span>Little Lungs Foundation</span><span>Bridges to Literacy</span><span>Riverside Youth Music</span><span>Loch Broom Lifeboat Fund</span><span>Second Spring Dementia Care</span><span>Open Door Shelters</span><span>Little Lungs Foundation</span><span>Bridges to Literacy</span><span>Riverside Youth Music</span></div></div><div class="row ltr"><div class="track"><span>Northern Woodland Trust</span><span>Oban Food Bank</span><span>Seafarers Support Network</span><span>Veterans' Workshop</span><span>Yorkshire Carers Trust</span><span>Green Corridor Trust</span><span>Northern Woodland Trust</span><span>Oban Food Bank</span><span>Seafarers Support Network</span><span>Veterans' Workshop</span><span>Yorkshire Carers Trust</span><span>Green Corridor Trust</span></div></div></div>
-      <h2 class="hd"><span>Watch your donation reach your charity</span></h2>
+<section class="snap sec gut" id="tracker" aria-labelledby="trk-h">
+  <div class="inner sgrid rv">
+    <div class="stext">
+      <div class="trk-head">
+        <div class="rows" aria-hidden="true"><div class="row ltr"><div class="track"><span>Harbour Lights Hospice</span><span>Glen Affric Wildlife Trust</span><span>The Reading Tree</span><span>Brightwater Children's Fund</span><span>Moorland Mountain Rescue</span><span>Kindred Kitchens</span><span>Harbour Lights Hospice</span><span>Glen Affric Wildlife Trust</span><span>The Reading Tree</span><span>Brightwater Children's Fund</span><span>Moorland Mountain Rescue</span><span>Kindred Kitchens</span></div></div><div class="row rtl"><div class="track"><span>Loch Broom Lifeboat Fund</span><span>Second Spring Dementia Care</span><span>Open Door Shelters</span><span>Little Lungs Foundation</span><span>Bridges to Literacy</span><span>Riverside Youth Music</span><span>Loch Broom Lifeboat Fund</span><span>Second Spring Dementia Care</span><span>Open Door Shelters</span><span>Little Lungs Foundation</span><span>Bridges to Literacy</span><span>Riverside Youth Music</span></div></div><div class="row ltr"><div class="track"><span>Northern Woodland Trust</span><span>Oban Food Bank</span><span>Seafarers Support Network</span><span>Veterans' Workshop</span><span>Yorkshire Carers Trust</span><span>Green Corridor Trust</span><span>Northern Woodland Trust</span><span>Oban Food Bank</span><span>Seafarers Support Network</span><span>Veterans' Workshop</span><span>Yorkshire Carers Trust</span><span>Green Corridor Trust</span></div></div></div>
+        <h2 class="hd" id="trk-h">Watch your donation reach your charity</h2>
+      </div>
+      <p class="body">You're in control from start to finish. Track every donation as it moves from the firm to your charity, with a receipt at each step.</p>
+      <ul class="checks">
+        <li><svg class="ck" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#141414"/><path d="M10 17.5l4.5 4.5L24 12.5" fill="none" stroke="#F5F0E6" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>100% of every donation reaches the charity</li>
+        <li><svg class="ck" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#141414"/><path d="M10 17.5l4.5 4.5L24 12.5" fill="none" stroke="#F5F0E6" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Dapperowl never touches the money</li>
+        <li><svg class="ck" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#141414"/><path d="M10 17.5l4.5 4.5L24 12.5" fill="none" stroke="#F5F0E6" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Firms donate straight to your chosen charity</li>
+      </ul>
     </div>
-    <div class="trk-wrap">
-      <div id="tracker-demo"></div>
+    <div class="svis">
       <div class="send" role="img" aria-label="Drawing: a finger pressing a big Send button">
         <picture class="sf sf1"><source srcset="images/send-1.webp" type="image/webp"><img src="images/send-1.png" width="487" height="693" alt="" loading="lazy" decoding="async"></picture>
         <picture class="sf sf2"><source srcset="images/send-2.webp" type="image/webp"><img src="images/send-2.png" width="487" height="693" alt="" loading="lazy" decoding="async"></picture>
@@ -291,43 +318,30 @@ body{font-size:20px}
           </g>
         </svg>
       </div>
+      <div id="tracker-demo"></div>
     </div>
   </div>
 </section>
 
-<svg class="wave" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true" style="background:var(--trk)"><path d="M0 26 C260 66 520 6 780 30 S1240 62 1440 18 L1440 72 L0 72 Z" fill="#F5F0E6"/></svg>
-
-<section class="band extras gut">
-  <div class="inner rv">
-    <h2 class="hd"><span>What else you get</span></h2>
-    <div class="xgrid">
-      <div>
-        <figure class="post tilt" aria-label="Example LinkedIn post with an impact certificate">
+<section class="snap sec gut" id="certificate" aria-labelledby="cert-h">
+  <div class="inner sgrid rv">
+    <div class="stext">
+      <h2 class="hd" id="cert-h">An official certificate of impact</h2>
+      <p class="body">Every time the charity confirms your donation, you get an official certificate of impact to post on LinkedIn in one click. It shows your photo, name, the amount and the charity. The firm stays anonymous unless it chooses to be named.</p>
+      <div class="tile"><b>£4,500 raised so far</b><span>Only you can see this</span></div>
+    </div>
+    <div class="svis">
+      <figure class="post tilt" aria-label="Example LinkedIn post with an impact certificate">
           <div class="ph"><span class="av"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="22" r="13" fill="#141414"/><path d="M6 60c0-15 11-23 24-23s24 8 24 23z" fill="#141414"/></svg></span><div><b>The Hon. Inglebert Montgomery-Smythe</b><span>Founder, Broom Bay Seaweed · 1h</span></div></div>
           <p class="pc">Proud to have shared what I know about Scottish seaweed farming, and that £500 went straight to Loch Broom Lifeboat Fund.</p>
           <div class="cq"><div class="cert c1"><div class="frame"></div><div class="in"><svg class="logo" viewBox="18 14 274 108" aria-label="Dapperowl"><path d="M50 18 A28 28 0 0 1 78 46 L78 88 Q78 94 72 94 L36 94 Q22 94 22 80 L22 46 A28 28 0 0 1 50 18 Z" fill="#2251FF"/><path d="M-10 -5 L0 5 L10 -5" transform="translate(50 44)" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M44 98 L57 98 L43 118 L30 118 Z M62 98 L75 98 L61 118 L48 118 Z" fill="#2251FF"/><path d="M82 58 L286 58 Q206 106 108 100 L82 96 Z" fill="#2251FF"/><path d="M156 56 L128 108 M202 56 L178 102 M246 56 L228 90" stroke="#fff" stroke-width="4"/><text x="92" y="46.4" font-family="Outfit, sans-serif" font-weight="700" font-size="24" letter-spacing="2" fill="#14254F">DAPPEROWL</text></svg><span class="k">Certificate of impact</span><div class="photo"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="22" r="13" fill="#141414"/><path d="M6 60c0-15 11-23 24-23s24 8 24 23z" fill="#141414"/></svg></div><span class="nm">The Hon. Inglebert Montgomery-Smythe</span><span class="rule"></span><span class="amt">£500</span><span class="to">donated to<b>Loch Broom Lifeboat Fund</b></span></div><span class="date">October 2026</span></div></div>
           <div class="pa"><span>Like</span><span>Comment</span><span>Share</span></div>
         </figure>
-      </div>
-      <div class="side">
-        <div class="explain">
-          <h3>An official certificate of impact for every donation</h3>
-          <p>Once your charity confirms it has received the donation, we make you an official certificate of impact, ready to post on LinkedIn in one click.</p>
-          <p>It shows your photo, your name, the amount and your charity, so your network can see the good your knowledge has done. The firm stays anonymous unless it chooses to be named.</p>
-        </div>
-        <div class="total tilt">
-          <b>Your total raised, tracked privately on your own profile</b>
-          <span class="raised">£4,500 raised</span>
-          <span>Only you can see this.</span>
-        </div>
-      </div>
     </div>
   </div>
 </section>
 
-<svg class="wave" viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden="true" style="background:#F5F0E6"><path d="M0 44 C280 4 600 66 900 30 S1300 10 1440 40 L1440 72 L0 72 Z" fill="#14254F"/></svg>
-
-<section class="band join gut" id="join">
+<section class="snap band join gut" id="join">
   <div class="inner rv">
     <div class="jart">
       <svg class="jdots" viewBox="0 0 1200 896" aria-hidden="true">
@@ -352,11 +366,16 @@ body{font-size:20px}
   </div>
 </section>
 
-
 <footer id="site-foot"></footer>
 <script src="site.js"></script>
 <script>
 DapperTracker.mount(document.getElementById('tracker-demo'), DapperTracker.EXPERT);
+(function(){ // top bar height drives full-screen sections and snap offsets
+  const head=document.getElementById('site-head'); if(!head) return;
+  const set=()=>document.documentElement.style.setProperty('--topbar',head.offsetHeight+'px');
+  set(); if('ResizeObserver' in window) new ResizeObserver(set).observe(head); addEventListener('resize',set);
+})();
+
 (function(){ // Join band flag ripple (SVG animation) stays still when motion is turned off
   const svg=document.querySelector('.jfront'); if(!svg||!svg.pauseAnimations) return;
   const mq=matchMedia('(prefers-reduced-motion: reduce)');
