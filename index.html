@@ -277,6 +277,37 @@ html{scroll-snap-type:y mandatory}
   .hiw-line{display:none}
   .hiw-sep{display:block;width:64px;height:2px;background:var(--navy);margin:0 auto 6px}
 }
+
+/* 3 Watch your donation (30 Oct): intro + vertical timeline left, SEND and guarantees right; plays once */
+.wy{display:grid;grid-template-columns:minmax(0,55fr) minmax(0,45fr);gap:64px;align-items:center}
+.wy-left{display:flex;flex-direction:column;gap:22px;min-width:0}
+.wy-right{display:flex;flex-direction:column;align-items:center;gap:30px;min-width:0}
+.wy-right .checks{align-self:center}
+.wy-right .send{max-width:240px}
+.tl{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:22px}
+.tl-step{position:relative;display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:20px;align-items:start}
+.tl-dot{position:relative;z-index:1;width:52px;height:52px;box-sizing:border-box;border-radius:50%;border:3px solid var(--ink);background:#18743a;display:grid;place-items:center;transition:background .35s ease,opacity .4s ease,transform .4s ease}
+.tl-num{font-family:var(--ui);font-weight:700;font-size:22px;color:var(--navy);display:none}
+.tl-tick{width:28px;height:28px}
+.tl-body{display:flex;flex-direction:column;gap:2px;padding-top:9px}
+.tl-name{font-family:var(--ui);font-weight:700;font-size:22px;line-height:1.25;color:var(--navy)}
+.tl-text{margin:0;font-family:var(--body);font-size:21px;line-height:1.5;color:var(--navy)}
+/* thick bar from this circle's centre to the next one's */
+.tl-bar{position:absolute;z-index:0;left:22px;top:26px;bottom:-48px;width:8px;background:#C9C4BA;border-radius:4px;overflow:hidden}
+.tl-fill{position:absolute;inset:0;background:#18743a;transform-origin:top;transform:scaleY(1)}
+/* sequence start state (added by the script only when motion is allowed) */
+.wy-ready .wy-intro .w,.wy-ready .tl-name,.wy-ready .tl-text .w,.wy-ready .checks li,.wy-ready .sendwrap{opacity:0;transition:opacity .35s ease}
+.wy-ready .tl-dot{opacity:0;transform:scale(.85);background:#fff}
+.wy-ready .tl-dot .tl-num{display:block}.wy-ready .tl-dot .tl-tick{display:none}
+.wy-ready .tl-dot.done{background:#18743a}.wy-ready .tl-dot.done .tl-num{display:none}.wy-ready .tl-dot.done .tl-tick{display:block}
+.wy-ready .tl-fill{transform:scaleY(0);transition-property:transform;transition-timing-function:linear}
+.wy-ready .tl-fill.on{transform:scaleY(1)}
+.wy-ready .on{opacity:1!important}
+.wy-ready .tl-dot.on{transform:none}
+.wy-ready .sendwrap:not(.on) .sf,.wy-ready .sendwrap:not(.on) .sword-g{animation-play-state:paused}
+@media (max-width:900px){
+  .wy{grid-template-columns:1fr;gap:40px}
+}
 </style>
 </head><body>
 
@@ -319,17 +350,30 @@ html{scroll-snap-type:y mandatory}
 </section>
 
 <section class="snap sec gut" id="tracker" aria-labelledby="trk-h">
-  <div class="inner sgrid rv">
-    <div class="stext">
+  <div class="inner wy">
+    <div class="wy-left">
       <h2 class="hd" id="trk-h">Watch your donation reach your charity</h2>
-      <p class="body">You're in control from start to finish. Track every donation as it moves from the firm to your charity, with a receipt at each step.</p>
-      <ul class="checks">
-        <li><svg class="ck" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#141414"/><path d="M10 17.5l4.5 4.5L24 12.5" fill="none" stroke="#F5F0E6" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>100% of every donation reaches the charity</li>
-        <li><svg class="ck" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#141414"/><path d="M10 17.5l4.5 4.5L24 12.5" fill="none" stroke="#F5F0E6" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Dapperowl never touches the money</li>
-        <li><svg class="ck" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#141414"/><path d="M10 17.5l4.5 4.5L24 12.5" fill="none" stroke="#F5F0E6" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Firms donate straight to your chosen charity</li>
-      </ul>
+      <p class="body wy-intro">Track your donation all the way from the firm to your charity. The money moves in four simple steps, and you see each one happen.</p>
+      <ol class="tl">
+        <li class="tl-step"><span class="tl-bar" aria-hidden="true"><span class="tl-fill"></span></span>
+          <span class="tl-dot"><span class="tl-num">1</span><svg class="tl-tick" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div class="tl-body"><b class="tl-name">Pledged</b><p class="tl-text">Dapperowl sets up the meeting, and the firm pledges a donation to your charity.</p></div>
+        </li>
+        <li class="tl-step"><span class="tl-bar" aria-hidden="true"><span class="tl-fill"></span></span>
+          <span class="tl-dot"><span class="tl-num">2</span><svg class="tl-tick" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div class="tl-body"><b class="tl-name">You send it</b><p class="tl-text">After the meeting, press Send to release the donation.</p></div>
+        </li>
+        <li class="tl-step"><span class="tl-bar" aria-hidden="true"><span class="tl-fill"></span></span>
+          <span class="tl-dot"><span class="tl-num">3</span><svg class="tl-tick" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div class="tl-body"><b class="tl-name">Firm paid</b><p class="tl-text">The firm donates on the charity's own website and uploads the receipt.</p></div>
+        </li>
+        <li class="tl-step">
+          <span class="tl-dot"><span class="tl-num">4</span><svg class="tl-tick" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div class="tl-body"><b class="tl-name">Charity received</b><p class="tl-text">The charity confirms it and thanks you directly.</p></div>
+        </li>
+      </ol>
     </div>
-    <div class="svis">
+    <div class="wy-right">
       <div class="sendwrap">
         <div class="rows" aria-hidden="true"><div class="row ltr"><div class="track"><span>Harbour Lights Hospice</span><span>Glen Affric Wildlife Trust</span><span>The Reading Tree</span><span>Brightwater Children's Fund</span><span>Moorland Mountain Rescue</span><span>Kindred Kitchens</span><span>Harbour Lights Hospice</span><span>Glen Affric Wildlife Trust</span><span>The Reading Tree</span><span>Brightwater Children's Fund</span><span>Moorland Mountain Rescue</span><span>Kindred Kitchens</span></div></div><div class="row rtl"><div class="track"><span>Loch Broom Lifeboat Fund</span><span>Second Spring Dementia Care</span><span>Open Door Shelters</span><span>Little Lungs Foundation</span><span>Bridges to Literacy</span><span>Riverside Youth Music</span><span>Loch Broom Lifeboat Fund</span><span>Second Spring Dementia Care</span><span>Open Door Shelters</span><span>Little Lungs Foundation</span><span>Bridges to Literacy</span><span>Riverside Youth Music</span></div></div><div class="row ltr"><div class="track"><span>Northern Woodland Trust</span><span>Oban Food Bank</span><span>Seafarers Support Network</span><span>Veterans' Workshop</span><span>Yorkshire Carers Trust</span><span>Green Corridor Trust</span><span>Northern Woodland Trust</span><span>Oban Food Bank</span><span>Seafarers Support Network</span><span>Veterans' Workshop</span><span>Yorkshire Carers Trust</span><span>Green Corridor Trust</span></div></div></div>
         <div class="send" role="img" aria-label="Drawing: a finger pressing a big Send button">
@@ -347,7 +391,11 @@ html{scroll-snap-type:y mandatory}
         </svg>
       </div>
       </div>
-      <div id="tracker-demo"></div>
+      <ul class="checks">
+        <li><svg class="ck" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#141414"/><path d="M10 17.5l4.5 4.5L24 12.5" fill="none" stroke="#F5F0E6" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>100% of every donation reaches the charity</li>
+        <li><svg class="ck" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#141414"/><path d="M10 17.5l4.5 4.5L24 12.5" fill="none" stroke="#F5F0E6" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Dapperowl never touches the money</li>
+        <li><svg class="ck" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#141414"/><path d="M10 17.5l4.5 4.5L24 12.5" fill="none" stroke="#F5F0E6" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Firms donate straight to your chosen charity</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -398,7 +446,43 @@ html{scroll-snap-type:y mandatory}
 <footer id="site-foot"></footer>
 <script src="site.js"></script>
 <script>
-DapperTracker.mount(document.getElementById('tracker-demo'), DapperTracker.EXPERT);
+(function(){ // Watch your donation: plays once on arrival - intro, then each step (circle, tick, name, text) while the bar fills to the next circle
+  const sec=document.getElementById('tracker'); if(!sec) return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  const LINE=350;
+  const wrap=p=>{ [...p.childNodes].forEach(n=>{ if(n.nodeType!==3) return; const f=document.createDocumentFragment();
+    n.textContent.split(/(\s+)/).forEach(part=>{ if(!part) return; if(/^\s+$/.test(part)) f.appendChild(document.createTextNode(part)); else { const w=document.createElement('span'); w.className='w'; w.textContent=part; f.appendChild(w); } });
+    p.replaceChild(f,n); }); };
+  const linesOf=p=>{ const g=[]; let top=null; p.querySelectorAll('.w').forEach(w=>{ const t=w.offsetTop; if(top===null||Math.abs(t-top)>4){ g.push([]); top=t; } g[g.length-1].push(w); }); return g; };
+  const intro=sec.querySelector('.wy-intro'); wrap(intro); sec.querySelectorAll('.tl-text').forEach(wrap);
+  sec.classList.add('wy-ready');
+  const wait=ms=>new Promise(r=>setTimeout(r,ms));
+  const showLines=async p=>{ for(const line of linesOf(p)){ line.forEach(w=>w.classList.add('on')); await wait(LINE); } };
+  let played=false;
+  const play=async()=>{
+    if(played) return; played=true;
+    await showLines(intro);
+    const steps=[...sec.querySelectorAll('.tl-step')];
+    for(let i=0;i<steps.length;i++){
+      const st=steps[i], dot=st.querySelector('.tl-dot');
+      dot.classList.add('on'); await wait(420);
+      dot.classList.add('done'); await wait(320);
+      if(i===1) sec.querySelector('.sendwrap').classList.add('on'); // SEND appears with step 2 and starts its loop
+      st.querySelector('.tl-name').classList.add('on'); await wait(260);
+      const lines=linesOf(st.querySelector('.tl-text'));
+      const fill=st.querySelector('.tl-fill');
+      if(fill){ fill.style.transitionDuration=(lines.length*LINE)+'ms'; fill.classList.add('on'); } // reaches the next circle as the last line finishes
+      await showLines(st.querySelector('.tl-text'));
+    }
+    for(const li of sec.querySelectorAll('.checks li')){ li.classList.add('on'); await wait(300); }
+    await wait(400);
+    sec.classList.remove('wy-ready'); // everything stays visible from now on
+  };
+  const io=new IntersectionObserver(es=>{ if(es.some(e=>e.isIntersecting)){ io.disconnect(); play(); } },{threshold:.4});
+  io.observe(sec);
+  const check=()=>{ if(played) return removeEventListener('scroll',check); const r=sec.getBoundingClientRect(); const seen=Math.min(r.bottom,innerHeight)-Math.max(r.top,0); if(seen>Math.min(r.height,innerHeight)*.4){ io.disconnect(); play(); } };
+  addEventListener('scroll',check,{passive:true}); check();
+})();
 (function(){ // How it works: plays once on arrival - box, then its text line by line; dividers before columns 2 and 3
   const sec=document.getElementById('what'); if(!sec) return;
   if(matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
@@ -431,7 +515,7 @@ DapperTracker.mount(document.getElementById('tracker-demo'), DapperTracker.EXPER
       const div=[...col.querySelectorAll('.hiw-line,.hiw-sep')].find(d=>getComputedStyle(d).display!=='none');
       if(div){ div.classList.add('on'); await wait(300); }
       col.querySelector('.hiw-box').classList.add('on'); await wait(400);
-      for(const line of linesOf(col.querySelector('.hiw-text'))){ line.forEach(w=>w.classList.add('on')); await wait(200); }
+      for(const line of linesOf(col.querySelector('.hiw-text'))){ line.forEach(w=>w.classList.add('on')); await wait(350); }
       await wait(100);
     }
     sec.classList.remove('hiw-ready'); // fully visible from now on
