@@ -28,7 +28,7 @@ body{font-size:20px}
 .hd{text-align:center;margin:0 auto;font-family:var(--head);font-weight:400;font-size:clamp(40px,5.4vw,80px);line-height:1.28;text-transform:uppercase;max-width:20ch;color:var(--navy)}
 
 /* Poster hero (30 Oct): cobalt band, huge two-line headline, one sentence, the table drawing big and spilling over the wavy edge */
-.phero{position:relative;z-index:2;background:var(--cobalt);color:var(--cream);text-align:center;padding-top:clamp(56px,7vw,96px);padding-bottom:0}
+.phero{position:relative;z-index:2;background:var(--navy);color:var(--cream);text-align:center;padding-top:clamp(56px,7vw,96px);padding-bottom:0}
 .phero .inner{display:flex;flex-direction:column;align-items:center}
 .ptitle{margin:0;font-family:var(--head);font-weight:400;text-transform:uppercase;line-height:1.02;font-size:clamp(32px,9.2vw,146px);letter-spacing:-.005em}
 .ptitle span{display:block;white-space:nowrap}
@@ -205,33 +205,35 @@ html{scroll-snap-type:y mandatory}
 .snap{box-sizing:border-box;min-height:calc(100svh - var(--topbar));scroll-snap-align:start;scroll-margin-top:var(--topbar);display:flex;flex-direction:column;justify-content:center}
 #site-foot{scroll-snap-align:end}
 .snap > .inner{width:100%;max-width:1120px;margin-inline:auto}
-.sec{background:var(--cream);padding-block:56px}
+.sec{background:#F4B183;padding-block:56px} /* apricot (30 Oct) */
 .sgrid{display:grid;grid-template-columns:minmax(0,45fr) minmax(0,55fr);gap:64px;align-items:center}
 .stext{display:flex;flex-direction:column;gap:22px;align-items:flex-start}
 .svis{display:flex;flex-direction:column;align-items:center;gap:28px}
 .svis > *{width:100%;max-width:440px}
-.sec .hd{font-size:clamp(30px,3.2vw,46px);line-height:1.15;text-align:left;margin:0;max-width:none;color:var(--navy)}
-.body{margin:0;font-family:var(--body);font-size:19px;line-height:1.6;max-width:55ch;color:var(--navy)}
+.sec .hd{font-size:clamp(34px,3.6vw,52px);line-height:1.15;text-align:left;margin:0;max-width:none;color:var(--navy)}
+.body{margin:0;font-family:var(--body);font-size:21px;line-height:1.6;max-width:55ch;color:var(--navy)}
 /* 1 hero: everything on one screen */
-.phero{background:var(--cobalt);padding:28px 0 0;overflow:hidden}
+.phero{background:var(--navy);padding:28px 0 0;overflow:hidden}
 .phero .inner{display:flex;flex-direction:column;align-items:center;text-align:center}
 .ptitle{font-size:var(--tfs);line-height:1.02}
 .part{--artw:min(760px,88vw,calc((100svh - var(--topbar) - 2.1 * var(--tfs) - 80px) / .84));width:var(--artw);margin:calc(var(--artw) * -0.06) 0 calc(var(--artw) * -0.075)}
 /* 2 what Dapperowl does: the 3 stages stacked */
 .svis .wsteps{flex-direction:column;align-items:center;gap:10px;max-width:360px}
 .svis .wsteps li:not(.arr){width:100%;flex-direction:row;gap:18px;padding:16px 20px;text-align:left}
-.svis .wsteps .wi{width:58px;height:58px;flex:none}.svis .wsteps .wi svg{width:34px;height:34px}
+.svis .wsteps .wi{width:56px;height:56px;flex:none}.svis .wsteps .wi svg{width:33px;height:33px}
+.svis .wsteps b{font-size:24px}
 .svis .wsteps .arr{transform:rotate(90deg);font-size:28px;line-height:1}
 .svis .wsteps li > div,.svis .wsteps li > span:not(.wi){text-align:left}
 /* 3 watch your donation */
-.trk-head{position:relative;min-height:0;align-items:flex-start;text-align:left;padding-block:26px;width:100%}
-.trk-head .hd::after{display:none} /* on cream the faint names don't need the fade */
-.rows{position:absolute;inset:0;width:100%;transform:none;top:0;left:0;justify-content:center;gap:10px}
-.row span{font-size:clamp(18px,1.7vw,24px);opacity:.11}
 .checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
-.checks li{display:flex;align-items:center;gap:12px;font-family:var(--body);font-weight:700;font-size:19px;line-height:1.3;color:var(--navy)}
-.ck{flex:none;width:26px;height:26px}
+.checks li{display:flex;align-items:center;gap:12px;font-family:var(--body);font-weight:700;font-size:21px;line-height:1.3;color:var(--navy)}
+.ck{flex:none;width:28px;height:28px}
 .svis .send{max-width:240px}
+/* drifting charity names behind the SEND drawing (30 Oct) */
+.sendwrap{position:relative;width:100%;max-width:440px;display:flex;justify-content:center}
+.sendwrap .send{position:relative;z-index:1;width:100%}
+.sendwrap .rows{position:absolute;inset:0;width:100%;top:0;left:0;transform:none;z-index:0;justify-content:center;gap:22px;overflow:hidden}
+.sendwrap .row span{font-size:clamp(20px,1.8vw,26px);color:var(--navy);opacity:.18}
 #tracker-demo .ot{padding:22px}
 #tracker-demo .ot-status{font-size:17px}
 #tracker-demo .ot-dot{width:46px;height:46px}
@@ -249,7 +251,6 @@ html{scroll-snap-type:y mandatory}
   .svis > *{max-width:420px}
   :root{--tfs:min(9.2vw,11svh,112px)}
   .part{--artw:calc(100vw - 32px)}
-  .row span{opacity:.07}
   #tracker-demo .ot-stop,#tracker-demo .ot-btn{font-size:17px}
 }
 </style>
@@ -292,10 +293,7 @@ html{scroll-snap-type:y mandatory}
 <section class="snap sec gut" id="tracker" aria-labelledby="trk-h">
   <div class="inner sgrid rv">
     <div class="stext">
-      <div class="trk-head">
-        <div class="rows" aria-hidden="true"><div class="row ltr"><div class="track"><span>Harbour Lights Hospice</span><span>Glen Affric Wildlife Trust</span><span>The Reading Tree</span><span>Brightwater Children's Fund</span><span>Moorland Mountain Rescue</span><span>Kindred Kitchens</span><span>Harbour Lights Hospice</span><span>Glen Affric Wildlife Trust</span><span>The Reading Tree</span><span>Brightwater Children's Fund</span><span>Moorland Mountain Rescue</span><span>Kindred Kitchens</span></div></div><div class="row rtl"><div class="track"><span>Loch Broom Lifeboat Fund</span><span>Second Spring Dementia Care</span><span>Open Door Shelters</span><span>Little Lungs Foundation</span><span>Bridges to Literacy</span><span>Riverside Youth Music</span><span>Loch Broom Lifeboat Fund</span><span>Second Spring Dementia Care</span><span>Open Door Shelters</span><span>Little Lungs Foundation</span><span>Bridges to Literacy</span><span>Riverside Youth Music</span></div></div><div class="row ltr"><div class="track"><span>Northern Woodland Trust</span><span>Oban Food Bank</span><span>Seafarers Support Network</span><span>Veterans' Workshop</span><span>Yorkshire Carers Trust</span><span>Green Corridor Trust</span><span>Northern Woodland Trust</span><span>Oban Food Bank</span><span>Seafarers Support Network</span><span>Veterans' Workshop</span><span>Yorkshire Carers Trust</span><span>Green Corridor Trust</span></div></div></div>
-        <h2 class="hd" id="trk-h">Watch your donation reach your charity</h2>
-      </div>
+      <h2 class="hd" id="trk-h">Watch your donation reach your charity</h2>
       <p class="body">You're in control from start to finish. Track every donation as it moves from the firm to your charity, with a receipt at each step.</p>
       <ul class="checks">
         <li><svg class="ck" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#141414"/><path d="M10 17.5l4.5 4.5L24 12.5" fill="none" stroke="#F5F0E6" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>100% of every donation reaches the charity</li>
@@ -304,7 +302,9 @@ html{scroll-snap-type:y mandatory}
       </ul>
     </div>
     <div class="svis">
-      <div class="send" role="img" aria-label="Drawing: a finger pressing a big Send button">
+      <div class="sendwrap">
+        <div class="rows" aria-hidden="true"><div class="row ltr"><div class="track"><span>Harbour Lights Hospice</span><span>Glen Affric Wildlife Trust</span><span>The Reading Tree</span><span>Brightwater Children's Fund</span><span>Moorland Mountain Rescue</span><span>Kindred Kitchens</span><span>Harbour Lights Hospice</span><span>Glen Affric Wildlife Trust</span><span>The Reading Tree</span><span>Brightwater Children's Fund</span><span>Moorland Mountain Rescue</span><span>Kindred Kitchens</span></div></div><div class="row rtl"><div class="track"><span>Loch Broom Lifeboat Fund</span><span>Second Spring Dementia Care</span><span>Open Door Shelters</span><span>Little Lungs Foundation</span><span>Bridges to Literacy</span><span>Riverside Youth Music</span><span>Loch Broom Lifeboat Fund</span><span>Second Spring Dementia Care</span><span>Open Door Shelters</span><span>Little Lungs Foundation</span><span>Bridges to Literacy</span><span>Riverside Youth Music</span></div></div><div class="row ltr"><div class="track"><span>Northern Woodland Trust</span><span>Oban Food Bank</span><span>Seafarers Support Network</span><span>Veterans' Workshop</span><span>Yorkshire Carers Trust</span><span>Green Corridor Trust</span><span>Northern Woodland Trust</span><span>Oban Food Bank</span><span>Seafarers Support Network</span><span>Veterans' Workshop</span><span>Yorkshire Carers Trust</span><span>Green Corridor Trust</span></div></div></div>
+        <div class="send" role="img" aria-label="Drawing: a finger pressing a big Send button">
         <picture class="sf sf1"><source srcset="images/send-1.webp" type="image/webp"><img src="images/send-1.png" width="487" height="693" alt="" loading="lazy" decoding="async"></picture>
         <picture class="sf sf2"><source srcset="images/send-2.webp" type="image/webp"><img src="images/send-2.png" width="487" height="693" alt="" loading="lazy" decoding="async"></picture>
         <svg class="sword" viewBox="0 0 487 693" aria-hidden="true">
@@ -317,6 +317,7 @@ html{scroll-snap-type:y mandatory}
             </g>
           </g>
         </svg>
+      </div>
       </div>
       <div id="tracker-demo"></div>
     </div>
@@ -334,7 +335,7 @@ html{scroll-snap-type:y mandatory}
       <figure class="post tilt" aria-label="Example LinkedIn post with an impact certificate">
           <div class="ph"><span class="av"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="22" r="13" fill="#141414"/><path d="M6 60c0-15 11-23 24-23s24 8 24 23z" fill="#141414"/></svg></span><div><b>The Hon. Inglebert Montgomery-Smythe</b><span>Founder, Broom Bay Seaweed · 1h</span></div></div>
           <p class="pc">Proud to have shared what I know about Scottish seaweed farming, and that £500 went straight to Loch Broom Lifeboat Fund.</p>
-          <div class="cq"><div class="cert c1"><div class="frame"></div><div class="in"><svg class="logo" viewBox="18 14 274 108" aria-label="Dapperowl"><path d="M50 18 A28 28 0 0 1 78 46 L78 88 Q78 94 72 94 L36 94 Q22 94 22 80 L22 46 A28 28 0 0 1 50 18 Z" fill="#2251FF"/><path d="M-10 -5 L0 5 L10 -5" transform="translate(50 44)" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M44 98 L57 98 L43 118 L30 118 Z M62 98 L75 98 L61 118 L48 118 Z" fill="#2251FF"/><path d="M82 58 L286 58 Q206 106 108 100 L82 96 Z" fill="#2251FF"/><path d="M156 56 L128 108 M202 56 L178 102 M246 56 L228 90" stroke="#fff" stroke-width="4"/><text x="92" y="46.4" font-family="Outfit, sans-serif" font-weight="700" font-size="24" letter-spacing="2" fill="#14254F">DAPPEROWL</text></svg><span class="k">Certificate of impact</span><div class="photo"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="22" r="13" fill="#141414"/><path d="M6 60c0-15 11-23 24-23s24 8 24 23z" fill="#141414"/></svg></div><span class="nm">The Hon. Inglebert Montgomery-Smythe</span><span class="rule"></span><span class="amt">£500</span><span class="to">donated to<b>Loch Broom Lifeboat Fund</b></span></div><span class="date">October 2026</span></div></div>
+          <div class="cq"><div class="cert c1"><div class="frame"></div><div class="in"><svg class="logo" viewBox="18 14 274 108" aria-label="Dapperowl"><path d="M50 18 A28 28 0 0 1 78 46 L78 88 Q78 94 72 94 L36 94 Q22 94 22 80 L22 46 A28 28 0 0 1 50 18 Z" fill="#1F9D55"/><path d="M-10 -5 L0 5 L10 -5" transform="translate(50 44)" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M44 98 L57 98 L43 118 L30 118 Z M62 98 L75 98 L61 118 L48 118 Z" fill="#1F9D55"/><path d="M82 58 L286 58 Q206 106 108 100 L82 96 Z" fill="#1F9D55"/><path d="M156 56 L128 108 M202 56 L178 102 M246 56 L228 90" stroke="#fff" stroke-width="4"/><text x="92" y="46.4" font-family="Outfit, sans-serif" font-weight="700" font-size="24" letter-spacing="2" fill="#1F9D55">DAPPEROWL</text></svg><span class="k">Certificate of impact</span><div class="photo"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="22" r="13" fill="#141414"/><path d="M6 60c0-15 11-23 24-23s24 8 24 23z" fill="#141414"/></svg></div><span class="nm">The Hon. Inglebert Montgomery-Smythe</span><span class="rule"></span><span class="amt">£500</span><span class="to">donated to<b>Loch Broom Lifeboat Fund</b></span></div><span class="date">October 2026</span></div></div>
           <div class="pa"><span>Like</span><span>Comment</span><span>Share</span></div>
         </figure>
     </div>

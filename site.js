@@ -1,12 +1,12 @@
 // Shared header and footer for every Dapperowl prototype page.
 (function(){
   const LOGO = function(eye, word){ return '<svg class="logo" viewBox="18 14 274 108" role="img" aria-label="Dapperowl">'+
-    '<path d="M50 18 A28 28 0 0 1 78 46 L78 88 Q78 94 72 94 L36 94 Q22 94 22 80 L22 46 A28 28 0 0 1 50 18 Z" fill="#2251FF"/>'+
+    '<path d="M50 18 A28 28 0 0 1 78 46 L78 88 Q78 94 72 94 L36 94 Q22 94 22 80 L22 46 A28 28 0 0 1 50 18 Z" fill="#1F9D55"/>'+
     '<path d="M-10 -5 L0 5 L10 -5" transform="translate(50 44)" fill="none" stroke="'+eye+'" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>'+
-    '<path d="M44 98 L57 98 L43 118 L30 118 Z M62 98 L75 98 L61 118 L48 118 Z" fill="#2251FF"/>'+
-    '<path d="M82 58 L286 58 Q206 106 108 100 L82 96 Z" fill="#2251FF"/>'+
+    '<path d="M44 98 L57 98 L43 118 L30 118 Z M62 98 L75 98 L61 118 L48 118 Z" fill="#1F9D55"/>'+
+    '<path d="M82 58 L286 58 Q206 106 108 100 L82 96 Z" fill="#1F9D55"/>'+
     '<path d="M156 56 L128 108 M202 56 L178 102 M246 56 L228 90" stroke="'+eye+'" stroke-width="4"/>'+
-    (word?'<text x="92" y="46.4" font-family="Outfit, sans-serif" font-weight="700" font-size="24" letter-spacing="2" fill="'+word+'">DAPPEROWL</text>':'')+
+    (word?'<text x="92" y="46.4" font-family="Outfit, sans-serif" font-weight="700" font-size="24" letter-spacing="2" fill="#1F9D55">DAPPEROWL</text>':'')+
     '</svg>'; };
   window.DAPPER_LOGO = LOGO;
   const here = (location.pathname.split('/').pop() || 'index.html');
@@ -15,7 +15,7 @@
   if(head){
     head.className='top gut';
     head.innerHTML = '<nav aria-label="Main left"><a href="join.html"'+cls('join.html')+'>Join as an expert</a><a href="find.html"'+cls('find.html')+'>Find an expert</a></nav>'+
-      '<a href="index.html" aria-label="Dapperowl home">'+LOGO('#F5F0E6','#14254F')+'</a>'+
+      '<a href="index.html" aria-label="Dapperowl home">'+LOGO('#141414','#1F9D55')+'</a>'+
       '<nav class="r" aria-label="Main right"><a href="signin.html"'+cls('signin.html')+'>Sign in</a></nav>';
   }
   const foot = document.getElementById('site-foot');
