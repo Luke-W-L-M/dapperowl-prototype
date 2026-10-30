@@ -2,16 +2,16 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:title" content="Dapperowl: Specialise for charity">
 <meta property="og:description" content="Experts share their knowledge; firms donate 100% to the expert’s chosen charity.">
-<meta property="og:url" content="https://dapperowl.netlify.app/">
+<meta property="og:url" content="https://luke-w-l-m.github.io/dapperowl-prototype/">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://dapperowl.netlify.app/og-image.png?v=2">
+<meta property="og:image" content="https://luke-w-l-m.github.io/dapperowl-prototype/og-image.png?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="627">
 <meta property="og:image:alt" content="Specialise for charity: three people talking over coffee at a round table">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Dapperowl: Specialise for charity">
 <meta name="twitter:description" content="Experts share their knowledge; firms donate 100% to the expert’s chosen charity.">
-<meta name="twitter:image" content="https://dapperowl.netlify.app/og-image.png?v=2">
+<meta name="twitter:image" content="https://luke-w-l-m.github.io/dapperowl-prototype/og-image.png?v=2">
 <meta name="twitter:image:alt" content="Specialise for charity: three people talking over coffee at a round table"><title>Dapperowl</title>
 <title>Dapperowl Prototype</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -239,10 +239,26 @@ html{scroll-snap-type:y mandatory}
 #tracker-demo .ot-dot{width:46px;height:46px}
 #tracker-demo .ot-stop,#tracker-demo .ot-btn{font-size:14px}
 /* 4 certificate */
-.tile{display:flex;flex-direction:column;gap:4px;background:var(--white);border:3px solid var(--ink);border-radius:16px;box-shadow:5px 5px 0 var(--ink);padding:16px 22px}
-.tile b{font-family:var(--ui);font-size:22px;color:#18743a}
-.tile span{font-size:16px;color:var(--muted)}
-#certificate .svis > .post{max-width:min(440px,calc((100svh - var(--topbar) - 130px) * .6))}
+#certificate .svis > .certbtn{max-width:min(440px,calc((100svh - var(--topbar) - 160px) * .6))}
+/* 4 certificate (30 Oct): straight, click to enlarge */
+.certbtn{display:flex;flex-direction:column;align-items:center;gap:12px;cursor:zoom-in;border-radius:18px;outline-offset:6px}
+.certbtn .post{width:100%;max-width:none;transform:none;transition:transform .25s ease,box-shadow .25s ease}
+.certbtn:hover .post,.certbtn:focus-visible .post{transform:translateY(-4px);box-shadow:12px 12px 0 var(--ink)}
+.certhint{font-family:var(--ui);font-weight:600;font-size:16px;color:var(--navy)}
+.certdlg{padding:0;border:0;background:none;max-width:none;max-height:none;overflow:visible}
+.certdlg::backdrop{background:rgba(20,37,79,.8)}
+.certdlg-in{position:relative}
+.certdlg-scale .post{transform:none;margin:0;box-shadow:10px 10px 0 var(--ink)}
+.certdlg-x{position:absolute;z-index:2;top:-18px;right:-18px;width:48px;height:48px;border-radius:50%;background:#fff;border:3px solid var(--ink);color:var(--ink);font:700 30px/1 var(--ui);display:grid;place-items:center;cursor:pointer;padding:0}
+.certdlg-x:hover{background:var(--sun)}
+@media (prefers-reduced-motion:no-preference){
+  .certdlg,.certdlg::backdrop{transition:opacity .2s ease}
+  .certdlg.fading,.certdlg.fading::backdrop{opacity:0}
+}
+/* sequence start state: heading, then text line by line, then the certificate */
+.cr-ready #cert-h,.cr-ready .cert-text .w{opacity:0;transition:opacity .35s ease}
+.cr-ready .certbtn{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+.cr-ready .on{opacity:1!important;transform:none!important}
 /* 5 join band: unchanged, but a full screen with a straight top edge */
 .join.snap{padding-block:56px}
 .join .hd{font-size:clamp(30px,3.2vw,46px);line-height:1.15}
@@ -401,21 +417,29 @@ html{scroll-snap-type:y mandatory}
 </section>
 
 <section class="snap sec gut" id="certificate" aria-labelledby="cert-h">
-  <div class="inner sgrid rv">
+  <div class="inner sgrid">
     <div class="stext">
       <h2 class="hd" id="cert-h">An official certificate of impact</h2>
-      <p class="body">Every time the charity confirms your donation, you get an official certificate of impact to post on LinkedIn in one click. It shows your photo, name, the amount and the charity. The firm stays anonymous unless it chooses to be named.</p>
-      <div class="tile"><b>£4,500 raised so far</b><span>Only you can see this</span></div>
+      <p class="body cert-text">Every time the charity confirms your donation, you get an official certificate of impact to post on LinkedIn in one click. It shows your photo, name, the amount and the charity. The firm stays anonymous unless it chooses to be named.</p>
     </div>
     <div class="svis">
-      <figure class="post tilt" aria-label="Example LinkedIn post with an impact certificate">
+      <div class="certbtn" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Enlarge the example certificate">
+        <figure class="post" aria-label="Example LinkedIn post with an impact certificate">
           <div class="ph"><span class="av"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="22" r="13" fill="#141414"/><path d="M6 60c0-15 11-23 24-23s24 8 24 23z" fill="#141414"/></svg></span><div><b>The Hon. Inglebert Montgomery-Smythe</b><span>Founder, Broom Bay Seaweed · 1h</span></div></div>
           <p class="pc">Proud to have shared what I know about Scottish seaweed farming, and that £500 went straight to Loch Broom Lifeboat Fund.</p>
           <div class="cq"><div class="cert c1"><div class="frame"></div><div class="in"><svg class="logo" viewBox="18 14 274 108" aria-label="Dapperowl"><path d="M50 18 A28 28 0 0 1 78 46 L78 88 Q78 94 72 94 L36 94 Q22 94 22 80 L22 46 A28 28 0 0 1 50 18 Z" fill="#1F9D55"/><path d="M-10 -5 L0 5 L10 -5" transform="translate(50 44)" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M44 98 L57 98 L43 118 L30 118 Z M62 98 L75 98 L61 118 L48 118 Z" fill="#1F9D55"/><path d="M82 58 L286 58 Q206 106 108 100 L82 96 Z" fill="#1F9D55"/><path d="M156 56 L128 108 M202 56 L178 102 M246 56 L228 90" stroke="#fff" stroke-width="4"/><text x="92" y="46.4" font-family="Outfit, sans-serif" font-weight="700" font-size="24" letter-spacing="2" fill="#1F9D55">DAPPEROWL</text></svg><span class="k">Certificate of impact</span><div class="photo"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="22" r="13" fill="#141414"/><path d="M6 60c0-15 11-23 24-23s24 8 24 23z" fill="#141414"/></svg></div><span class="nm">The Hon. Inglebert Montgomery-Smythe</span><span class="rule"></span><span class="amt">£500</span><span class="to">donated to<b>Loch Broom Lifeboat Fund</b></span></div><span class="date">October 2026</span></div></div>
           <div class="pa"><span>Like</span><span>Comment</span><span>Share</span></div>
         </figure>
+        <span class="certhint" aria-hidden="true">Click to enlarge</span>
+      </div>
     </div>
   </div>
+  <dialog class="certdlg" aria-label="Example certificate of impact, enlarged">
+    <div class="certdlg-in">
+      <button type="button" class="certdlg-x" aria-label="Close"><span aria-hidden="true">×</span></button>
+      <div class="certdlg-scale"></div>
+    </div>
+  </dialog>
 </section>
 
 <section class="snap band join gut" id="join">
@@ -446,6 +470,60 @@ html{scroll-snap-type:y mandatory}
 <footer id="site-foot"></footer>
 <script src="site.js"></script>
 <script>
+(function(){ // Certificate: heading, then text line by line, then the certificate (plays once)
+  const sec=document.getElementById('certificate'); if(!sec) return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  const p=sec.querySelector('.cert-text');
+  [...p.childNodes].forEach(n=>{ if(n.nodeType!==3) return; const f=document.createDocumentFragment();
+    n.textContent.split(/(\s+)/).forEach(part=>{ if(!part) return; if(/^\s+$/.test(part)) f.appendChild(document.createTextNode(part)); else { const w=document.createElement('span'); w.className='w'; w.textContent=part; f.appendChild(w); } });
+    p.replaceChild(f,n); });
+  const linesOf=()=>{ const g=[]; let top=null; p.querySelectorAll('.w').forEach(w=>{ const t=w.offsetTop; if(top===null||Math.abs(t-top)>4){ g.push([]); top=t; } g[g.length-1].push(w); }); return g; };
+  sec.classList.add('cr-ready');
+  const wait=ms=>new Promise(r=>setTimeout(r,ms));
+  let played=false;
+  const play=async()=>{
+    if(played) return; played=true;
+    sec.querySelector('#cert-h').classList.add('on'); await wait(450);
+    for(const line of linesOf()){ line.forEach(w=>w.classList.add('on')); await wait(350); }
+    sec.querySelector('.certbtn').classList.add('on'); await wait(650);
+    sec.classList.remove('cr-ready');
+  };
+  const io=new IntersectionObserver(es=>{ if(es.some(e=>e.isIntersecting)){ io.disconnect(); play(); } },{threshold:.4});
+  io.observe(sec);
+  const check=()=>{ if(played) return removeEventListener('scroll',check); const r=sec.getBoundingClientRect(); const seen=Math.min(r.bottom,innerHeight)-Math.max(r.top,0); if(seen>Math.min(r.height,innerHeight)*.4){ io.disconnect(); play(); } };
+  addEventListener('scroll',check,{passive:true}); check();
+})();
+(function(){ // Certificate pop-up: enlarged copy, closes with ×, Esc or a click outside; focus and scroll handled
+  const btn=document.querySelector('.certbtn'), dlg=document.querySelector('.certdlg'); if(!btn||!dlg||!dlg.showModal) return;
+  const box=dlg.querySelector('.certdlg-scale'), x=dlg.querySelector('.certdlg-x');
+  const reduce=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fit=()=>{ // scale a copy of the post to fill up to ~90% of the screen height, keeping its proportions
+    const post=box.firstElementChild; if(!post) return;
+    post.style.transform='none'; post.style.width='440px';
+    const w=post.offsetWidth, h=post.offsetHeight;
+    const k=Math.min(innerHeight*0.9/h, innerWidth*0.9/w);
+    post.style.transformOrigin='top left'; post.style.transform='scale('+k+')';
+    box.style.width=(w*k)+'px'; box.style.height=(h*k)+'px';
+  };
+  const open=()=>{
+    box.innerHTML=''; const copy=btn.querySelector('.post').cloneNode(true); copy.removeAttribute('aria-label'); box.appendChild(copy);
+    document.documentElement.style.overflow='hidden'; document.documentElement.style.scrollSnapType='none';
+    dlg.classList.add('fading'); dlg.showModal(); fit();
+    requestAnimationFrame(()=>dlg.classList.remove('fading')); x.focus();
+  };
+  const close=()=>{
+    if(!dlg.open) return;
+    const done=()=>{ dlg.close(); dlg.classList.remove('fading'); document.documentElement.style.overflow=''; document.documentElement.style.scrollSnapType=''; btn.focus(); };
+    if(reduce()) return done();
+    dlg.classList.add('fading'); setTimeout(done,200);
+  };
+  btn.addEventListener('click',open);
+  btn.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); } });
+  x.addEventListener('click',close);
+  dlg.addEventListener('cancel',e=>{ e.preventDefault(); close(); }); // Esc
+  dlg.addEventListener('click',e=>{ if(e.target===dlg) close(); });   // click on the backdrop
+  addEventListener('resize',()=>{ if(dlg.open) fit(); });
+})();
 (function(){ // Watch your donation: plays once on arrival - intro, then each step (circle, tick, name, text) while the bar fills to the next circle
   const sec=document.getElementById('tracker'); if(!sec) return;
   if(matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;

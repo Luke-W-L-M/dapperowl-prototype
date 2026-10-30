@@ -6,7 +6,7 @@
 
 **Specialise for charity.** Experts share what they know with organisations that need it. Instead of paying the expert, the organisation donates, in full, to a charity the expert has chosen.
 
-### [▶ Open the live prototype: dapperowl.netlify.app](https://dapperowl.netlify.app)
+### [▶ Open the live prototype: luke-w-l-m.github.io/dapperowl-prototype](https://luke-w-l-m.github.io/dapperowl-prototype)
 
 </div>
 
@@ -46,9 +46,9 @@ No contracts, no selling yourself: just your expertise, put to work for a cause 
 
 Every page is clickable. Good routes to follow:
 
-- **As a firm:** [Find an expert](https://dapperowl.netlify.app/find.html) → search "seaweed" → *Request a conversation* → sign in as a firm → send the request → *My bookings* → donate, upload a receipt and open a certificate.
-- **As an expert:** [Sign in](https://dapperowl.netlify.app/signin.html) → *I'm an expert* → *Continue with Google* → review requests, accept or decline, and see *My impact*.
-- **Joining:** [Join as an expert](https://dapperowl.netlify.app/join.html) → *Start your profile* → walk through the eight sign-up steps.
+- **As a firm:** [Find an expert](https://luke-w-l-m.github.io/dapperowl-prototype/find.html) → search "seaweed" → *Request a conversation* → sign in as a firm → send the request → *My bookings* → donate, upload a receipt and open a certificate.
+- **As an expert:** [Sign in](https://luke-w-l-m.github.io/dapperowl-prototype/signin.html) → *I'm an expert* → *Continue with Google* → review requests, accept or decline, and see *My impact*.
+- **Joining:** [Join as an expert](https://luke-w-l-m.github.io/dapperowl-prototype/join.html) → *Start your profile* → walk through the eight sign-up steps.
 
 ## Pages
 
@@ -73,7 +73,7 @@ Every page is clickable. Good routes to follow:
 
 ## Built with
 
-Plain HTML, CSS and JavaScript with no build step, hosted on [Netlify](https://www.netlify.com/). Shared header, footer and donation tracker live in [`site.js`](site.js); design tokens and components live in [`styles.css`](styles.css).
+Plain HTML, CSS and JavaScript with no build step, hosted on [GitHub Pages](https://pages.github.com/). Shared header, footer and donation tracker live in [`site.js`](site.js); design tokens and components live in [`styles.css`](styles.css).
 
 ## Status
 
